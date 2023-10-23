@@ -8,4 +8,9 @@ public class APIDataAccessObject implements PlayerSearchDataAccessInterface {
     public Player search(int player_id) {
         return null;
     }
+
+    @Override
+    public Player search(String player_name) {
+        return null;
+    }
 }
