@@ -1,15 +1,15 @@
 package use_case.PlayerSearch;
 
-import entity.PlayerDataFactory;
+import entity.PlayerFactory;
 
 public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary{
 
     PlayerSearchOutputBoundary playerSearchOutputBoundary;
-    PlayerDataFactory playerDataFactory;
+    PlayerFactory playerDataFactory;
     PlayerSearchDataAccessInterface playerSearchDataAccessInterface;
     public PlayerSearchInteractor(PlayerSearchDataAccessInterface playerSearchDataAccessInterface,
                                   PlayerSearchOutputBoundary playerSearchOutputBoundary,
-                                  PlayerDataFactory playerDataFactory){
+                                  PlayerFactory playerDataFactory){
 
         this.playerDataFactory = playerDataFactory;
         this.playerSearchOutputBoundary =  playerSearchOutputBoundary;

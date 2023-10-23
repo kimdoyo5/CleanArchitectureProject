@@ -1,7 +1,7 @@
 package use_case.PlayerSearch;
 
-import entity.PlayerData;
+import entity.Player;
 
 public interface PlayerSearchDataAccessInterface {
-    public PlayerData search(int player_id);
+    public Player search(int player_id);
 }
