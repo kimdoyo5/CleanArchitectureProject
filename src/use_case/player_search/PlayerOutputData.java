@@ -1,4 +1,4 @@
-package use_case.PlayerSearch;
+package use_case.player_search;
 
 public class PlayerOutputData {
 }

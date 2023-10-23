@@ -1,5 +1,6 @@
-package use_case.PlayerSearch;
+package use_case.player_search;
 
+import entity.Player;
 import entity.PlayerFactory;
 
 public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary{
@@ -17,6 +18,10 @@ public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary{
     }
 
     public void execute(PlayerSearchInputData playerSearchInputData){
-
+        if (playerSearchInputData.getPlayer_id() != 0){
+            Player reuslt = playerSearchDataAccessInterface.search(playerSearchInputData.getPlayer_id());
+        }else{
+            Player result = playerSearchDataAccessInterface.search(playerSearchInputData.getName());
+        }
     }
 }
