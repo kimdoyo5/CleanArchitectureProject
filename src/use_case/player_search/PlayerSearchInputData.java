@@ -6,7 +6,7 @@ public class PlayerSearchInputData {
     private int player_id = 0;
 
     public PlayerSearchInputData(String name){
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public PlayerSearchInputData(int player_id){
@@ -20,5 +20,4 @@ public class PlayerSearchInputData {
     public String getName(){
         return name;
     }
-
 }
