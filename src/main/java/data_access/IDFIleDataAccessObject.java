@@ -1,10 +1,12 @@
 package data_access;
 
+import use_case.PlayerIDSearch.IDSearchDataAccessInterface;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IDFIleDataAccessObject {
+public class IDFIleDataAccessObject implements IDSearchDataAccessInterface {
     private final File playerIDFile;
 
     private  final Map<String, Integer> playerID = new HashMap<>();
@@ -29,6 +31,12 @@ public class IDFIleDataAccessObject {
         }
     }
 
+    public  boolean isPlayer(String name){
+        return playerID.containsKey(name);
+    }
+    public  boolean isPlayer(int id){
+        return playerID.containsValue(id);
+    }
     public int getID(String name){
         return playerID.get(name);
     }

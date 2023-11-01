@@ -1,4 +1,4 @@
 package entity;
 
-public class Player {
+public interface Player {
 }
