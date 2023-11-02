@@ -2,8 +2,9 @@ package use_case.player_search;
 
 import entity.Player;
 
-public interface PlayerSearchDataAccessInterface {
-    Player search(int player_id);
+import java.io.IOException;
 
-    Player search(String player_name);
+public interface PlayerSearchDataAccessInterface {
+    Player search(int player_id) throws IOException;
+
 }
