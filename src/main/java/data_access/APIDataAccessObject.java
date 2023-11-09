@@ -20,7 +20,6 @@ public class APIDataAccessObject implements PlayerSearchDataAccessInterface {
 
     @Override
     public Player search(int player_id) throws IOException {
-
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("text/plain");
@@ -28,19 +27,22 @@ public class APIDataAccessObject implements PlayerSearchDataAccessInterface {
                 .url(String.format("http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code='mlb'&player_id='%s'", player_id))
                 .method("GET", null)
                 .build();
-        Response response = client.newCall(request).execute();
         OkHttpClient client2 = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType2 = MediaType.parse("text/plain");
-        RequestBody body = RequestBody.create(mediaType, "");
         Request request2 = new Request.Builder()
                 .url(String.format("http://lookup-service-prod.mlb.com/json/named.sport_career_hitting.bam?league_list_id='mlb'&game_type='R'&player_id='%s'", player_id))
-                .method("GET", body)
+                .method("GET", null)
                 .build();
-        Response response2 = client.newCall(request).execute();
-        JSONObject info =new JSONObject(response.body().string());
-        JSONObject stats = new JSONObject(response2.body().string());
-        return playerFactory.create(info, stats);
+        try {
+            Response response = client.newCall(request).execute();
+            Response response2 = client.newCall(request2).execute();
+            JSONObject info = new JSONObject(response.body().string());
+            JSONObject stats = new JSONObject(response2.body().string());
+            return playerFactory.create(info, stats);
+        }catch (IOException | JSONException e){
+            throw new RuntimeException(e);
+        }
     }
 
 }

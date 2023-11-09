@@ -26,9 +26,13 @@ public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary{
 
         if (playerSearchInputData.getPlayer_id() != 0){
             if (idSearchDataInterface.isPlayer(playerSearchInputData.getPlayer_id())) {
-                Player reuslt = playerSearchDataAccessInterface.search(playerSearchInputData.getPlayer_id());
-                PlayerOutputData out = new PlayerOutputData(reuslt);
-                playerSearchOutputBoundary.prepareSuccessView(out);
+                try {
+                    Player reuslt = playerSearchDataAccessInterface.search(playerSearchInputData.getPlayer_id());
+                    PlayerOutputData out = new PlayerOutputData(reuslt);
+                    playerSearchOutputBoundary.prepareSuccessView(out);
+                }catch (RuntimeException e){
+                    playerSearchOutputBoundary.prepareFailView("Search Error");
+                }
             }else{
                 playerSearchOutputBoundary.prepareFailView("no id");
             }
