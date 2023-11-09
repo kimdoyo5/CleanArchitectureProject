@@ -1,16 +1,21 @@
-package  app;
+package main.java.app;
 
 import interface_adapter.ViewManagerModel;
 import main.java.interface_adapter.compare.CompareViewModel;
+import main.java.interface_adapter.id_search.IDSearchViewModel;
 import main.java.interface_adapter.navigation.NavigationViewModel;
+import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 import main.java.view.MainMenuView;
 import view.ViewManager;
 import main.java.app.NavigationUseCaseFactory;
+import main.java.view.CompareView;
+import main.java.view.IDSearchView;
+import main.java.view.PlayerSearchView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-// you are cringe
+
 public class Main{
     public static void main(String[] args) {
 
@@ -29,11 +34,27 @@ public class Main{
 
         NavigationViewModel navigationViewModel = new NavigationViewModel();
         CompareViewModel compareViewModel = new CompareViewModel();
-        MainMenuView mainMenuView = NavigationUseCaseFactory.create(viewManagerModel, navigationViewModel, );
+        IDSearchViewModel IDsearchViewModel = new IDSearchViewModel();
+        PlayerSearchViewModel playerSearchViewModel = new PlayerSearchViewModel();
+
+        MainMenuView mainMenuView = NavigationUseCaseFactory.create(viewManagerModel, navigationViewModel,
+                compareViewModel, IDsearchViewModel, playerSearchViewModel);
         views.add(mainMenuView, mainMenuView.viewName);
 
+        /* to be added as UI for each use case is done
+        CompareView compareView = CompareUseCaseFactory.create(viewManagerModel, navigationViewModel, compareViewModel);
+        views.add(compareView, compareView.viewName);
+
+        IDSearchView IDsearchView = IDSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, IDsearchViewModel);
+        views.add(IDsearchView, IDsearchView.viewName);
+
+        PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, PlayerSearchViewModel);
+        views.add(playerSearchView, playerSearchView.viewName);
+        */
         viewManagerModel.setActiveView(mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();
+
+
 
         application.pack();
         application.setVisible(true);

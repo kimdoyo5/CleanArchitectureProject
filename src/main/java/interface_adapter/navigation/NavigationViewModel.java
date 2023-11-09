@@ -7,6 +7,9 @@ import java.beans.PropertyChangeSupport;
 
 public class NavigationViewModel extends ViewModel {
     private NavigationState state = new NavigationState();
+    public static final String COMPARE_BUTTON_LABEL = "Compare Players";
+    public static final String ID_SEARCH_BUTTON_LABEL = "Search by Player ID";
+    public static final String PLAYER_SEARCH_BUTTON_LABEL = "Search by Player Name";
 
     public NavigationViewModel() {
         super("navigation");
