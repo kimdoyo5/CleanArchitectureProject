@@ -37,9 +37,15 @@ public class APIDataAccessObject implements PlayerSearchDataAccessInterface {
         try {
             Response response = client.newCall(request).execute();
             Response response2 = client.newCall(request2).execute();
-            JSONObject info = new JSONObject(response.body().string());
-            JSONObject stats = new JSONObject(response2.body().string());
-            return playerFactory.create(info, stats);
+            JSONObject info_rough = new JSONObject(response.body().string());
+            JSONObject stats_rough = new JSONObject(response2.body().string());
+            JSONObject info = info_rough.getJSONObject("player_info").getJSONObject("queryResults");
+            JSONObject stats = stats_rough.getJSONObject("sport_career_hitting").getJSONObject("queryResults");
+            if (info.getInt("totalSize") != 0 && stats.getInt("totalSize") != 0){
+                return playerFactory.create(info, stats);
+            }else{
+                throw new RuntimeException();
+            }
         }catch (IOException | JSONException e){
             throw new RuntimeException(e);
         }
