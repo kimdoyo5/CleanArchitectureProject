@@ -1,18 +1,17 @@
-package main.java.interface_adapter.navigation;
+package main.java.interface_adapter.player_search;
+
 import interface_adapter.ViewModel;
-import interface_adapter.navigation.NavigationState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+public class PlayerSearchViewModel extends ViewModel {
+    private PlayerSearchState state = new PlayerSearchState();
 
-public class NavigationViewModel extends ViewModel {
-    private NavigationState state = new NavigationState();
-
-    public NavigationViewModel() {
-        super("navigation");
+    public PlayerSearchViewModel() {
+        super("player search");
     }
 
-    public void setState(NavigationState state) {
+    public void setState(PlayerSearchState state) {
         this.state = state;
     }
 
@@ -26,7 +25,7 @@ public class NavigationViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public NavigationState getState() {
+    public PlayerSearchState getState() {
         return state;
     }
 }
