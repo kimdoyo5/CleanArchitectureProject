@@ -3,7 +3,9 @@ package data_access;
 import use_case.PlayerIDSearch.IDSearchDataAccessInterface;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class IDFIleDataAccessObject implements IDSearchDataAccessInterface {
@@ -20,12 +22,9 @@ public class IDFIleDataAccessObject implements IDSearchDataAccessInterface {
                 String[] col = row.split(",");
                 String playerName = String.valueOf(col[1]);
                 int id = Integer.valueOf(col[10]);
-                playerName.toLowerCase();
-                playerID.put(playerName, id);
+                playerID.put(playerName.toLowerCase(), id);
             }
 
-        }catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -37,7 +36,13 @@ public class IDFIleDataAccessObject implements IDSearchDataAccessInterface {
     public  boolean isPlayer(int id){
         return playerID.containsValue(id);
     }
-    public int getID(String name){
-        return playerID.get(name);
+    public List<Integer> getID(String name){
+        List<Integer> result = new ArrayList<>();
+        for(String key: playerID.keySet()){
+            if (key.contains(name.toLowerCase())){
+                result.add(playerID.get(key));
+            }
+        }
+        return result;
     }
 }
