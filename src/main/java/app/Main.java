@@ -10,7 +10,7 @@ import main.java.app.NavigationUseCaseFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-
+// you are cringe
 public class Main{
     public static void main(String[] args) {
 
