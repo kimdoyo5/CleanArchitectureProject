@@ -1,18 +1,18 @@
-package main.java.interface_adapter.navigation;
+package main.java.interface_adapter.id_search;
 import interface_adapter.ViewModel;
-import interface_adapter.navigation.NavigationState;
+import main.java.interface_adapter.compare.CompareState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class NavigationViewModel extends ViewModel {
-    private NavigationState state = new NavigationState();
+public class IDSearchViewModel extends ViewModel{
+    private IDSearchState state = new IDSearchState();
 
-    public NavigationViewModel() {
-        super("navigation");
+    public IDSearchViewModel() {
+        super("id search");
     }
 
-    public void setState(NavigationState state) {
+    public void setState(IDSearchState state) {
         this.state = state;
     }
 
@@ -26,7 +26,7 @@ public class NavigationViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public NavigationState getState() {
+    public IDSearchState getState() {
         return state;
     }
 }

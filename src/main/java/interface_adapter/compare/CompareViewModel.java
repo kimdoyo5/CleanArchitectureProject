@@ -1,18 +1,17 @@
-package main.java.interface_adapter.navigation;
-import interface_adapter.ViewModel;
-import interface_adapter.navigation.NavigationState;
+package main.java.interface_adapter.compare;
 
+import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class NavigationViewModel extends ViewModel {
-    private NavigationState state = new NavigationState();
+public class CompareViewModel extends ViewModel {
+    private CompareState state = new CompareState();
 
-    public NavigationViewModel() {
-        super("navigation");
+    public CompareViewModel() {
+        super("compare");
     }
 
-    public void setState(NavigationState state) {
+    public void setState(CompareState state) {
         this.state = state;
     }
 
@@ -26,7 +25,7 @@ public class NavigationViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public NavigationState getState() {
+    public CompareState getState() {
         return state;
     }
 }

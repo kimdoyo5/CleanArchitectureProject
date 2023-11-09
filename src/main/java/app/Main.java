@@ -1,9 +1,11 @@
 package main.java.app;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.navigation.NavigationViewModel;
-import view.MainMenuView;
+import main.java.interface_adapter.compare.CompareViewModel;
+import main.java.interface_adapter.navigation.NavigationViewModel;
+import main.java.view.MainMenuView;
 import view.ViewManager;
+import main.java.app.NavigationUseCaseFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,19 +17,19 @@ public class Main{
         JFrame application = new JFrame("Main Menu");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        GridLayout gridLayout = new GridLayout();
+        CardLayout cardLayout = new CardLayout();
 
         // view objects
-        JPanel views = new JPanel(gridLayout);
+        JPanel views = new JPanel(cardLayout);
         application.add(views);
 
         // what view is showing
         ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, gridLayout, viewManagerModel);
+        new ViewManager(views, cardLayout, viewManagerModel);
 
         NavigationViewModel navigationViewModel = new NavigationViewModel();
-
-        MainMenuView mainMenuView = NavigationUseCaseFactory.create(viewManagerModel, navigationViewModel);
+        CompareViewModel compareViewModel = new CompareViewModel();
+        MainMenuView mainMenuView = NavigationUseCaseFactory.create(viewManagerModel, navigationViewModel, );
         views.add(mainMenuView, mainMenuView.viewName);
 
         viewManagerModel.setActiveView(mainMenuView.viewName);
