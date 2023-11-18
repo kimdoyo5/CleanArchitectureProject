@@ -1,6 +1,6 @@
-package data_access;
+package main.java.data_access;
 
-import use_case.PlayerIDSearch.IDSearchDataAccessInterface;
+import main.java.use_case.id_search.IDSearchDataAccessInterface;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class IDFIleDataAccessObject implements IDSearchDataAccessInterface {
+public class IDFileDataAccessObject implements IDSearchDataAccessInterface {
     private final File playerIDFile;
 
     private  final Map<String, Integer> playerID = new HashMap<>();
 
-    public IDFIleDataAccessObject(String filePath){
+    public IDFileDataAccessObject(String filePath){
         playerIDFile =new File(filePath);
         try(BufferedReader reader = new BufferedReader(new FileReader(playerIDFile))){
             reader.readLine();
