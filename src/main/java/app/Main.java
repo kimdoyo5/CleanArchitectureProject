@@ -6,7 +6,7 @@ import main.java.interface_adapter.id_search.IDSearchViewModel;
 import main.java.interface_adapter.navigation.NavigationViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 import main.java.view.MainMenuView;
-import view.ViewManager;
+import main.java.view.ViewManager;
 import main.java.app.NavigationUseCaseFactory;
 import main.java.view.CompareView;
 import main.java.view.IDSearchView;
