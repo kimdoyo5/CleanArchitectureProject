@@ -10,7 +10,7 @@ public class IDSearchInputData {
     }
 
     public boolean isEmpty(){
-        return query.isEmpty())
+        return query.isEmpty();
     }
 
     public String getQuery(){
