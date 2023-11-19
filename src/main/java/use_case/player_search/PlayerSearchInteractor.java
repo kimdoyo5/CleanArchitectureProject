@@ -2,7 +2,7 @@ package main.java.use_case.player_search;
 
 import entity.Player;
 import entity.PlayerFactory;
-import use_case.PlayerIDSearch.IDSearchDataAccessInterface;
+import main.java.use_case.id_search.IDSearchDataAccessInterface;
 import main.java.use_case.player_search.PlayerSearchInputDataBoundary;
 import main.java.use_case.player_search.PlayerSearchOutputBoundary;
 import main.java.use_case.player_search.PlayerSearchDataAccessInterface;
