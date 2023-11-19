@@ -10,7 +10,6 @@ import java.util.Map;
 
 public class IDFileDataAccessObject implements IDSearchDataAccessInterface {
     private final File playerIDFile;
-
     private  final Map<String, Integer> playerID = new HashMap<>();
 
     public IDFileDataAccessObject(String filePath){
@@ -21,10 +20,9 @@ public class IDFileDataAccessObject implements IDSearchDataAccessInterface {
             while((row = reader.readLine()) != null){
                 String[] col = row.split(",");
                 String playerName = String.valueOf(col[1]);
-                int id = Integer.valueOf(col[10]);
+                int id = Integer.valueOf(col[0]);
                 playerID.put(playerName.toLowerCase(), id);
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -36,11 +34,11 @@ public class IDFileDataAccessObject implements IDSearchDataAccessInterface {
     public  boolean isPlayer(int id){
         return playerID.containsValue(id);
     }
-    public List<Integer> getID(String name){
-        List<Integer> result = new ArrayList<>();
+    public Map<String, Integer> getID(String name){
+        Map<String, Integer> result = new HashMap<>();
         for(String key: playerID.keySet()){
             if (key.contains(name.toLowerCase())){
-                result.add(playerID.get(key));
+                result.put(key, playerID.get(key));
             }
         }
         return result;
