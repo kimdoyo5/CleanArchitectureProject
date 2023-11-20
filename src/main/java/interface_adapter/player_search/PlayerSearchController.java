@@ -1,6 +1,6 @@
 package main.java.interface_adapter.player_search;
 
-import use_case.player_search.PlayerSearchInputData;
+import main.java.use_case.player_search.PlayerSearchInputData;
 import main.java.use_case.player_search.PlayerSearchInputDataBoundary;
 import main.java.use_case.player_search.PlayerSearchInteractor;
 
@@ -15,6 +15,10 @@ public class PlayerSearchController {
     public void execute(int player_id) throws IOException {
         PlayerSearchInputData data = new PlayerSearchInputData(player_id);
         playerSearchInteractor.execute(data);
+    }
+
+    public void execute(){
+        playerSearchInteractor.execute();
     }
 
 }

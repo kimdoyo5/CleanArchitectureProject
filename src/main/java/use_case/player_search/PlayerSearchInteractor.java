@@ -22,7 +22,7 @@ public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary {
     }
 
     @Override
-    public void execute(PlayerSearchInputData playerSearchInputData) throws IOException {
+    public void execute(PlayerSearchInputData playerSearchInputData){
 
         if (playerSearchInputData.getPlayer_id() != 0){
             if (idSearchDataInterface.isPlayer(playerSearchInputData.getPlayer_id())) {
@@ -30,12 +30,16 @@ public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary {
                     Player reuslt = playerSearchDataAccessInterface.search(playerSearchInputData.getPlayer_id());
                     PlayerOutputData out = new PlayerOutputData(reuslt);
                     playerSearchOutputBoundary.prepareSuccessView(out);
-                }catch (RuntimeException e){
+                }catch (RuntimeException | IOException e){
                     playerSearchOutputBoundary.prepareFailView("Search Error");
                 }
             }else{
                 playerSearchOutputBoundary.prepareFailView("no id");
             }
         }
+    }
+
+    public void execute(){
+        playerSearchOutputBoundary.back();
     }
 }

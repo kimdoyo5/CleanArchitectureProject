@@ -13,4 +13,9 @@ public class PlayerSearchPresenter implements PlayerSearchOutputBoundary {
     public void prepareFailView(String error) {
 
     }
+
+    @Override
+    public void back() {
+
+    }
 }
