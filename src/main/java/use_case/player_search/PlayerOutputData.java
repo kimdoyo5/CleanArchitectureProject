@@ -10,14 +10,14 @@ public class PlayerOutputData {
         this.player = player;
     }
 
-    String getName(){
+    public String getName(){
         return player.getName();
     }
-    int getID(){
+    public int getID(){
         return player.getID();
     }
 
-    Map<String, String> getStats(){
+    public Map<String, String> getStats(){
         return player.getStats();
     }
 }

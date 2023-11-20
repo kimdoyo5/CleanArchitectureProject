@@ -1,6 +1,7 @@
 package main.java.interface_adapter.player_search;
 
 import java.security.PrivateKey;
+import java.util.Map;
 
 public class PlayerSearchState {
     private String search = "";
@@ -27,7 +28,11 @@ public class PlayerSearchState {
 
     public String getResult(){return result;}
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setResult(Map<String, String> data) {
+        StringBuilder value = new StringBuilder();
+        for (String key: data.keySet()){
+            value.append(key).append(": ").append(data.get(key)).append("/n");
+        }
+        result = value.toString();
     }
 }
