@@ -1,4 +1,4 @@
-package interface_adapter.navigation;
+package main.java.interface_adapter.navigation;
 
 public class NavigationViewModel {
 }
