@@ -1,4 +1,4 @@
-package entity;
+package main.java.entity;
 
 import org.json.JSONObject;
 import entity.Player;
