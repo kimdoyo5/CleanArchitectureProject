@@ -1,5 +1,6 @@
 package interface_adapter.player_comparison;
 
+import entity.Player;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
@@ -9,7 +10,7 @@ public class PlayerComparisonViewModel extends ViewModel {
     private PlayerComparisonState state = new PlayerComparisonState();
 
     public PlayerComparisonViewModel() {
-        super("player search"); // Fix player search
+        super("compare");
     }
 
     public void setState(PlayerComparisonState state) {
@@ -24,5 +25,9 @@ public class PlayerComparisonViewModel extends ViewModel {
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
+    }
+
+    public PlayerComparisonState getState() {
+        return state;
     }
 }
