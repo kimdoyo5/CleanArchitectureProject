@@ -1,17 +1,19 @@
-package main.java.interface_adapter.compare;
+package interface_adapter.player_comparison;
 
+import entity.Player;
 import interface_adapter.ViewModel;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class CompareViewModel extends ViewModel {
-    private CompareState state = new CompareState();
+public class PlayerComparisonViewModel extends ViewModel {
+    private PlayerComparisonState state = new PlayerComparisonState();
 
-    public CompareViewModel() {
+    public PlayerComparisonViewModel() {
         super("compare");
     }
 
-    public void setState(CompareState state) {
+    public void setState(PlayerComparisonState state) {
         this.state = state;
     }
 
@@ -25,7 +27,7 @@ public class CompareViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public CompareState getState() {
+    public PlayerComparisonState getState() {
         return state;
     }
 }
