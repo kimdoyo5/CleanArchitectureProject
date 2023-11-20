@@ -1,11 +1,12 @@
-package data_access;
+package main.java.data_access;
 
 import java.io.*;
 import java.util.*;
 import entity.Player;
 import entity.PlayerFactory;
+import main.java.use_case.player_comparison_add.PlayerComparisonAddDataAccessInterface;
 
-public class PlayerComparisonDataAccessObject {
+public class PlayerComparisonDataAccessObject implements PlayerComparisonAddDataAccessInterface {
 
     private final File csvFile;
 
@@ -65,8 +66,23 @@ public class PlayerComparisonDataAccessObject {
         }
     }
 
+    @Override
     public Player get(String username) {
         return players.get(username);
+    }
+
+    @Override
+    public boolean existsByName(String identifier) {                     //May not be needed
+        return players.containsKey(identifier);
+    }
+
+    public boolean add(Player player){
+        if (players.size() >= 4){
+            return false;
+        }else{
+            players.put(player.getName, player);
+            return true;
+        }
     }
 
 }
