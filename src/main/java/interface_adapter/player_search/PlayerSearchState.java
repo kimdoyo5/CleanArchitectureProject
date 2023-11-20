@@ -30,9 +30,15 @@ public class PlayerSearchState {
 
     public void setResult(Map<String, String> data) {
         StringBuilder value = new StringBuilder();
+        value.append("<html><body>");
+        value.append("Name").append(": ").append(data.get("Name")).append("<br>");
+        value.append("Player Id").append(": ").append(data.get("Player Id")).append("<br>");
         for (String key: data.keySet()){
-            value.append(key).append(": ").append(data.get(key)).append("/n");
+            if (!key.equals("Name") && !key.equals("Player Id")) {
+                value.append(key).append(": ").append(data.get(key)).append("<br>");
+            }
         }
+        value.append("</body></html>");
         result = value.toString();
     }
 }

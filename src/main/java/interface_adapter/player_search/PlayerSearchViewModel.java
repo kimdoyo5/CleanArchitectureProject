@@ -13,7 +13,7 @@ public class PlayerSearchViewModel extends ViewModel {
     private PlayerSearchState searchState = new PlayerSearchState();
 
     public PlayerSearchViewModel(){
-        super("Player Search");
+        super("player search");
     }
 
     public void setSearchState(PlayerSearchState searchState){this.searchState = searchState;}

@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class PlayerSearchView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    public final String viewName = "id search";
+    public final String viewName = "player search";
     private final PlayerSearchViewModel playerSearchViewModel;
     private final JTextField queryInputField = new JTextField(15);
     private final JLabel result = new JLabel("");
@@ -65,10 +65,12 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
                 new KeyListener() {
                     @Override
                     public void keyTyped(KeyEvent e) {
-                        PlayerSearchState currentState = playerSearchViewModel.getSearchState();
-                        String text = queryInputField.getText() + e.getKeyChar();
-                        currentState.setSearch(text);
-                        playerSearchViewModel.setSearchState(currentState);
+                        if ("1234567890".contains(String.valueOf(e.getKeyChar()))) {
+                            PlayerSearchState currentState = playerSearchViewModel.getSearchState();
+                            String text = queryInputField.getText() + e.getKeyChar();
+                            currentState.setSearch(text);
+                            playerSearchViewModel.setSearchState(currentState);
+                        }
                     }
 
                     @Override

@@ -20,4 +20,6 @@ public class PlayerOutputData {
     public Map<String, String> getStats(){
         return player.getStats();
     }
+
+    public String calculateStat(String target){return player.calculateState(target);}
 }

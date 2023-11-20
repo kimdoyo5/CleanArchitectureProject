@@ -12,7 +12,7 @@ public class CommonPlayerFactory implements PlayerFactory{
     public Player create(JSONObject info, JSONObject stats) {
         Map<String, String> stat = new HashMap<>();
         for(String key: keys){
-            stat.put(key, stats.getString("key"));
+            stat.put(key, stats.getString(key));
         }
         return new CommonPlayer(info.getString("name_display_first_last"), info.getInt("player_id"), stat);
     }
