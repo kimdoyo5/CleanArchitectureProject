@@ -1,5 +1,7 @@
 
+
 package main.java.interface_adapter.navigation;
+
 
 import main.java.use_case.navigation.NavigationInputBoundary;
 

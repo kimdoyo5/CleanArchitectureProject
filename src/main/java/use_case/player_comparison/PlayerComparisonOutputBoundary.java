@@ -1,8 +1,8 @@
-package use_case.player_comparison;
+package main.java.use_case.player_comparison;
 
-import use_case.player_search.PlayerOutputData;
+import main.java.use_case.player_comparison.PlayerComparisonOutputData;
 
-public class PlayerComparisonOutputBoundary {
+public interface PlayerComparisonOutputBoundary {
     void prepareSuccessView(PlayerComparisonOutputData player);
 
     void prepareFailView(String error);

@@ -1,4 +1,4 @@
-package interface_adapter.player_comparison;
+package main.java.interface_adapter.player_comparison;
 
 import entity.Player;
 import interface_adapter.ViewModel;

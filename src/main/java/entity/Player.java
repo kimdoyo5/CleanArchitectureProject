@@ -1,6 +1,8 @@
 package main.java.entity;
 
+
 import java.util.Map;
+
 
 public interface Player {
     String getName();
