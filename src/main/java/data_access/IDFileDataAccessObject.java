@@ -2,6 +2,9 @@ package main.java.data_access;
 
 import main.java.use_case.id_search.IDSearchDataAccessInterface;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,8 +23,8 @@ public class IDFileDataAccessObject implements IDSearchDataAccessInterface {
             while((row = reader.readLine()) != null){
                 String[] col = row.split(",");
                 String playerName = String.valueOf(col[1]);
-                int id = Integer.valueOf(col[0]);
-                playerID.put(playerName.toLowerCase(), id);
+                int id = Integer.valueOf(col[0].substring(1, col[0].length()-1));
+                playerID.put(playerName, id);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -29,7 +32,12 @@ public class IDFileDataAccessObject implements IDSearchDataAccessInterface {
     }
 
     public  boolean isPlayer(String name){
-        return playerID.containsKey(name);
+        for(String key: playerID.keySet()){
+            if (key.toLowerCase().contains(name.toLowerCase())){
+                return true;
+            }
+        }
+        return false;
     }
     public  boolean isPlayer(int id){
         return playerID.containsValue(id);
@@ -37,7 +45,7 @@ public class IDFileDataAccessObject implements IDSearchDataAccessInterface {
     public Map<String, Integer> getID(String name){
         Map<String, Integer> result = new HashMap<>();
         for(String key: playerID.keySet()){
-            if (key.contains(name.toLowerCase())){
+            if (key.toLowerCase().contains(name.toLowerCase())){
                 result.put(key, playerID.get(key));
             }
         }

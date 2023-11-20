@@ -5,7 +5,7 @@ import main.java.use_case.navigation.NavigationOutputBoundary;
 import main.java.interface_adapter.compare.CompareViewModel;
 import main.java.interface_adapter.id_search.IDSearchViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
-import interface_adapter.ViewManagerModel;
+import main.java.interface_adapter.ViewManagerModel;
 
 
 public class NavigationPresenter implements NavigationOutputBoundary {
@@ -15,7 +15,7 @@ public class NavigationPresenter implements NavigationOutputBoundary {
     private final IDSearchViewModel IDsearchViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public NavigationPresenter(interface_adapter.ViewManagerModel viewManagerModel,
+    public NavigationPresenter(ViewManagerModel viewManagerModel,
                            NavigationViewModel navigationViewModel, CompareViewModel compareViewModel,
                                PlayerSearchViewModel playerSearchViewModel, IDSearchViewModel idSearchViewModel) {
         this.viewManagerModel = viewManagerModel;
