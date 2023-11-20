@@ -1,7 +1,9 @@
 package main.java.data_access;
 
-import entity.Player;
-import entity.PlayerFactory;
+
+import main.java.entity.Player;
+import main.java.entity.PlayerFactory;
+
 import main.java.use_case.player_search.PlayerSearchDataAccessInterface;
 import okhttp3.*;
 import org.json.JSONArray;
@@ -11,10 +13,10 @@ import main.java.data_access.IDFileDataAccessObject;
 
 import java.io.IOException;
 public class APIDataAccessObject implements PlayerSearchDataAccessInterface {
-    private IDFileDataAccessObject idFile;
+
     private PlayerFactory playerFactory;
-    public APIDataAccessObject(IDFileDataAccessObject idfile, PlayerFactory playerFactory){
-        this.idFile = idfile;
+    public APIDataAccessObject(PlayerFactory playerFactory){
+
         this.playerFactory = playerFactory;
     }
 
@@ -42,12 +44,14 @@ public class APIDataAccessObject implements PlayerSearchDataAccessInterface {
             JSONObject stats_rough = new JSONObject(response2.body().string());
             JSONObject info = info_rough.getJSONObject("player_info").getJSONObject("queryResults");
             JSONObject stats = stats_rough.getJSONObject("sport_career_hitting").getJSONObject("queryResults");
-            if (info.getInt("totalSize") != 0 && stats.getInt("totalSize") != 0){
-                return playerFactory.create(info, stats);
+            if (info.getInt("totalSize") > 0 && stats.getInt("totalSize") > 0){
+                return playerFactory.create(info.getJSONObject("row"), stats.getJSONObject("row"));
             }else{
+                System.out.println("no player");
                 throw new RuntimeException();
             }
         }catch (IOException | JSONException e){
+            System.out.println("error");
             throw new RuntimeException(e);
         }
     }

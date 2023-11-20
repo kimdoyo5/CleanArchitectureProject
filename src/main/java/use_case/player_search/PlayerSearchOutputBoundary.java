@@ -4,4 +4,6 @@ public interface PlayerSearchOutputBoundary {
     void prepareSuccessView(PlayerOutputData player);
 
     void prepareFailView(String error);
+
+    void back();
 }

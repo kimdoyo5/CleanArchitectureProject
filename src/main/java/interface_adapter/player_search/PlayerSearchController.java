@@ -17,4 +17,8 @@ public class PlayerSearchController {
         playerSearchInteractor.execute(data);
     }
 
+    public void execute(){
+        playerSearchInteractor.execute();
+    }
+
 }
