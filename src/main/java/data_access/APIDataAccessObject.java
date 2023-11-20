@@ -1,18 +1,19 @@
-package data_access;
+package main.java.data_access;
 
 import entity.Player;
 import entity.PlayerFactory;
-import use_case.player_search.PlayerSearchDataAccessInterface;
+import main.java.use_case.player_search.PlayerSearchDataAccessInterface;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import main.java.data_access.IDFileDataAccessObject;
 
 import java.io.IOException;
 public class APIDataAccessObject implements PlayerSearchDataAccessInterface {
-    private IDFIleDataAccessObject idFile;
+    private IDFileDataAccessObject idFile;
     private PlayerFactory playerFactory;
-    public APIDataAccessObject(IDFIleDataAccessObject idfile, PlayerFactory playerFactory){
+    public APIDataAccessObject(IDFileDataAccessObject idfile, PlayerFactory playerFactory){
         this.idFile = idfile;
         this.playerFactory = playerFactory;
     }

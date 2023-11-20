@@ -1,4 +1,4 @@
-package use_case.player_search;
+package main.java.use_case.player_search;
 
 public interface PlayerSearchOutputBoundary {
     void prepareSuccessView(PlayerOutputData player);

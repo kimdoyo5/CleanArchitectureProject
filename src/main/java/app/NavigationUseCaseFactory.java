@@ -1,6 +1,6 @@
 package main.java.app;
 
-import interface_adapter.ViewManagerModel;
+import main.java.interface_adapter.ViewManagerModel;
 import interface_adapter.navigation.NavigationController;
 import main.java.interface_adapter.compare.CompareViewModel;
 import main.java.interface_adapter.id_search.IDSearchViewModel;
