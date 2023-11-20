@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import interface_adapter.navigation.NavigationState;
+import main.java.interface_adapter.navigation.NavigationState;
 
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "navigation";

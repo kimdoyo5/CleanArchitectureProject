@@ -1,6 +1,6 @@
 package main.java.interface_adapter.compare;
 
-import interface_adapter.ViewModel;
+import main.java.interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 

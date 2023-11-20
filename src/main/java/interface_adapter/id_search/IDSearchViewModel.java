@@ -1,5 +1,5 @@
 package main.java.interface_adapter.id_search;
-import interface_adapter.ViewModel;
+import main.java.interface_adapter.ViewModel;
 import main.java.interface_adapter.id_search.IDSearchState;
 
 import java.beans.PropertyChangeListener;
