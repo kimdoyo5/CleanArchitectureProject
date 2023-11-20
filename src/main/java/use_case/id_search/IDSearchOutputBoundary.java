@@ -6,4 +6,5 @@ import java.util.Map;
 public interface IDSearchOutputBoundary {
     void prepareFailView(String error);
     void prepareSuccessView(Map<String, Integer> results);
+    void back();
 }

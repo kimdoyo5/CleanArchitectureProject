@@ -1,10 +1,12 @@
 package main.java.app;
 
-import interface_adapter.ViewManagerModel;
+import main.java.interface_adapter.ViewManagerModel;
+import main.java.data_access.IDFileDataAccessObject;
 import main.java.interface_adapter.compare.CompareViewModel;
 import main.java.interface_adapter.id_search.IDSearchViewModel;
 import main.java.interface_adapter.navigation.NavigationViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
+
 import main.java.view.MainMenuView;
 import main.java.view.ViewManager;
 import main.java.app.NavigationUseCaseFactory;
@@ -16,7 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class Main{
+public class Main extends JFrame{
     public static void main(String[] args) {
 
         JFrame application = new JFrame("Main Menu");
@@ -36,17 +38,25 @@ public class Main{
         CompareViewModel compareViewModel = new CompareViewModel();
         IDSearchViewModel IDsearchViewModel = new IDSearchViewModel();
         PlayerSearchViewModel playerSearchViewModel = new PlayerSearchViewModel();
+        IDFileDataAccessObject idSearchDataAccessOject;
+        try {
+            idSearchDataAccessOject = new IDFileDataAccessObject("./database.csv");
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
 
         MainMenuView mainMenuView = NavigationUseCaseFactory.create(viewManagerModel, navigationViewModel,
                 compareViewModel, IDsearchViewModel, playerSearchViewModel);
         views.add(mainMenuView, mainMenuView.viewName);
 
+        IDSearchView IDsearchView = IDSearchUseCaseFactory.create(viewManagerModel, IDsearchViewModel, idSearchDataAccessOject, navigationViewModel);
+        views.add(IDsearchView, IDsearchView.viewName);
+
         /* to be added as UI for each use case is done
         CompareView compareView = CompareUseCaseFactory.create(viewManagerModel, navigationViewModel, compareViewModel);
         views.add(compareView, compareView.viewName);
 
-        IDSearchView IDsearchView = IDSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, IDsearchViewModel);
-        views.add(IDsearchView, IDsearchView.viewName);
+
 
         PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, PlayerSearchViewModel);
         views.add(playerSearchView, playerSearchView.viewName);

@@ -12,7 +12,7 @@ import java.beans.PropertyChangeListener;
 import interface_adapter.navigation.NavigationState;
 
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "Main Menu";
+    public final String viewName = "navigation";
     private final NavigationViewModel navigationViewModel;
     private final JButton compare;
     private final JButton IDsearch;
@@ -27,12 +27,12 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel buttons = new JPanel();
+        IDsearch = new JButton(NavigationViewModel.PLAYER_SEARCH_BUTTON_LABEL);
+        buttons.add(IDsearch);
+        playerSearch = new JButton(NavigationViewModel.ID_SEARCH_BUTTON_LABEL);
+        buttons.add(playerSearch);
         compare = new JButton(NavigationViewModel.COMPARE_BUTTON_LABEL);
         buttons.add(compare);
-        IDsearch = new JButton(NavigationViewModel.ID_SEARCH_BUTTON_LABEL);
-        buttons.add(IDsearch);
-        playerSearch = new JButton(NavigationViewModel.PLAYER_SEARCH_BUTTON_LABEL);
-        buttons.add(playerSearch);
 
         compare.addActionListener(
                 new ActionListener() {
