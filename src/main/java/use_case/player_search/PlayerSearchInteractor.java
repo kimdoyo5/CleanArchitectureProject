@@ -1,7 +1,9 @@
 package main.java.use_case.player_search;
+
 import main.java.entity.Player;
 import main.java.entity.PlayerFactory;
 import main.java.use_case.id_search.IDSearchDataAccessInterface;
+
 
 import java.io.IOException;
 
@@ -25,8 +27,8 @@ public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary {
         if (playerSearchInputData.getPlayer_id() != 0){
             if (idSearchDataInterface.isPlayer(playerSearchInputData.getPlayer_id())) {
                 try {
-                    Player reuslt = playerSearchDataAccessInterface.search(playerSearchInputData.getPlayer_id());
-                    PlayerOutputData out = new PlayerOutputData(reuslt);
+                    Player result = playerSearchDataAccessInterface.search(playerSearchInputData.getPlayer_id());
+                    PlayerOutputData out = new PlayerOutputData(result);
                     playerSearchOutputBoundary.prepareSuccessView(out);
                 }catch (RuntimeException | IOException e){
                     playerSearchOutputBoundary.prepareFailView("Search Error");

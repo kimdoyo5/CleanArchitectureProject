@@ -1,6 +1,8 @@
 package main.java.view;
 
+
 import main.java.interface_adapter.navigation.NavigationController;
+
 import main.java.interface_adapter.navigation.NavigationViewModel;
 
 import javax.swing.*;
@@ -10,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import main.java.interface_adapter.navigation.NavigationState;
+
 
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "navigation";
@@ -57,7 +60,9 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         playerSearch.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
+
                         if (evt.getSource().equals(playerSearch)) {
+
                             navigationController.execute("playerSearch");
                         }
                     }

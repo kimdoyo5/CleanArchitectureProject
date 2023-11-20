@@ -1,6 +1,8 @@
 package main.java.interface_adapter.navigation;
+
 import main.java.interface_adapter.ViewModel;
 import main.java.interface_adapter.navigation.NavigationState;
+
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

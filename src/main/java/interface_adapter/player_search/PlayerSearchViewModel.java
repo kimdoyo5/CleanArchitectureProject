@@ -1,4 +1,5 @@
 package main.java.interface_adapter.player_search;
+
 import main.java.interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
@@ -30,4 +31,5 @@ public class PlayerSearchViewModel extends ViewModel {
     }
 
     public PlayerSearchState getSearchState(){return searchState;}
+
 }

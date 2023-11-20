@@ -1,5 +1,6 @@
 package main.java.view;
 
+
 import main.java.interface_adapter.player_search.PlayerSearchController;
 import main.java.interface_adapter.player_search.PlayerSearchState;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
@@ -130,4 +131,5 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
         }
         result.setText(currentState.getResult());
     }
+
 }

@@ -41,4 +41,5 @@ public class PlayerSearchState {
         value.append("</body></html>");
         result = value.toString();
     }
+
 }
