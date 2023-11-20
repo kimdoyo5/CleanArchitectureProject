@@ -1,6 +1,6 @@
 package main.java.interface_adapter.player_search;
 
-import use_case.player_search.PlayerSearchInputData;
+import main.java.use_case.player_search.PlayerSearchInputData;
 import main.java.use_case.player_search.PlayerSearchInputDataBoundary;
 import main.java.use_case.player_search.PlayerSearchInteractor;
 

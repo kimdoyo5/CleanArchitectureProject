@@ -23,22 +23,22 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
     private final JLabel label = new JLabel("Enter player Id");
     private final JLabel buffer = new JLabel("<html><body><br><br></body></html>");
     private final PlayerSearchController playerSearchController;
-    private final JButton search;
+    private final JButton playerSearch;
     private final JButton back;
 
-    PlayerSearchView(PlayerSearchController playerSearchController, PlayerSearchViewModel playerSearchViewModel){
+    public PlayerSearchView(PlayerSearchController playerSearchController, PlayerSearchViewModel playerSearchViewModel){
         this.playerSearchController = playerSearchController;
         this.playerSearchViewModel = playerSearchViewModel;
         this.playerSearchViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(playerSearchViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        search = new JButton(playerSearchViewModel.SEARCH_LABEL);
-        search.addActionListener(
+        playerSearch = new JButton(playerSearchViewModel.SEARCH_LABEL);
+        playerSearch.addActionListener(
                 new ActionListener() {
                     @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(search)){
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(playerSearch)){
                             PlayerSearchState currentstate = playerSearchViewModel.getSearchState();
                             try{
                                 playerSearchController.execute(Integer.parseInt(currentstate.getSearch()));
@@ -94,7 +94,7 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
                                 .addComponent(label))
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                 .addComponent(back)
-                                .addComponent(search))
+                                .addComponent(playerSearch))
         );
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
@@ -103,7 +103,7 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
                                 .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                 .addComponent(queryInputField)
-                                                .addComponent(search))
+                                                .addComponent(playerSearch))
                                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                 .addComponent(result))
                                 )

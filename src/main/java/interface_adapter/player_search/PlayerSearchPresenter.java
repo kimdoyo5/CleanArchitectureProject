@@ -13,7 +13,7 @@ public class PlayerSearchPresenter implements PlayerSearchOutputBoundary {
     private final NavigationViewModel navigationViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    PlayerSearchPresenter(PlayerSearchViewModel playerSearchViewModel, NavigationViewModel navigationViewModel, ViewManagerModel viewManagerModel){
+    public PlayerSearchPresenter(PlayerSearchViewModel playerSearchViewModel, NavigationViewModel navigationViewModel, ViewManagerModel viewManagerModel){
         this.playerSearchViewModel = playerSearchViewModel;
         this.navigationViewModel = navigationViewModel;
         this.viewManagerModel = viewManagerModel;

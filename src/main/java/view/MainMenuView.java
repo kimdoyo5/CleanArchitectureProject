@@ -57,7 +57,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         playerSearch.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(compare)) {
+                        if (evt.getSource().equals(playerSearch)) {
                             navigationController.execute("playerSearch");
                         }
                     }

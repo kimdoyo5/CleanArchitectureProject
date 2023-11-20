@@ -8,14 +8,12 @@ import java.io.IOException;
 public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary {
 
     PlayerSearchOutputBoundary playerSearchOutputBoundary;
-    PlayerFactory playerDataFactory;
     PlayerSearchDataAccessInterface playerSearchDataAccessInterface;
     IDSearchDataAccessInterface idSearchDataInterface;
     public PlayerSearchInteractor(PlayerSearchDataAccessInterface playerSearchDataAccessInterface,
                                   PlayerSearchOutputBoundary playerSearchOutputBoundary,
-                                  PlayerFactory playerDataFactory, IDSearchDataAccessInterface idSearchDataInterface){
+                                  IDSearchDataAccessInterface idSearchDataInterface){
 
-        this.playerDataFactory = playerDataFactory;
         this.playerSearchOutputBoundary =  playerSearchOutputBoundary;
         this.playerSearchDataAccessInterface = playerSearchDataAccessInterface;
         this.idSearchDataInterface = idSearchDataInterface;
