@@ -2,7 +2,7 @@ package main.java.app;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.navigation.NavigationController;
-import main.java.interface_adapter.compare.CompareViewModel;
+import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.interface_adapter.id_search.IDSearchViewModel;
 import main.java.interface_adapter.navigation.NavigationPresenter;
 import main.java.interface_adapter.navigation.NavigationViewModel;
@@ -19,11 +19,11 @@ public class NavigationUseCaseFactory {
     private NavigationUseCaseFactory() {}
 
     public static MainMenuView create(
-            ViewManagerModel viewManagerModel, NavigationViewModel navigationViewModel, CompareViewModel compareViewModel, IDSearchViewModel IDsearchViewModel,
+            ViewManagerModel viewManagerModel, NavigationViewModel navigationViewModel, PlayerComparisonViewModel playerComparisonViewModel, IDSearchViewModel IDsearchViewModel,
             PlayerSearchViewModel playerSearchViewModel) {
 
         try {
-            NavigationController navigationController = createNavigationUseCase(viewManagerModel, navigationViewModel, compareViewModel, IDsearchViewModel, playerSearchViewModel);
+            NavigationController navigationController = createNavigationUseCase(viewManagerModel, navigationViewModel, playerComparisonViewModel, IDsearchViewModel, playerSearchViewModel);
             return new MainMenuView(navigationViewModel, navigationController);
         } catch (IOException e) {
             /// change
@@ -36,11 +36,11 @@ public class NavigationUseCaseFactory {
 
     private static NavigationController createNavigationUseCase(ViewManagerModel viewManagerModel,
                                                                 NavigationViewModel navigationViewModel,
-                                                                CompareViewModel compareViewModel, IDSearchViewModel IDsearchViewModel,
+                                                                PlayerComparisonViewModel playerComparisonViewModel, IDSearchViewModel IDsearchViewModel,
                                                                 PlayerSearchViewModel playerSearchViewModel) throws IOException {
 
 
-        NavigationOutputBoundary navigationOutputBoundary = new NavigationPresenter(viewManagerModel, navigationViewModel, compareViewModel, playerSearchViewModel, IDsearchViewModel);
+        NavigationOutputBoundary navigationOutputBoundary = new NavigationPresenter(viewManagerModel, navigationViewModel, playerComparisonViewModel, playerSearchViewModel, IDsearchViewModel);
 
         NavigationInputBoundary navigationInteractor = new NavigationInteractor(navigationOutputBoundary);
 

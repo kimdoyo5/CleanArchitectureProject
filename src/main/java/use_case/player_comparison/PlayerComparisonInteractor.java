@@ -1,20 +1,21 @@
-package use_case.player_comparison;
+package main.java.use_case.player_comparison;
 
 import entity.Player;
 import entity.PlayerFactory;
-import interface_adapter.player_comparison.PlayerComparisonController;
+import main.java.interface_adapter.player_comparison.PlayerComparisonController;
+import main.java.use_case.player_comparison.PlayerComparisonInputBoundary;
 import java.io.IOException;
 
-public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary {
-    final PlayerComparisonDataAccessInterface comparisonDataAccessObject;
-    final PlayerComparisonOutputBoundary playerComparisonOutputBoundary;
-    final PlayerFactory playerDataFactory;
+public class PlayerComparisonInteractor extends PlayerComparisonInputBoundary {
+    PlayerComparisonDataAccessInterface comparisonDataAccessObject;
+    PlayerComparisonOutputBoundary playerComparisonOutputBoundary;
+    PlayerFactory playerDataFactory;
 
     public PlayerComparisonInteractor(PlayerComparisonDataAccessInterface comparisonDataAccessInterface,
                                       PlayerComparisonOutputBoundary comparisonOutputBoundary,
                                       PlayerFactory playerFactory) {
         this.comparisonDataAccessObject = comparisonDataAccessInterface;
-        this.comparisonPresenter = comparisonOutputBoundary;
+        this.playerComparisonOutputBoundary = comparisonOutputBoundary;
         this.playerDataFactory = playerFactory;
     }
 

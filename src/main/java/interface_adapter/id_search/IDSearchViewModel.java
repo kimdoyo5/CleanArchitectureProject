@@ -1,6 +1,6 @@
 package main.java.interface_adapter.id_search;
 import interface_adapter.ViewModel;
-import main.java.interface_adapter.compare.CompareState;
+import main.java.interface_adapter.player_comparison.PlayerComparisonState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

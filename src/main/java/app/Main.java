@@ -1,14 +1,14 @@
 package main.java.app;
 
 import interface_adapter.ViewManagerModel;
-import main.java.interface_adapter.compare.CompareViewModel;
+import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.interface_adapter.id_search.IDSearchViewModel;
 import main.java.interface_adapter.navigation.NavigationViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 import main.java.view.MainMenuView;
 import view.ViewManager;
 import main.java.app.NavigationUseCaseFactory;
-import main.java.view.CompareView;
+import main.java.view.PlayerComparisonView;
 import main.java.view.IDSearchView;
 import main.java.view.PlayerSearchView;
 
@@ -33,7 +33,7 @@ public class Main{
         new ViewManager(views, cardLayout, viewManagerModel);
 
         NavigationViewModel navigationViewModel = new NavigationViewModel();
-        CompareViewModel compareViewModel = new CompareViewModel();
+        PlayerComparisonViewModel compareViewModel = new PlayerComparisonViewModel();
         IDSearchViewModel IDsearchViewModel = new IDSearchViewModel();
         PlayerSearchViewModel playerSearchViewModel = new PlayerSearchViewModel();
 
