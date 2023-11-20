@@ -1,5 +1,6 @@
 package main.java.app;
 
+import main.java.data_access.DatabaseDataAccessObject;
 import main.java.interface_adapter.ViewManagerModel;
 import main.java.data_access.IDFileDataAccessObject;
 import main.java.interface_adapter.compare.CompareViewModel;
@@ -68,5 +69,7 @@ public class Main extends JFrame{
 
         application.pack();
         application.setVisible(true);
+        DatabaseCreationInterface databaseCreation = new DatabaseDataAccessObject();
+        databaseCreation.create();
     }
 }
