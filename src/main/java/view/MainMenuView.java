@@ -12,9 +12,9 @@ import java.beans.PropertyChangeListener;
 import interface_adapter.navigation.NavigationState;
 
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "Main Menu";
+    public final String viewName = "navigation";
     private final NavigationViewModel navigationViewModel;
-    private final JButton playerComparison;
+    private final JButton compare;
     private final JButton IDsearch;
     private final JButton playerSearch;
 
@@ -27,18 +27,18 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel buttons = new JPanel();
-        playerComparison = new JButton(NavigationViewModel.PLAYER_COMPARISON_BUTTON_LABEL);
-        buttons.add(playerComparison);
-        IDsearch = new JButton(NavigationViewModel.ID_SEARCH_BUTTON_LABEL);
+        IDsearch = new JButton(NavigationViewModel.PLAYER_SEARCH_BUTTON_LABEL);
         buttons.add(IDsearch);
-        playerSearch = new JButton(NavigationViewModel.PLAYER_SEARCH_BUTTON_LABEL);
+        playerSearch = new JButton(NavigationViewModel.ID_SEARCH_BUTTON_LABEL);
         buttons.add(playerSearch);
+        compare = new JButton(NavigationViewModel.COMPARE_BUTTON_LABEL);
+        buttons.add(compare);
 
-        playerComparison.addActionListener(
+        compare.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(playerComparison)) {
-                            navigationController.execute("playerComparison");
+                        if (evt.getSource().equals(compare)) {
+                            navigationController.execute("compare");
                         }
                     }
                 }
@@ -57,7 +57,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         playerSearch.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(playerComparison)) {
+                        if (evt.getSource().equals(compare)) {
                             navigationController.execute("playerSearch");
                         }
                     }
