@@ -16,17 +16,17 @@ public class NavigationPresenter implements NavigationOutputBoundary {
     private ViewManagerModel viewManagerModel;
 
     public NavigationPresenter(interface_adapter.ViewManagerModel viewManagerModel,
-                           NavigationViewModel navigationViewModel, PlayerComparisonViewModel compareViewModel,
+                           NavigationViewModel navigationViewModel, PlayerComparisonViewModel playerComparisonViewModel,
                                PlayerSearchViewModel playerSearchViewModel, IDSearchViewModel idSearchViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.navigationViewModel = navigationViewModel;
-        this.playerComparisonViewModel = compareViewModel;
+        this.playerComparisonViewModel = playerComparisonViewModel;
         this.playerSearchViewModel = playerSearchViewModel;
         this.IDsearchViewModel = idSearchViewModel;
     }
 
     @Override
-    public void prepareCompareView() {
+    public void preparePlayerComparisonView() {
         viewManagerModel.setActiveView(playerComparisonViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

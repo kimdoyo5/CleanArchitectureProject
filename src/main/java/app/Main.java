@@ -33,17 +33,17 @@ public class Main{
         new ViewManager(views, cardLayout, viewManagerModel);
 
         NavigationViewModel navigationViewModel = new NavigationViewModel();
-        PlayerComparisonViewModel compareViewModel = new PlayerComparisonViewModel();
+        PlayerComparisonViewModel playerComparisonViewModel = new PlayerComparisonViewModel();
         IDSearchViewModel IDsearchViewModel = new IDSearchViewModel();
         PlayerSearchViewModel playerSearchViewModel = new PlayerSearchViewModel();
 
         MainMenuView mainMenuView = NavigationUseCaseFactory.create(viewManagerModel, navigationViewModel,
-                compareViewModel, IDsearchViewModel, playerSearchViewModel);
+                playerComparisonViewModel, IDsearchViewModel, playerSearchViewModel);
         views.add(mainMenuView, mainMenuView.viewName);
 
         /* to be added as UI for each use case is done
-        CompareView compareView = CompareUseCaseFactory.create(viewManagerModel, navigationViewModel, compareViewModel);
-        views.add(compareView, compareView.viewName);
+        PlayerComparisonView playerComparisonView = CompareUseCaseFactory.create(viewManagerModel, navigationViewModel, playerComparisonViewModel);
+        views.add(playerComparisonView, playerComparisonView.viewName);
 
         IDSearchView IDsearchView = IDSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, IDsearchViewModel);
         views.add(IDsearchView, IDsearchView.viewName);
