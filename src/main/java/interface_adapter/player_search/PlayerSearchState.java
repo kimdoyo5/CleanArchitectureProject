@@ -4,7 +4,7 @@ import java.security.PrivateKey;
 
 public class PlayerSearchState {
     private String search = "";
-    private String search_error = "";
+    private String search_error = null;
     private String result = "";
 
     PlayerSearchState(PlayerSearchState copy){
