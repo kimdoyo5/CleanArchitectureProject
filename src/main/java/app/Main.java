@@ -1,6 +1,8 @@
 package main.java.app;
 
+import main.java.data_access.APIDataAccessObject;
 import main.java.data_access.DatabaseDataAccessObject;
+import main.java.entity.CommonPlayerFactory;
 import main.java.interface_adapter.ViewManagerModel;
 import main.java.data_access.IDFileDataAccessObject;
 import main.java.interface_adapter.compare.CompareViewModel;
@@ -40,6 +42,7 @@ public class Main extends JFrame{
         IDSearchViewModel IDsearchViewModel = new IDSearchViewModel();
         PlayerSearchViewModel playerSearchViewModel = new PlayerSearchViewModel();
         IDFileDataAccessObject idSearchDataAccessOject;
+        APIDataAccessObject apiDataAccessObject = new APIDataAccessObject(new CommonPlayerFactory());
         try {
             idSearchDataAccessOject = new IDFileDataAccessObject("./database.csv");
         } catch (RuntimeException e) {
@@ -57,11 +60,13 @@ public class Main extends JFrame{
         CompareView compareView = CompareUseCaseFactory.create(viewManagerModel, navigationViewModel, compareViewModel);
         views.add(compareView, compareView.viewName);
 
-
-
-        PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, PlayerSearchViewModel);
+        PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessOject);
         views.add(playerSearchView, playerSearchView.viewName);
+
         */
+        PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessOject);
+        views.add(playerSearchView, playerSearchView.viewName);
+
         viewManagerModel.setActiveView(mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();
 
