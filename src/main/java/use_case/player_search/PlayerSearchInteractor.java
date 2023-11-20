@@ -1,4 +1,4 @@
-package use_case.player_search;
+package main.java.use_case.player_search;
 
 import entity.Player;
 import entity.PlayerFactory;

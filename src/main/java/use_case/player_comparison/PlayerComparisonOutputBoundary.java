@@ -1,7 +1,6 @@
 package main.java.use_case.player_comparison;
 
-import use_case.player_search.PlayerOutputData;
-import use_case.player_search.PlayerComparisonOutputData;
+import main.java.use_case.player_comparison.PlayerComparisonOutputData;
 
 public interface PlayerComparisonOutputBoundary {
     void prepareSuccessView(PlayerComparisonOutputData player);

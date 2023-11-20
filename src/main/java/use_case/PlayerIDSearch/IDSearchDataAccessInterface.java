@@ -1,4 +1,4 @@
-package use_case.PlayerIDSearch;
+package main.java.use_case.PlayerIDSearch;
 
 import java.util.List;
 

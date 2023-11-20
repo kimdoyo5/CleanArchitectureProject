@@ -1,6 +1,6 @@
-package data_access;
+package main.java.data_access;
 
-import use_case.PlayerIDSearch.IDSearchDataAccessInterface;
+import main.java.use_case.PlayerIDSearch.IDSearchDataAccessInterface;
 
 import java.io.*;
 import java.util.ArrayList;

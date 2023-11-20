@@ -1,8 +1,8 @@
-package data_access;
+package main.java.data_access;
 
-import entity.Player;
-import entity.PlayerFactory;
-import use_case.player_search.PlayerSearchDataAccessInterface;
+import main.java.entity.Player;
+import main.java.entity.PlayerFactory;
+import main.java.use_case.player_search.PlayerSearchDataAccessInterface;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
