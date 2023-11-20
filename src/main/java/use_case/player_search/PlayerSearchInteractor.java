@@ -1,12 +1,11 @@
-package use_case.player_search;
-
-import entity.Player;
-import entity.PlayerFactory;
+package main.java.use_case.player_search;
+import main.java.entity.Player;
+import main.java.entity.PlayerFactory;
 import use_case.PlayerIDSearch.IDSearchDataAccessInterface;
 
 import java.io.IOException;
 
-public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary{
+public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary {
 
     PlayerSearchOutputBoundary playerSearchOutputBoundary;
     PlayerFactory playerDataFactory;
@@ -22,6 +21,7 @@ public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary{
         this.idSearchDataInterface = idSearchDataInterface;
     }
 
+    @Override
     public void execute(PlayerSearchInputData playerSearchInputData) throws IOException {
 
         if (playerSearchInputData.getPlayer_id() != 0){

@@ -1,6 +1,6 @@
-package use_case.player_search;
+package main.java.use_case.player_search;
 
-import entity.Player;
+import main.java.entity.Player;
 
 import java.util.Map;
 
