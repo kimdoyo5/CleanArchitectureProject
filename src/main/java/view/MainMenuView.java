@@ -1,6 +1,6 @@
 package main.java.view;
 
-import interface_adapter.navigation.NavigationController;
+import main.java.interface_adapter.navigation.NavigationController;
 import main.java.interface_adapter.navigation.NavigationViewModel;
 
 import javax.swing.*;
