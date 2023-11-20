@@ -1,10 +1,11 @@
 package main.java.use_case.player_comparison;
 
 import use_case.player_search.PlayerOutputData;
+import use_case.player_search.PlayerComparisonOutputData;
 
-public class PlayerComparisonOutputBoundary {
-    void prepareSuccessView(PlayerComparisonOutputData player) {}
+public interface PlayerComparisonOutputBoundary {
+    void prepareSuccessView(PlayerComparisonOutputData player);
 
-    void prepareFailView(String error) {}
+    void prepareFailView(String error);
 
 }

@@ -6,7 +6,7 @@ import main.java.interface_adapter.player_comparison.PlayerComparisonController;
 import main.java.use_case.player_comparison.PlayerComparisonInputBoundary;
 import java.io.IOException;
 
-public class PlayerComparisonInteractor extends PlayerComparisonInputBoundary {
+public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary {
     PlayerComparisonDataAccessInterface comparisonDataAccessObject;
     PlayerComparisonOutputBoundary playerComparisonOutputBoundary;
     PlayerFactory playerDataFactory;
