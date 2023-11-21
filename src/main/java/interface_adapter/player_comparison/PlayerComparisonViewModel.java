@@ -1,7 +1,7 @@
 package main.java.interface_adapter.player_comparison;
 
-import entity.Player;
-import interface_adapter.ViewModel;
+import main.java.entity.Player;
+import main.java.interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

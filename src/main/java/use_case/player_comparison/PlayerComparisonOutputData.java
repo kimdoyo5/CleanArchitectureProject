@@ -1,9 +1,9 @@
 package main.java.use_case.player_comparison;
 
-import entity.Player;
+import main.java.entity.Player;
 
 public class PlayerComparisonOutputData {
-    public PlayerComparisonOutputData(Player player) {
+    //public PlayerComparisonOutputData(Player player);{
 
-    }
+    //}
 }
