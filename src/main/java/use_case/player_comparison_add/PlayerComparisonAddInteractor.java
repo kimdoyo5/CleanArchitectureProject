@@ -16,7 +16,7 @@ public class PlayerComparisonAddInteractor implements PlayerComparisonAddInputBo
 
     @Override
     public void execute(PlayerComparisonAddInputData playerComparisonAddInputData) {
-        Player player = playerComparisonAddInputData.getPlayer();               //Change with player specifics
+        Player player = playerComparisonAddInputData.getPlayer();
         boolean added = playerComparisonAddDataAccessInterface.add(player);
         if (added){
             PlayerComparisonAddOutputData playerComparisonAddOutputData = new PlayerComparisonAddOutputData(player);

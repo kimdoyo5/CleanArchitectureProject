@@ -4,7 +4,7 @@ import main.java.entity.Player;
 
 public class PlayerComparisonAddInputData {
 
-    final private Player player;                      //Player attribute is wip: specific player attributes subject to change
+    final private Player player;
 
     public PlayerComparisonAddInputData(Player player){
         this.player = player;
