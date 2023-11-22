@@ -1,8 +1,9 @@
 package main.java.interface_adapter.player_comparison_add;
 
+import main.java.interface_adapter.ViewModel;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import interface_adapter.ViewModel;
 
 public class PlayerComparisonAddViewModel extends ViewModel {
 

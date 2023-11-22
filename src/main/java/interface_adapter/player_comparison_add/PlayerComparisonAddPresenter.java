@@ -1,5 +1,6 @@
 package main.java.interface_adapter.player_comparison_add;
 
+import main.java.entity.Player;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddOutputBoundary;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddOutputData;
 

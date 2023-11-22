@@ -1,5 +1,7 @@
 package main.java.interface_adapter.player_comparison_add;
 
+import main.java.entity.Player;
+
 import java.util.ArrayList;
 
 public class PlayerComparisonAddState {
