@@ -106,6 +106,7 @@ public class PlayerComparisonDataAccessObject implements PlayerComparisonAddData
             return false;
         }else{
             players.put(player.getName(), player);
+            this.save();
             return true;
         }
     }
