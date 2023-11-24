@@ -109,6 +109,7 @@ public class PlayerComparisonDataAccessObject implements
             return false;
         }else{
             players.put(player.getName(), player);
+            this.save();
             return true;
         }
     }
