@@ -23,7 +23,7 @@ public class PlayerSearchPresenter implements PlayerSearchOutputBoundary {
         Map<String, String> data = new HashMap<>();
         data.put("Name", player.getName());
         data.put("Player Id", String.valueOf(player.getID()));
-        String[] stat_key = {"HR_rate", "CS_rate", "HBB_ rate", "HH_rate", "OPS", "wOPS"};
+        String[] stat_key = {"HR_rate", "CS_rate", "HBB_rate", "HH_rate", "OPS", "wOPS"};
         for (String key: player.getStats().keySet()){
             data.put(key, player.getStats().get(key));
         }

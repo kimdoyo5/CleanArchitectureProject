@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CommonPlayerFactory implements PlayerFactory{
-    String[] keys = {"hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg"};
+    final String[] keys = {"hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg"};
 
     @Override
     public Player create(JSONObject info, JSONObject stats) {
