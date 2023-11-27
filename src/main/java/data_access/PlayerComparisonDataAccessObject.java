@@ -4,9 +4,12 @@ import java.io.*;
 import java.util.*;
 import main.java.entity.Player;
 import main.java.entity.PlayerFactory;
+import main.java.use_case.player_compaison_remove.PlayerComparisonRemoveDataAccessInterface;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddDataAccessInterface;
 
-public class PlayerComparisonDataAccessObject implements PlayerComparisonAddDataAccessInterface {
+public class PlayerComparisonDataAccessObject implements
+        PlayerComparisonAddDataAccessInterface,
+        PlayerComparisonRemoveDataAccessInterface {
 
     private final File csvFile;
 
@@ -111,4 +114,16 @@ public class PlayerComparisonDataAccessObject implements PlayerComparisonAddData
         }
     }
 
+    public Player remove(int playerId){
+        Set<String> keys = players.keySet();
+        Player player = null;
+        for(String key: keys){
+            if (players.get(key).getID() == playerId){
+                player = players.get(key);
+                players.remove(key);
+                this.save();
+            }
+        }
+        return player;
+    }
 }
