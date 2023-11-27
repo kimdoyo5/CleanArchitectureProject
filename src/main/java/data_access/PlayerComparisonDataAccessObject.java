@@ -126,5 +126,4 @@ public class PlayerComparisonDataAccessObject implements
         }
         return player;
     }
-
 }
