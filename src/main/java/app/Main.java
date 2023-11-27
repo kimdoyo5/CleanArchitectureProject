@@ -4,6 +4,7 @@ import main.java.data_access.APIDataAccessObject;
 import main.java.data_access.DatabaseDataAccessObject;
 import main.java.entity.CommonPlayerFactory;
 
+import main.java.interface_adapter.PlayerDataDisplay.PlayerDataDisplayViewModel;
 import main.java.interface_adapter.ViewManagerModel;
 import main.java.data_access.IDFileDataAccessObject;
 import main.java.interface_adapter.compare.CompareViewModel;
@@ -11,16 +12,10 @@ import main.java.interface_adapter.id_search.IDSearchViewModel;
 import main.java.interface_adapter.navigation.NavigationViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 
-import main.java.view.MainMenuView;
-import main.java.view.ViewManager;
-import main.java.app.NavigationUseCaseFactory;
-import main.java.view.CompareView;
-import main.java.view.IDSearchView;
-import main.java.view.PlayerSearchView;
+import main.java.view.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class Main extends JFrame{
     public static void main(String[] args) {
@@ -46,6 +41,8 @@ public class Main extends JFrame{
 
         APIDataAccessObject apiDataAccessObject = new APIDataAccessObject(new CommonPlayerFactory());
 
+        PlayerDataDisplayViewModel playerDataDisplayViewModel = new PlayerDataDisplayViewModel();
+
         try {
             idSearchDataAccessOject = new IDFileDataAccessObject("./database.csv");
         } catch (RuntimeException e) {
@@ -69,9 +66,11 @@ public class Main extends JFrame{
         */
 
 
-        PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessOject);
+        PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessOject, playerDataDisplayViewModel);
         views.add(playerSearchView, playerSearchView.viewName);
 
+        PlayerDataDisplayView playerDataDisplayView = PlayerDataDisplayViewFactory.create(playerDataDisplayViewModel, viewManagerModel, playerSearchViewModel);
+        views.add(playerDataDisplayView, playerDataDisplayView.viewName);
 
         viewManagerModel.setActiveView(mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();

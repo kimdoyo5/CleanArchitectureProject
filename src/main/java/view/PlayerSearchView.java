@@ -135,10 +135,9 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         PlayerSearchState currentState = playerSearchViewModel.getSearchState();
-        if (currentState.getSearch_error() != null){
+        if (currentState.getSearch_error() != null) {
             JOptionPane.showMessageDialog(this, currentState.getSearch_error());
         }
-        result.setText(currentState.getResult());
     }
 
 }
