@@ -32,6 +32,8 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
         this.playerSearchViewModel = playerSearchViewModel;
         this.playerSearchViewModel.addPropertyChangeListener(this);
 
+
+
         JLabel title = new JLabel(playerSearchViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         playerSearch = new JButton(playerSearchViewModel.SEARCH_LABEL);
@@ -76,6 +78,14 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
 
                     @Override
                     public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+                            PlayerSearchState currentstate = playerSearchViewModel.getSearchState();
+                            try{
+                                playerSearchController.execute(Integer.parseInt(currentstate.getSearch()));
+                            } catch (IOException ex) {
+                                JOptionPane.showMessageDialog(null, "An error occured. Please try again.");
+                            }
+                        }
                     }
 
                     @Override
@@ -87,7 +97,6 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
         this.setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
-
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
