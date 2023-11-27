@@ -1,5 +1,7 @@
 package main.java.interface_adapter.player_search;
 
+import main.java.interface_adapter.PlayerDataDisplay.PlayerDataDisplayViewModel;
+import main.java.interface_adapter.PlayerDataDisplay.PlayerDataDisplayViewState;
 import main.java.interface_adapter.ViewManagerModel;
 import main.java.interface_adapter.navigation.NavigationViewModel;
 import main.java.use_case.player_search.PlayerOutputData;
@@ -12,29 +14,22 @@ public class PlayerSearchPresenter implements PlayerSearchOutputBoundary {
     private final PlayerSearchViewModel playerSearchViewModel;
     private final NavigationViewModel navigationViewModel;
     private final ViewManagerModel viewManagerModel;
+    private final PlayerDataDisplayViewModel playerDataDisplayViewModel;
 
-    public PlayerSearchPresenter(PlayerSearchViewModel playerSearchViewModel, NavigationViewModel navigationViewModel, ViewManagerModel viewManagerModel){
+    public PlayerSearchPresenter(PlayerSearchViewModel playerSearchViewModel, NavigationViewModel navigationViewModel, ViewManagerModel viewManagerModel, PlayerDataDisplayViewModel playerDataDisplayViewModel){
         this.playerSearchViewModel = playerSearchViewModel;
         this.navigationViewModel = navigationViewModel;
         this.viewManagerModel = viewManagerModel;
+        this.playerDataDisplayViewModel = playerDataDisplayViewModel;
     }
     @Override
     public void prepareSuccessView(PlayerOutputData player) {
-        Map<String, String> data = new HashMap<>();
-        data.put("Name", player.getName());
-        data.put("Player Id", String.valueOf(player.getID()));
-        String[] stat_key = {"HR_rate", "CS_rate", "HBB_rate", "HH_rate", "OPS", "wOPS"};
-        for (String key: player.getStats().keySet()){
-            data.put(key, player.getStats().get(key));
-        }
-
-        for (String key: stat_key){
-            data.put(key, player.calculateStat(key));
-        }
-        PlayerSearchState state = playerSearchViewModel.getSearchState();
-        state.setResult(data);
-        this.playerSearchViewModel.setSearchState(state);
-        playerSearchViewModel.firePropertyChanged();
+        PlayerDataDisplayViewState state = playerDataDisplayViewModel.getState();
+        state.setResult(player.getData());
+        this.playerDataDisplayViewModel.setViewState(state);
+        playerDataDisplayViewModel.firePropertyChanged();
+        viewManagerModel.setActiveView(playerDataDisplayViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override
