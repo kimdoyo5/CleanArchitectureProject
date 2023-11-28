@@ -63,19 +63,15 @@ public class Main extends JFrame{
         CompareView compareView = CompareUseCaseFactory.create(viewManagerModel, navigationViewModel, compareViewModel);
         views.add(compareView, compareView.viewName);
 
-
         PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessOject);
         views.add(playerSearchView, playerSearchView.viewName);
         */
 
-
         PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessOject);
         views.add(playerSearchView, playerSearchView.viewName);
 
-
         viewManagerModel.setActiveView(mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();
-
 
 
         application.pack();

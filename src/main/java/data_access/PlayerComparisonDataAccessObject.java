@@ -5,17 +5,20 @@ import java.util.*;
 import main.java.entity.Player;
 import main.java.entity.PlayerFactory;
 import main.java.use_case.player_compaison_remove.PlayerComparisonRemoveDataAccessInterface;
+import main.java.use_case.player_comparison.PlayerComparisonDataAccessInterface;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddDataAccessInterface;
 
 public class PlayerComparisonDataAccessObject implements
         PlayerComparisonAddDataAccessInterface,
-        PlayerComparisonRemoveDataAccessInterface {
+        PlayerComparisonRemoveDataAccessInterface,
+        PlayerComparisonDataAccessInterface {
 
     private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-
     private final Map<String, Player> players = new HashMap<>();
+    private final Map<String, Player> leaders = new LinkedHashMap<>();
+    private boolean leaders_updated = false;
 
     private PlayerFactory playerFactory;
 
@@ -36,7 +39,6 @@ public class PlayerComparisonDataAccessObject implements
         headers.put("ab", 9);
         headers.put("obp", 10);
         headers.put("slg", 11);
-
 
         if (csvFile.length() == 0) {
             save();
@@ -104,13 +106,60 @@ public class PlayerComparisonDataAccessObject implements
         return players.containsKey(identifier);
     }
 
-    public boolean add(Player player){
-        if (players.size() >= 4){
+    public boolean add(Player player) {
+        if (players.size() >= 4) {
             return false;
-        }else{
+        } else {
             players.put(player.getName(), player);
             this.save();
+            leaders_updated = false;
             return true;
+        }
+    }
+
+    public int playersAdded() {
+        return players.size();
+    }
+
+    public Map getLeaders() {
+        if (leaders_updated) {
+            return leaders;
+        } else {
+            // Find the best player for each stat
+            for (each of 4 players) {
+                if (each.hr > leaders.get) {
+                    leaders.put("hr", each.getName());
+                }
+                if (each.tb > leaders.get) {
+                    leaders.put("tb", each.getName());
+                }
+                if (each.xbh > leaders.get) {
+                    leaders.put("xbh", each.getName());
+                }
+                if (each.bb > leaders.get) {
+                    leaders.put("bb", each.getName());
+                }
+                if (each.h > leaders.get) {
+                    leaders.put("h", each.getName());
+                }
+                if (each.cs < leaders.get) {
+                    leaders.put("cs", each.getName());
+                }
+                if (each.sb > leaders.get) {
+                    leaders.put("sb", each.getName());
+                }
+                if (each.ab > leaders.get) {
+                    leaders.put("ab", each.getName());
+                }
+                if (each.obp > leaders.get) {
+                    leaders.put("obp", each.getName());
+                }
+                if (each.slg > leaders.get) {
+                    leaders.put("slg", each.getName());
+                }
+            }
+            leaders_updated = true;
+            return leaders;
         }
     }
 

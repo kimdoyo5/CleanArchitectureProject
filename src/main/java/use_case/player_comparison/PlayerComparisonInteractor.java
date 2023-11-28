@@ -8,31 +8,37 @@ import main.java.interface_adapter.player_comparison.PlayerComparisonPresenter;
 import java.io.IOException;
 
 public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary {
-    final PlayerComparisonDataAccessInterface comparisonDataAccessObject;
+    final PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface;
+    final PlayerComparisonOutputBoundary playerComparisonPresenter;
     final PlayerFactory playerDataFactory;
 
     PlayerComparisonOutputBoundary comparisonPresenter;
 
-    public PlayerComparisonInteractor(PlayerComparisonDataAccessInterface comparisonDataAccessInterface,
-                                      PlayerComparisonOutputBoundary comparisonOutputBoundary,
+    public PlayerComparisonInteractor(PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface,
+                                      PlayerComparisonOutputBoundary playerComparisonOutputBoundary,
                                       PlayerFactory playerFactory) {
-        this.comparisonDataAccessObject = comparisonDataAccessInterface;
-        this.comparisonPresenter = comparisonOutputBoundary;
+        this.playerComparisonDataAccessInterface = playerComparisonDataAccessInterface;
+        this.playerComparisonPresenter = playerComparisonOutputBoundary;
         this.playerDataFactory = playerFactory;
     }
 
     @Override
-    public void execute(PlayerComparisonInputData playerComparisonInputData) {
+    public void execute() {
 
-        if (playerComparisonInputData.inputsin) {
+        int playersAdded = playerComparisonDataAccessInterface.playersAdded();
+
+        if (playersAdded == 2) { // Whether there's 2+ players
             // Player 1 statistic
             // Player 2 statistic
 
+
+        } if (playersAdded == 3) {
+
+        } if (playersAdded == 4) {
+
         } else {
-            comparisonPresenter.prepareFailView("Did not select 2 players.");
+            comparisonPresenter.prepareFailView("You need to select at least 2 players.");
         }
-
-
 
     }
 }
