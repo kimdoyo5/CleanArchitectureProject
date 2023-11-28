@@ -10,7 +10,7 @@ public class PlayerComparisonViewModel extends ViewModel {
     private PlayerComparisonState state = new PlayerComparisonState();
 
     public PlayerComparisonViewModel() {
-        super("compare");
+        super("playerComparison");
     }
 
     public void setState(PlayerComparisonState state) {
