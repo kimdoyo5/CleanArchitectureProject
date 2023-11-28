@@ -10,7 +10,7 @@ public class NavigationInteractor implements NavigationInputBoundary {
     @Override
     public void execute(String source) {
         //should prepare different views depending on button ):
-        if (source.equals("compare")){
+        if (source.equals("playerComparison")){
             navigationPresenter.preparePlayerComparisonView();
         }
         else if (source.equals("playerSearch")){
