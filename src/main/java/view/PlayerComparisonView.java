@@ -1,128 +1,85 @@
 package main.java.view;
 
-import main.java.interface_adapter.id_search.IDSearchController;
-import main.java.interface_adapter.id_search.IDSearchState;
-import main.java.interface_adapter.id_search.IDSearchViewModel;
-import main.java.interface_adapter.player_comparison.PlayerComparisonController;
-import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
-import main.java.interface_adapter.player_comparison.PlayerComparisonState;
+import main.java.entity.Player;
+import main.java.interface_adapter.player_comparison.*;
+import main.java.interface_adapter.player_comparison_add.*;
+import main.java.interface_adapter.player_comparison_remove.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.IOException;
+import java.util.List;
 
-public class PlayerComparisonView extends JPanel implements ActionListener {
+public class PlayerComparisonView extends JPanel {
 
-    public final String viewName = "player comparison";
     private final PlayerComparisonViewModel playerComparisonViewModel;
-    private final JTextField queryInputField = new JTextField(15);
-    private final JLabel result = new JLabel("");
-    private final JLabel label1 = new JLabel("Enter player 1 name:");
-    private final JLabel label2 = new JLabel("Enter player 2 name:");
-    private final JLabel buffer = new JLabel("<html><body><br><br></body></html>");
-    private final PlayerComparisonController playerComparisonController;
-    private final JButton playerComparison;
-    private final JButton back;
+    private final PlayerComparisonAddController playerComparisonAddController;
+    private final PlayerComparisonRemoveController playerComparisonRemoveController;
+    private final JTable comparisonTable;
+    private final DefaultTableModel comparisonTableModel;
+    private final JList<String> playerListDisplay;
+    private final DefaultListModel<String> playerListModel;
 
-    public PlayerComparisonView(PlayerComparisonController playerComparisonController, PlayerComparisonViewModel playerComparisonViewModel) {
+    public PlayerComparisonView(PlayerComparisonController comparisonController,
+                                PlayerComparisonAddController addController,
+                                PlayerComparisonRemoveController removeController,
+                                PlayerComparisonViewModel comparisonViewModel) {
+        this.playerComparisonAddController = addController;
+        this.playerComparisonRemoveController = removeController;
+        this.playerComparisonViewModel = comparisonViewModel;
 
-        this.playerComparisonController = playerComparisonController;
-        this.playerComparisonViewModel = playerComparisonViewModel;
+        setLayout(new BorderLayout());
+        playerListModel = new DefaultListModel<>();
+        playerListDisplay = new JList<>(playerListModel);
+        add(new JScrollPane(playerListDisplay), BorderLayout.WEST);
 
-        playerComparisonViewModel.addPropertyChangeListener(this);
+        JPanel buttonPanel = createButtonPanel();
+        add(buttonPanel, BorderLayout.NORTH);
 
-        JLabel title = new JLabel(PlayerComparisonViewModel.TITLE_LABEL);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        comparisonTableModel = new DefaultTableModel();
+        comparisonTable = new JTable(comparisonTableModel);
+        add(new JScrollPane(comparisonTable), BorderLayout.CENTER);
 
-        playerComparison = new JButton(PlayerComparisonViewModel.COMPARISON_BUTTON_LABEL);
-        back = new JButton(PlayerComparisonViewModel.BACK_BUTTON_LABEL);
-
-        playerComparison.addActionListener(
-
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(playerComparison)) {
-                            PlayerComparisonState currentState = playerComparisonViewModel.getState();
-                            try {
-                                playerComparisonController.execute(currentState.getQuery());
-                            } catch (IOException e) {
-                                JOptionPane.showMessageDialog(null, "An error occured. Please try again.");
-                            }
-                        }
-                    }
-                }
-        );
-
-        back.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(back)) {
-                            playerComparisonController.execute();
-                        }
-                    }
-                }
-        );
-
-        queryInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        PlayerComparisonState currentState = playerComparisonViewModel.getState();
-                        String text = queryInputField.getText() + e.getKeyChar();
-                        currentState.setQuery(text);
-                        playerComparisonViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                    }
-                });
-
-        GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
-
-        layout.setHorizontalGroup(
-                layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(queryInputField)
-                                .addComponent(result)
-                                .addComponent(buffer)
-                                .addComponent(label))
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(back)
-                                .addComponent(playerComparison))
-        );
-        layout.setVerticalGroup(
-                layout.createSequentialGroup()
-                        .addComponent(label)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(queryInputField)
-                                                .addComponent(playerComparison))
-                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(result))
-                                )
-                        )
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(buffer)
-                                .addComponent(back)
-                        )
-
-        );
-
+        playerComparisonViewModel.addPropertyChangeListener(evt -> updateView());
     }
 
+    private JPanel createButtonPanel() {
+        JButton addButton = new JButton("Add Player");
+        addButton.addActionListener(this::addPlayerAction);
+
+        JButton removeButton = new JButton("Remove Player");
+        removeButton.addActionListener(this::removePlayerAction);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(addButton);
+        buttonPanel.add(removeButton);
+        return buttonPanel;
+    }
+
+    private void addPlayerAction(ActionEvent e) {
+        // Implement logic to add a player
+    }
+
+    private void removePlayerAction(ActionEvent e) {
+        // Implement logic to remove a player
+    }
+
+    private void updateView() {
+        updatePlayerList();
+        updateComparisonTable();
+    }
+
+    private void updatePlayerList() {
+        List<Player> players = playerComparisonViewModel.getState().getPlayers();
+        playerListModel.clear();
+        players.forEach(player -> playerListModel.addElement(player.getName()));
+    }
+
+    private void updateComparisonTable() {
+        String[][] data = playerComparisonViewModel.getState().getDataArray();
+        if (data != null && data.length > 0) {
+            comparisonTableModel.setDataVector(data, data[0]); // First row is column names
+        }
+    }
 }

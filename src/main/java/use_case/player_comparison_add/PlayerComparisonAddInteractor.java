@@ -9,7 +9,7 @@ public class PlayerComparisonAddInteractor implements PlayerComparisonAddInputBo
 
     public PlayerComparisonAddInteractor(
             PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface,
-                                          PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary) {
+            PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary) {
         this.playerComparisonAddDataAccessInterface = playerComparisonAddDataAccessInterface;
         this.playerComparisonAddPresenter = playerComparisonAddOutputBoundary;
     }

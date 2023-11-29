@@ -2,10 +2,8 @@ package main.java.interface_adapter.player_comparison;
 
 import main.java.interface_adapter.ViewManagerModel;
 import main.java.interface_adapter.navigation.NavigationViewModel;
-import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddPresenter;
 import main.java.use_case.player_comparison.PlayerComparisonOutputBoundary;
 import main.java.use_case.player_comparison.PlayerComparisonOutputData;
-import main.java.view.PlayerComparisonView;
 
 public class PlayerComparisonPresenter implements PlayerComparisonOutputBoundary {
 
@@ -21,21 +19,23 @@ public class PlayerComparisonPresenter implements PlayerComparisonOutputBoundary
 
     @Override
     public void prepareSuccessView(PlayerComparisonOutputData player) {
-
-
-        this.playerSearchViewModel.setSearchState(state);
+        PlayerComparisonState state = playerComparisonViewModel.getState();
+        state.setDataArray(player.getDataArray());
+        this.playerComparisonViewModel.setState(state);
+        playerComparisonViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        PlayerComparisonState playerComparisonState = playerComparisonViewModel.getState();
-        playerComparisonState.setPlayerComparisonError(error);
-        this.playerComparisonViewModel.setComparisonState(state);
+        PlayerComparisonState state = playerComparisonViewModel.getState();
+        state.setPlayerComparisonError(error);
+        this.playerComparisonViewModel.setState(state);
         playerComparisonViewModel.firePropertyChanged();
     }
 
     @Override
     public void back() {
+        // Navigation logic, as currently implemented
         viewManagerModel.setActiveView(navigationViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
