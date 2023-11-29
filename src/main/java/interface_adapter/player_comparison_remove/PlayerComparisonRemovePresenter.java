@@ -1,8 +1,8 @@
 package main.java.interface_adapter.player_comparison_remove;
 
 import main.java.entity.Player;
-import main.java.use_case.player_compaison_remove.PlayerComparisonRemoveOutputBoundary;
-import main.java.use_case.player_compaison_remove.PlayerComparisonRemoveOutputData;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputBoundary;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputData;
 
 public class PlayerComparisonRemovePresenter implements PlayerComparisonRemoveOutputBoundary {
 
