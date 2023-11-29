@@ -2,10 +2,7 @@ package main.java.use_case.player_search;
 
 public class PlayerSearchInputData {
 
-
-    private int player_id = 0;
-
-
+    private final int player_id;
 
     public PlayerSearchInputData(int player_id){
         this.player_id = player_id;
