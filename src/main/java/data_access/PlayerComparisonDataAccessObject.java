@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import main.java.entity.Player;
 import main.java.entity.PlayerFactory;
-import main.java.use_case.player_compaison_remove.PlayerComparisonRemoveDataAccessInterface;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAccessInterface;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddDataAccessInterface;
 
 public class PlayerComparisonDataAccessObject implements
