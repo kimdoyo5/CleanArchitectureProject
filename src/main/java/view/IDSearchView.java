@@ -80,6 +80,16 @@ public class IDSearchView extends JPanel implements ActionListener, PropertyChan
 
                     @Override
                     public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+                            IDSearchState currentState = idSearchViewModel.getState();
+
+                            try{
+                                idSearchController.execute(currentState.getQuery());
+                            }
+                            catch (IOException f){
+                                JOptionPane.showMessageDialog(null, "An error occured. Please try again.");
+                            }
+                        }
                     }
 
                     @Override
