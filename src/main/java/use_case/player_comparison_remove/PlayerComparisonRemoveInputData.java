@@ -1,4 +1,4 @@
-package main.java.use_case.player_compaison_remove;
+package main.java.use_case.player_comparison_remove;
 
 public class PlayerComparisonRemoveInputData {
 
