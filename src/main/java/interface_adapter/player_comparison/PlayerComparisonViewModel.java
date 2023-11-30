@@ -1,16 +1,20 @@
 package main.java.interface_adapter.player_comparison;
 
-import main.java.entity.Player;
 import main.java.interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class PlayerComparisonViewModel extends ViewModel {
+
+    public static final String TITLE_LABEL = "Player Comparison View";
+    public static final String ADD_BUTTON_LABEL = "Add Player";
+    public static final String COMPARISON_BUTTON_LABEL = "Compare";
+    public static final String BACK_BUTTON_LABEL = "Back";
     private PlayerComparisonState state = new PlayerComparisonState();
 
     public PlayerComparisonViewModel() {
-        super("compare");
+        super("playerComparison");
     }
 
     public void setState(PlayerComparisonState state) {

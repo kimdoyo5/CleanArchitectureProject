@@ -2,7 +2,7 @@ package main.java.app;
 
 import main.java.interface_adapter.PlayerDataDisplay.PlayerDataDisplayViewModel;
 import main.java.interface_adapter.ViewManagerModel;
-import main.java.interface_adapter.compare.CompareViewModel;
+import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.interface_adapter.id_search.IDSearchViewModel;
 import main.java.interface_adapter.navigation.NavigationViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchController;

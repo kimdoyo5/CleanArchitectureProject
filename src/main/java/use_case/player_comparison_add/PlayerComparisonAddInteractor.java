@@ -9,7 +9,7 @@ public class PlayerComparisonAddInteractor implements PlayerComparisonAddInputBo
 
     public PlayerComparisonAddInteractor(
             PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface,
-                                          PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary) {
+            PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary) {
         this.playerComparisonAddDataAccessInterface = playerComparisonAddDataAccessInterface;
         this.playerComparisonAddPresenter = playerComparisonAddOutputBoundary;
     }
@@ -17,11 +17,11 @@ public class PlayerComparisonAddInteractor implements PlayerComparisonAddInputBo
     @Override
     public void execute(PlayerComparisonAddInputData playerComparisonAddInputData) {
         Player player = playerComparisonAddInputData.getPlayer();
-        boolean added = playerComparisonAddDataAccessInterface.add(player);
-        if (added){
+        boolean added = playerComparisonAddDataAccessInterface.add(player); // PlayerComparisonDataAccessObject
+        if (added) {
             PlayerComparisonAddOutputData playerComparisonAddOutputData = new PlayerComparisonAddOutputData(player);
             playerComparisonAddPresenter.prepareSuccessView(playerComparisonAddOutputData);
-        }else{
+        } else {
             playerComparisonAddPresenter.prepareFailView(
                     "Max amount(4) of players already added to the player comparison");
         }

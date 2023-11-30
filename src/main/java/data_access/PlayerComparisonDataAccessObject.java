@@ -4,39 +4,40 @@ import java.io.*;
 import java.util.*;
 import main.java.entity.Player;
 import main.java.entity.PlayerFactory;
-import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAccessInterface;
+import main.java.use_case.player_compaison_remove.PlayerComparisonRemoveDataAccessInterface;
+import main.java.use_case.player_comparison.PlayerComparisonDataAccessInterface;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddDataAccessInterface;
 
 public class PlayerComparisonDataAccessObject implements
         PlayerComparisonAddDataAccessInterface,
-        PlayerComparisonRemoveDataAccessInterface {
+        PlayerComparisonRemoveDataAccessInterface,
+        PlayerComparisonDataAccessInterface {
 
     private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-
     private final Map<String, Player> players = new HashMap<>();
+    private final Map<String, String> leaders = new LinkedHashMap<>();
+    private boolean leaders_updated = false;
 
     private PlayerFactory playerFactory;
+
+    public List<String> getAllPlayerNames() {
+        return new ArrayList<>(players.keySet());
+    }
 
     public PlayerComparisonDataAccessObject(String csvName, PlayerFactory playerFactory) throws IOException {
         this.playerFactory = playerFactory;
 
         csvFile = new File(csvName);
 
-        headers.put("name", 0);
-        headers.put("id", 1);
-        headers.put("hr", 2);
-        headers.put("tb", 3);
-        headers.put("xbh", 4);
-        headers.put("bb", 5);
-        headers.put("h", 6);
-        headers.put("cs", 7);
-        headers.put("sb", 8);
-        headers.put("ab", 9);
-        headers.put("obp", 10);
-        headers.put("slg", 11);
+        String[] headerNames = {
+                "name", "id", "hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab",
+                "obp", "slg", "HR_rate", "CS_rate", "HBB_rate", "HH_rate", "OPS", "wOPS" };
 
+        for (int i = 0; i < headerNames.length; i++) {
+            headers.put(headerNames[i], i);
+        }
 
         if (csvFile.length() == 0) {
             save();
@@ -70,21 +71,28 @@ public class PlayerComparisonDataAccessObject implements
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
+            // Define the keys for the stats
+            String[] statKeys = {
+                    "hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg",
+                    "HR_rate", "CS_rate", "HBB_rate", "HH_rate", "OPS", "wOPS"};
+
             for (Player player : players.values()) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",
-                        player.getName(),
-                        player.getID(),
-                        player.getStats().get("hr"),
-                        player.getStats().get("tb"),
-                        player.getStats().get("xbh"),
-                        player.getStats().get("bb"),
-                        player.getStats().get("h"),
-                        player.getStats().get("cs"),
-                        player.getStats().get("sb"),
-                        player.getStats().get("ab"),
-                        player.getStats().get("obp"),
-                        player.getStats().get("slg")
-                );
+                List<String> lineParts = new ArrayList<>();
+
+                // Add non-stat attributes
+                lineParts.add(player.getName());
+                lineParts.add(String.valueOf(player.getID()));
+
+                // Add stats
+                for (String key : statKeys) {
+                    if (player.getStats().containsKey(key)) {
+                        lineParts.add(String.valueOf(player.getStats().get(key))); // Basic stats
+                    } else {
+                        lineParts.add(String.valueOf(player.calculateState(key))); // Advanced stats
+                    }
+                }
+
+                String line = String.join(",", lineParts);
                 writer.write(line);
                 writer.newLine();
             }
@@ -104,15 +112,88 @@ public class PlayerComparisonDataAccessObject implements
         return players.containsKey(identifier);
     }
 
-    public boolean add(Player player){
-        if (players.size() >= 4){
+    public boolean add(Player player) {
+        if (players.size() >= 4) {
             return false;
-        }else{
+        } else {
             players.put(player.getName(), player);
             this.save();
+            leaders_updated = false;
             return true;
         }
     }
+
+    public int playersAdded() {
+        return players.size();
+    }
+
+    public Map<String, Double> getSimplified(String name) {
+        Player player = get(name);
+        Map<String,Double> simple = new HashMap<>();
+
+        String[] statKeys = {
+                "hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg",
+                "HR_rate", "CS_rate", "HBB_rate", "HH_rate", "OPS", "wOPS" };
+        for (String stat : statKeys) {
+            simple.put(stat, getStatValue(player, stat));
+        }
+        return simple;
+    }
+
+    public Map<String, String> getLeaders() {
+        if (!leaders_updated) {
+            for (String stat : headers.keySet()) {
+                if (!stat.equals("name") && !stat.equals("id")) {
+                    leaders.put(stat, null);
+                }
+            }
+            for (Player player : players.values()) {
+                updateLeadersWithPlayer(player);
+            }
+            leaders_updated = true;
+        }
+        return leaders;
+    }
+
+    private void updateLeadersWithPlayer(Player player) {
+        for (String stat : headers.keySet()) {
+            if (!stat.equals("name") && !stat.equals("id")) {
+                String currentLeaderName = leaders.get(stat);
+                Player currentLeader = currentLeaderName != null ? players.get(currentLeaderName) : null;
+                boolean shouldUpdate = false;
+
+                double currentPlayerStatValue = getStatValue(player, stat);
+                double currentLeaderStatValue = currentLeader != null ? getStatValue(currentLeader, stat) : (stat.equals("cs") ? Double.MAX_VALUE : Double.MIN_VALUE);
+
+                if (stat.equals("cs") | stat.equals("CS_rate")) {
+                    shouldUpdate = currentPlayerStatValue < currentLeaderStatValue;
+                } else {
+                    shouldUpdate = currentPlayerStatValue > currentLeaderStatValue;
+                }
+
+                if (shouldUpdate) {
+                    leaders.put(stat, player.getName());
+                }
+            }
+        }
+    }
+
+    private double getStatValue(Player player, String stat) {
+        if (Arrays.asList("HR_rate", "CS_rate", "HBB_rate", "HH_rate", "OPS", "wOPS").contains(stat)) {
+            try {
+                return Double.parseDouble(player.calculateState(stat));
+            } catch (NumberFormatException e) {
+                return 0.0; // Arbitrary default value
+            }
+        } else {
+            try {
+                return Double.parseDouble(player.getStats().getOrDefault(stat, "0.0"));
+            } catch (NumberFormatException e) {
+                return 0.0; // Arbitrary default value
+            }
+        }
+    }
+
 
     public Player remove(int playerId){
         Set<String> keys = players.keySet();
