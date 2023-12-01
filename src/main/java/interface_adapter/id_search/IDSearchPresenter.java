@@ -1,23 +1,21 @@
 package main.java.interface_adapter.id_search;
 
-import main.java.interface_adapter.navigation.NavigationViewModel;
+import main.java.interface_adapter.navigation.MainMenuViewModel;
 import main.java.use_case.id_search.IDSearchOutputBoundary;
 import main.java.interface_adapter.ViewManagerModel;
-import main.java.interface_adapter.id_search.IDSearchViewModel;
-import main.java.interface_adapter.id_search.IDSearchState;
 
 import java.util.Map;
 
 public class IDSearchPresenter implements IDSearchOutputBoundary {
     private final IDSearchViewModel idSearchViewModel;
     private ViewManagerModel viewManagerModel;
-    private NavigationViewModel navigationViewModel;
+    private MainMenuViewModel mainMenuViewModel;
 
     public IDSearchPresenter(ViewManagerModel viewManagerModel,
-                          IDSearchViewModel idSearchViewModel, NavigationViewModel navigationViewModel) {
+                          IDSearchViewModel idSearchViewModel, MainMenuViewModel mainMenuViewModel) {
         this.idSearchViewModel = idSearchViewModel;
         this.viewManagerModel = viewManagerModel;
-        this.navigationViewModel = navigationViewModel;
+        this.mainMenuViewModel = mainMenuViewModel;
     }
 
     @Override
@@ -38,7 +36,7 @@ public class IDSearchPresenter implements IDSearchOutputBoundary {
 
     @Override
     public void back(){
-        viewManagerModel.setActiveView(navigationViewModel.getViewName());
+        viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 
