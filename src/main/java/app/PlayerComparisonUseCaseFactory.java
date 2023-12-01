@@ -2,13 +2,13 @@ package main.java.app;
 
 import main.java.entity.PlayerFactory;
 import main.java.interface_adapter.ViewManagerModel;
-import main.java.interface_adapter.navigation.NavigationViewModel;
+import main.java.interface_adapter.navigation.MainMenuViewModel;
 import main.java.interface_adapter.player_comparison.*;
 import main.java.interface_adapter.player_comparison_add.*;
 import main.java.interface_adapter.player_comparison_remove.*;
-import main.java.use_case.player_compaison_remove.PlayerComparisonRemoveDataAccessInterface;
-import main.java.use_case.player_compaison_remove.PlayerComparisonRemoveInteractor;
-import main.java.use_case.player_compaison_remove.PlayerComparisonRemoveOutputBoundary;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAccessInterface;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveInteractor;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputBoundary;
 import main.java.use_case.player_comparison.*;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddDataAccessInterface;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddInteractor;
@@ -21,7 +21,7 @@ public class PlayerComparisonUseCaseFactory {
 
     public static PlayerComparisonView create (
             PlayerComparisonViewModel playerComparisonViewModel,
-            NavigationViewModel navigationViewModel,
+            MainMenuViewModel navigationViewModel,
             ViewManagerModel viewManagerModel,
             PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface,
             PlayerComparisonRemoveOutputBoundary playerComparisonRemoveOutputBoundary,
@@ -40,7 +40,7 @@ public class PlayerComparisonUseCaseFactory {
 
     private static PlayerComparisonController createPlayerComparisonController(
             PlayerComparisonViewModel playerComparisonViewModel,
-            NavigationViewModel navigationViewModel,
+            MainMenuViewModel navigationViewModel,
             ViewManagerModel viewManagerModel,
             PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface,
             PlayerFactory playerFactory
