@@ -3,6 +3,10 @@ package main.java.entity;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The regular player object that contains all the info needed
+ * and provides method to calculate advanced stats
+ */
 public class CommonPlayer implements Player{
     String name;
     int id;

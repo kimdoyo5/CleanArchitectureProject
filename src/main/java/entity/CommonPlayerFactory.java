@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Factory for the player object
+ */
 public class CommonPlayerFactory implements PlayerFactory{
     final String[] keys = {"hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg"};
 

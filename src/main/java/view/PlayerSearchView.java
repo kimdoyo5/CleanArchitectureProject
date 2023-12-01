@@ -140,11 +140,21 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
 
         );
     }
+
+    /**
+     * The event that is performed by user
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Click" + e.getActionCommand());
     }
 
+    /**
+     * Change to property of the view
+     * @param evt A PropertyChangeEvent object describing the event source
+     *          and the property that has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         PlayerSearchState currentState = playerSearchViewModel.getSearchState();

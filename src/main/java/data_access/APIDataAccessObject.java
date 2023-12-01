@@ -12,9 +12,18 @@ import org.json.JSONObject;
 import main.java.data_access.IDFileDataAccessObject;
 
 import java.io.IOException;
+
+/**
+ * Obtains requested data from the API
+ */
 public class APIDataAccessObject implements PlayerSearchDataAccessInterface {
 
     private PlayerFactory playerFactory;
+
+    /**
+     * Constructor of the class
+     * @param playerFactory The factory used to create player objects
+     */
     public APIDataAccessObject(PlayerFactory playerFactory){
 
         this.playerFactory = playerFactory;

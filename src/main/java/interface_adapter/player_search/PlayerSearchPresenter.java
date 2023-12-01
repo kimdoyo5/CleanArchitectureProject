@@ -3,22 +3,30 @@ package main.java.interface_adapter.player_search;
 import main.java.interface_adapter.PlayerDataDisplay.PlayerDataDisplayViewModel;
 import main.java.interface_adapter.PlayerDataDisplay.PlayerDataDisplayViewState;
 import main.java.interface_adapter.ViewManagerModel;
-import main.java.interface_adapter.navigation.NavigationViewModel;
+import main.java.interface_adapter.navigation.MainMenuViewModel;
 import main.java.use_case.player_search.PlayerOutputData;
 import main.java.use_case.player_search.PlayerSearchOutputBoundary;
 
-import java.util.HashMap;
-import java.util.Map;
-
+/**
+ * The presenter of the player search use case
+ * Takes the results from the interactor and displays it to the user
+ */
 public class PlayerSearchPresenter implements PlayerSearchOutputBoundary {
     private final PlayerSearchViewModel playerSearchViewModel;
-    private final NavigationViewModel navigationViewModel;
+    private final MainMenuViewModel mainMenuViewModel;
     private final ViewManagerModel viewManagerModel;
     private final PlayerDataDisplayViewModel playerDataDisplayViewModel;
 
-    public PlayerSearchPresenter(PlayerSearchViewModel playerSearchViewModel, NavigationViewModel navigationViewModel, ViewManagerModel viewManagerModel, PlayerDataDisplayViewModel playerDataDisplayViewModel){
+    /**
+     * Initializes the class
+     * @param playerSearchViewModel The view model of player search
+     * @param mainMenuViewModel The view model of main menu
+     * @param viewManagerModel The view manager
+     * @param playerDataDisplayViewModel The view model for player data display
+     */
+    public PlayerSearchPresenter(PlayerSearchViewModel playerSearchViewModel, MainMenuViewModel mainMenuViewModel, ViewManagerModel viewManagerModel, PlayerDataDisplayViewModel playerDataDisplayViewModel){
         this.playerSearchViewModel = playerSearchViewModel;
-        this.navigationViewModel = navigationViewModel;
+        this.mainMenuViewModel = mainMenuViewModel;
         this.viewManagerModel = viewManagerModel;
         this.playerDataDisplayViewModel = playerDataDisplayViewModel;
     }
@@ -42,7 +50,7 @@ public class PlayerSearchPresenter implements PlayerSearchOutputBoundary {
 
     @Override
     public void back() {
-        viewManagerModel.setActiveView(navigationViewModel.getViewName());
+        viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 }

@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * View used to display the data of the player after player search
+ * Contains a back button to return to playerSearchView
+ */
 public class PlayerDataDisplayView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "Data Display";
     private final PlayerDataDisplayViewModel playerDataDisplayViewModel;
@@ -23,6 +27,12 @@ public class PlayerDataDisplayView extends JPanel implements ActionListener, Pro
     private final PlayerSearchViewModel playerSearchViewModel;
     private final ViewManagerModel viewManagerModel;
 
+    /**
+     * Initialize PLayerDataDisplayeView
+     * @param playerDataDisplayViewModel view model of playerDataDisplay which saves the info about the view
+     * @param playerSearchViewModel view model of playerSearchView containing info on playerSearchView
+     * @param viewManagerModel the manager in charge of switching the views
+     */
     public PlayerDataDisplayView(PlayerDataDisplayViewModel playerDataDisplayViewModel, PlayerSearchViewModel playerSearchViewModel, ViewManagerModel viewManagerModel){
         this.playerDataDisplayViewModel = playerDataDisplayViewModel;
         this.playerSearchViewModel = playerSearchViewModel;
@@ -43,7 +53,7 @@ public class PlayerDataDisplayView extends JPanel implements ActionListener, Pro
                 }
         );
 
-        this.setPreferredSize(new Dimension(100, 500));
+        this.setSize(new Dimension(100, 500));
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setAutoCreateGaps(true);
@@ -70,13 +80,23 @@ public class PlayerDataDisplayView extends JPanel implements ActionListener, Pro
                         )
 
         );
+
     }
 
+    /**
+     * The event that is performed by user
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Click" + e.getActionCommand());
     }
 
+    /**
+     * Change to property of the view
+     * @param evt A PropertyChangeEvent object describing the event source
+     *          and the property that has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         PlayerDataDisplayViewState currentState = playerDataDisplayViewModel.getState();
