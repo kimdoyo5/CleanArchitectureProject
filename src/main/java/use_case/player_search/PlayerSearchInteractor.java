@@ -9,9 +9,10 @@ import java.io.IOException;
 
 public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary {
 
-    PlayerSearchOutputBoundary playerSearchOutputBoundary;
-    PlayerSearchDataAccessInterface playerSearchDataAccessInterface;
-    IDSearchDataAccessInterface idSearchDataInterface;
+    final PlayerSearchOutputBoundary playerSearchOutputBoundary;
+    final PlayerSearchDataAccessInterface playerSearchDataAccessInterface;
+    final IDSearchDataAccessInterface idSearchDataInterface;
+    String error = null;
     public PlayerSearchInteractor(PlayerSearchDataAccessInterface playerSearchDataAccessInterface,
                                   PlayerSearchOutputBoundary playerSearchOutputBoundary,
                                   IDSearchDataAccessInterface idSearchDataInterface){
@@ -30,14 +31,18 @@ public class PlayerSearchInteractor implements PlayerSearchInputDataBoundary {
                     Player result = playerSearchDataAccessInterface.search(playerSearchInputData.getPlayer_id());
                     PlayerOutputData out = new PlayerOutputData(result);
                     playerSearchOutputBoundary.prepareSuccessView(out);
-                } catch (RuntimeException | IOException e){
-                    playerSearchOutputBoundary.prepareFailView("Search Error");
+                }catch (RuntimeException | IOException e){
+                    error = "Search Error";
+                    playerSearchOutputBoundary.prepareFailView(error);
                 }
-            } else {
-                playerSearchOutputBoundary.prepareFailView("no id");
+            }else{
+                error = "no id";
+                playerSearchOutputBoundary.prepareFailView(error);
             }
         }
     }
+
+    public String getError(){return error;}
 
     public void execute(){
         playerSearchOutputBoundary.back();

@@ -15,6 +15,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 
+/**
+ * This class is the view of the player search use case
+ * This view contains a search bar, search button, and back button
+ */
 public class PlayerSearchView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "player search";
@@ -27,6 +31,11 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
     private final JButton playerSearch;
     private final JButton back;
 
+    /**
+     * Initializing PlayerSearchView
+     * @param playerSearchController this controller for the player search use case
+     * @param playerSearchViewModel the view model for player search controller
+     */
     public PlayerSearchView(PlayerSearchController playerSearchController, PlayerSearchViewModel playerSearchViewModel){
         this.playerSearchController = playerSearchController;
         this.playerSearchViewModel = playerSearchViewModel;
@@ -56,6 +65,10 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
         back = new JButton(playerSearchViewModel.BACK_BUTTON_LABEL);
         back.addActionListener(
                 new ActionListener() {
+                    /**
+                     * Detects if the back button is pressed
+                     * @param e the action that is performed
+                     */
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(back)){

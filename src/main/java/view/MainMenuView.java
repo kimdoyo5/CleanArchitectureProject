@@ -1,9 +1,10 @@
 package main.java.view;
 
 
-import main.java.interface_adapter.navigation.NavigationController;
+import main.java.interface_adapter.ViewManagerModel;
+import main.java.interface_adapter.id_search.IDSearchViewModel;
 
-import main.java.interface_adapter.navigation.NavigationViewModel;
+import main.java.interface_adapter.navigation.MainMenuViewModel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,21 +17,30 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 
-import main.java.interface_adapter.navigation.NavigationState;
+import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
+import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 
 
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "navigation";
-    private final NavigationViewModel navigationViewModel;
+    private final MainMenuViewModel mainMenuViewModel;
+    private final ViewManagerModel viewManagerModel;
+    private final PlayerSearchViewModel playerSearchViewModel;
+    private final PlayerComparisonViewModel playerComparisonViewModel;
+    private final IDSearchViewModel idSearchViewModel;
     private final JButton compare;
     private final JButton IDsearch;
     private final JButton playerSearch;
 
 
     // add JButtons later
-    public MainMenuView(NavigationViewModel navigationViewModel, NavigationController navigationController) throws IOException {
-        this.navigationViewModel = navigationViewModel;
-        this.navigationViewModel.addPropertyChangeListener(this);
+    public MainMenuView(MainMenuViewModel mainMenuViewModel, ViewManagerModel viewManagerModel, PlayerSearchViewModel playerSearchViewModel, PlayerComparisonViewModel playerComparisonViewModel, IDSearchViewModel idSearchViewModel) throws IOException {
+        this.mainMenuViewModel = mainMenuViewModel;
+        this.mainMenuViewModel.addPropertyChangeListener(this);
+        this.viewManagerModel = viewManagerModel;
+        this.playerSearchViewModel = playerSearchViewModel;
+        this.playerComparisonViewModel = playerComparisonViewModel;
+        this.idSearchViewModel = idSearchViewModel;
 
         BufferedImage picture = ImageIO.read(new File("baseball.png"));
         JLabel pic = new JLabel(new ImageIcon(picture.getScaledInstance(100,100, Image.SCALE_SMOOTH)));
@@ -39,18 +49,20 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel buttons = new JPanel();
-        IDsearch = new JButton(NavigationViewModel.PLAYER_SEARCH_BUTTON_LABEL);
+        IDsearch = new JButton(MainMenuViewModel.PLAYER_SEARCH_BUTTON_LABEL);
         buttons.add(IDsearch);
-        playerSearch = new JButton(NavigationViewModel.ID_SEARCH_BUTTON_LABEL);
+        playerSearch = new JButton(MainMenuViewModel.ID_SEARCH_BUTTON_LABEL);
         buttons.add(playerSearch);
-        compare = new JButton(NavigationViewModel.PLAYER_COMPARISON_BUTTON_LABEL);
+        compare = new JButton(MainMenuViewModel.PLAYER_COMPARISON_BUTTON_LABEL);
         buttons.add(compare);
 
         compare.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(compare)) {
-                            navigationController.execute("compare");
+                            viewManagerModel.setActiveView(playerComparisonViewModel.getViewName());
+                            viewManagerModel.firePropertyChanged();
+                            //navigationController.execute("compare");
                         }
                     }
                 }
@@ -60,7 +72,9 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(IDsearch)) {
-                            navigationController.execute("IDSearch");
+                            viewManagerModel.setActiveView(idSearchViewModel.getViewName());
+                            viewManagerModel.firePropertyChanged();
+                            //navigationController.execute("IDSearch");
                         }
                     }
                 }
@@ -71,8 +85,9 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
                     public void actionPerformed(ActionEvent evt) {
 
                         if (evt.getSource().equals(playerSearch)) {
-
-                            navigationController.execute("playerSearch");
+                            viewManagerModel.setActiveView(playerSearchViewModel.getViewName());
+                            viewManagerModel.firePropertyChanged();
+                            //navigationController.execute("playerSearch");
                         }
                     }
                 }
