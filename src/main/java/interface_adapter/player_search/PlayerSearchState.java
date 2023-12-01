@@ -3,43 +3,53 @@ package main.java.interface_adapter.player_search;
 import java.security.PrivateKey;
 import java.util.Map;
 
+/**
+ * The state of the player search view
+ * What is in the search bar and what is the result of search
+ */
 public class PlayerSearchState {
     private String search = "";
     private String search_error = null;
-    private String result = "";
 
+
+    /**
+     * Constructs a copy of the class using an existing version of the class
+     * @param copy An existing version of the class
+     */
     PlayerSearchState(PlayerSearchState copy){
-        this.result = copy.result;
         this.search_error = copy.search_error;
         this.search = copy.search;
     }
 
+    /**
+     * Constructs the class
+     */
     PlayerSearchState(){}
 
+    /**
+     * Retrieves what is in the search bar
+     * @return The thing that is typed in the search bar so far
+     */
     public String getSearch(){return search;}
 
+    /**
+     * Sets what is being searched
+     * @param search the string based on what the user has inputted so far
+     */
     public void setSearch(String search){this.search = search;}
 
+    /**
+     * Gets the error of the search
+     * @return the error that might have happened in the search
+     */
     public String getSearch_error(){return search_error;}
 
+    /**
+     * Sets the error
+     * @param search_error the error that occurred
+     */
     public void setSearch_error(String search_error) {
         this.search_error = search_error;
-    }
-
-    public String getResult(){return result;}
-
-    public void setResult(Map<String, String> data) {
-        StringBuilder value = new StringBuilder();
-        value.append("<html><body>");
-        value.append("Name").append(": ").append(data.get("Name")).append("<br>");
-        value.append("Player Id").append(": ").append(data.get("Player Id")).append("<br>");
-        for (String key: data.keySet()){
-            if (!key.equals("Name") && !key.equals("Player Id")) {
-                value.append(key).append(": ").append(data.get(key)).append("<br>");
-            }
-        }
-        value.append("</body></html>");
-        result = value.toString();
     }
 
 }
