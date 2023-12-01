@@ -7,9 +7,9 @@ import main.java.entity.CommonPlayerFactory;
 import main.java.interface_adapter.PlayerDataDisplay.PlayerDataDisplayViewModel;
 import main.java.interface_adapter.ViewManagerModel;
 import main.java.data_access.IDFileDataAccessObject;
-import main.java.interface_adapter.compare.CompareViewModel;
 import main.java.interface_adapter.id_search.IDSearchViewModel;
-import main.java.interface_adapter.navigation.NavigationViewModel;
+import main.java.interface_adapter.navigation.MainMenuViewModel;
+import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 
 import main.java.view.*;
@@ -33,8 +33,8 @@ public class Main extends JFrame{
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
-        NavigationViewModel navigationViewModel = new NavigationViewModel();
-        CompareViewModel compareViewModel = new CompareViewModel();
+        MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
+        PlayerComparisonViewModel compareViewModel = new PlayerComparisonViewModel();
         IDSearchViewModel IDsearchViewModel = new IDSearchViewModel();
         PlayerSearchViewModel playerSearchViewModel = new PlayerSearchViewModel();
         IDFileDataAccessObject idSearchDataAccessOject;
@@ -49,11 +49,11 @@ public class Main extends JFrame{
             throw new RuntimeException(e);
         }
 
-        MainMenuView mainMenuView = NavigationUseCaseFactory.create(viewManagerModel, navigationViewModel,
+        MainMenuView mainMenuView = MainMenuViewFactory.create(viewManagerModel, mainMenuViewModel,
                 compareViewModel, IDsearchViewModel, playerSearchViewModel);
         views.add(mainMenuView, mainMenuView.viewName);
 
-        IDSearchView IDsearchView = IDSearchUseCaseFactory.create(viewManagerModel, IDsearchViewModel, idSearchDataAccessOject, navigationViewModel);
+        IDSearchView IDsearchView = IDSearchUseCaseFactory.create(viewManagerModel, IDsearchViewModel, idSearchDataAccessOject, mainMenuViewModel);
         views.add(IDsearchView, IDsearchView.viewName);
 
         /* to be added as UI for each use case is done
@@ -66,7 +66,7 @@ public class Main extends JFrame{
         */
 
 
-        PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessOject, playerDataDisplayViewModel);
+        PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, mainMenuViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessOject, playerDataDisplayViewModel);
         views.add(playerSearchView, playerSearchView.viewName);
 
         PlayerDataDisplayView playerDataDisplayView = PlayerDataDisplayViewFactory.create(playerDataDisplayViewModel, viewManagerModel, playerSearchViewModel);
