@@ -64,6 +64,14 @@ public class PlayerOutputData {
     }
 
     /**
+     * Get the player
+     * @return the player as a Player object
+     */
+    public Player getPlayer(){
+        return player;
+    }
+
+    /**
      * Gets the stats of the player
      * @return the stats of the player as a map
      */

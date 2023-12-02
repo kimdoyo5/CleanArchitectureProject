@@ -113,7 +113,15 @@ public class PlayerComparisonDataAccessObject implements
     }
 
     public boolean add(Player player) {
-        if (players.size() >= 4) {
+        int playerId = player.getID();
+        boolean alreadyIn = false;
+        for (String key: players.keySet()){
+            if (players.get(key).getID() == playerId){
+                alreadyIn = true;
+            }
+        }
+
+        if (players.size() >= 4 || alreadyIn) {
             return false;
         } else {
             players.put(player.getName(), player);
@@ -121,6 +129,10 @@ public class PlayerComparisonDataAccessObject implements
             leaders_updated = false;
             return true;
         }
+    }
+
+    public int getSize(){
+        return players.size();
     }
 
     public int playersAdded() {

@@ -1,6 +1,7 @@
 package main.java.view;
 
 
+import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddController;
 import main.java.interface_adapter.player_search.PlayerSearchController;
 import main.java.interface_adapter.player_search.PlayerSearchState;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
@@ -28,6 +29,7 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
     private final JLabel label = new JLabel("Enter player Id");
     private final JLabel buffer = new JLabel("<html><body><br><br></body></html>");
     private final PlayerSearchController playerSearchController;
+
     private final JButton playerSearch;
     private final JButton back;
 
@@ -36,7 +38,8 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
      * @param playerSearchController this controller for the player search use case
      * @param playerSearchViewModel the view model for player search controller
      */
-    public PlayerSearchView(PlayerSearchController playerSearchController, PlayerSearchViewModel playerSearchViewModel){
+    public PlayerSearchView(PlayerSearchController playerSearchController,
+                            PlayerSearchViewModel playerSearchViewModel){
         this.playerSearchController = playerSearchController;
         this.playerSearchViewModel = playerSearchViewModel;
         this.playerSearchViewModel.addPropertyChangeListener(this);

@@ -34,6 +34,7 @@ public class PlayerSearchPresenter implements PlayerSearchOutputBoundary {
     public void prepareSuccessView(PlayerOutputData player) {
         PlayerDataDisplayViewState state = playerDataDisplayViewModel.getState();
         state.setResult(player.getData());
+        state.setLastSearchedPlayer(player.getPlayer());
         this.playerDataDisplayViewModel.setViewState(state);
         playerDataDisplayViewModel.firePropertyChanged();
         viewManagerModel.setActiveView(playerDataDisplayViewModel.getViewName());

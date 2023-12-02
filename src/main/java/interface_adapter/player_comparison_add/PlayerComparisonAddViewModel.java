@@ -7,6 +7,7 @@ import java.beans.PropertyChangeSupport;
 
 public class PlayerComparisonAddViewModel extends ViewModel {
 
+    public static final String ADD_BUTTON_LABEL = "Add Player to Comparison";
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     private PlayerComparisonAddState state = new PlayerComparisonAddState();

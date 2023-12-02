@@ -6,4 +6,6 @@ public interface PlayerComparisonAddDataAccessInterface {
 
     boolean add(Player player);
 
+    int getSize();
+
 }

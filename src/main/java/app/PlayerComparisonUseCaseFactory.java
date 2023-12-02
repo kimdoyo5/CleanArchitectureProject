@@ -30,12 +30,11 @@ public class PlayerComparisonUseCaseFactory {
             PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface,
             PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary
     ) {
-        PlayerComparisonAddController playerComparisonAddController = createPlayerComparisonAddController(playerComparisonAddDataAccessInterface, playerComparisonAddOutputBoundary);
         PlayerComparisonRemoveController playerComparisonRemoveController = createPlayerComparisonRemoveController(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
         PlayerComparisonController playerComparisonController = createPlayerComparisonController(
                 playerComparisonViewModel, navigationViewModel, viewManagerModel, playerComparisonDataAccessInterface, playerFactory);
 
-        return new PlayerComparisonView(playerComparisonController, playerComparisonAddController, playerComparisonRemoveController, playerComparisonViewModel);
+        return new PlayerComparisonView(playerComparisonController, playerComparisonRemoveController, playerComparisonViewModel);
     }
 
     private static PlayerComparisonController createPlayerComparisonController(
@@ -54,13 +53,13 @@ public class PlayerComparisonUseCaseFactory {
         return new PlayerComparisonController(playerComparisonInputBoundary);
     }
 
-    private static PlayerComparisonAddController createPlayerComparisonAddController(
-            PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface,
-            PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary
-    ) {
-        PlayerComparisonAddInteractor addInteractor = new PlayerComparisonAddInteractor(playerComparisonAddDataAccessInterface, playerComparisonAddOutputBoundary);
-        return new PlayerComparisonAddController(addInteractor);
-    }
+//    private static PlayerComparisonAddController createPlayerComparisonAddController(
+//            PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface,
+//            PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary
+//    ) {
+//        PlayerComparisonAddInteractor addInteractor = new PlayerComparisonAddInteractor(playerComparisonAddDataAccessInterface, playerComparisonAddOutputBoundary);
+//        return new PlayerComparisonAddController(addInteractor);
+//    }
 
     private static PlayerComparisonRemoveController createPlayerComparisonRemoveController(
             PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface,
