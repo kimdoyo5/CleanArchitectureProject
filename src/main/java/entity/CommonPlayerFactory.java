@@ -22,7 +22,24 @@ public class CommonPlayerFactory implements PlayerFactory{
     }
 
     public Player create(List<String> playerInfo){
-        String[] keys = {"hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg"};
+        String[] keys = {
+                "hr",
+                "tb",
+                "xbh",
+                "bb",
+                "h",
+                "cs",
+                "sb",
+                "ab",
+                "obp",
+                "slg",
+                "HR_rate",
+                "CS_rate",
+                "HBB_rate",
+                "HH_rate",
+                "OPS",
+                "wOPS"
+        };
         String playerName = playerInfo.get(0);
         int playerId = Integer.parseInt(playerInfo.get(1));
         Map<String, String> stats = new HashMap<>();

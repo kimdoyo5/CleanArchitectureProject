@@ -17,9 +17,8 @@ public class PlayerComparisonAddPresenter implements PlayerComparisonAddOutputBo
     public void prepareSuccessView(PlayerComparisonAddOutputData response) {
         PlayerComparisonAddState playerComparisonAddState = playerComparisonAddViewModel.getState();
         Player addedPlayer = response.getPlayer();
-        ArrayList<Player> players = playerComparisonAddState.getPlayers();
-        players.add(addedPlayer);
-        playerComparisonAddState.setPlayers(players);
+        playerComparisonAddState.setLastAddedPlayer(addedPlayer);
+        playerComparisonAddState.setPlayerAddError(null);
         this.playerComparisonAddViewModel.setState(playerComparisonAddState);
         playerComparisonAddViewModel.firePropertyChanged();
     }
