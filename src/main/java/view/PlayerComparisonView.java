@@ -1,9 +1,10 @@
 package main.java.view;
 
 import main.java.entity.Player;
-import main.java.interface_adapter.player_comparison.*;
-import main.java.interface_adapter.player_comparison_add.*;
-import main.java.interface_adapter.player_comparison_remove.*;
+import main.java.interface_adapter.player_comparison.PlayerComparisonController;
+import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
+import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddController;
+import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemoveController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

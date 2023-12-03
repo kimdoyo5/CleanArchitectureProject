@@ -1,13 +1,7 @@
 package main.java.use_case.player_comparison;
 
-import main.java.entity.Player;
 import main.java.entity.PlayerFactory;
-import main.java.interface_adapter.player_comparison.PlayerComparisonController;
-import main.java.interface_adapter.player_comparison.PlayerComparisonPresenter;
-import main.java.use_case.player_comparison_add.PlayerComparisonAddOutputData;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

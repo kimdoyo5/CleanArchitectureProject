@@ -1,7 +1,5 @@
 package main.java.use_case.player_comparison;
 
-import main.java.entity.Player;
-
 import java.util.List;
 import java.util.Map;
 
