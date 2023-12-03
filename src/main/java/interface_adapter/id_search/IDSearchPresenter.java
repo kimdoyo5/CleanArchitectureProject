@@ -22,6 +22,7 @@ public class IDSearchPresenter implements IDSearchOutputBoundary {
     public void prepareSuccessView(Map<String, Integer> results){
         IDSearchState idSearchState = idSearchViewModel.getState();
         idSearchState.setResult(results);
+        idSearchState.setSearchError(null);
         this.idSearchViewModel.setState(idSearchState);
         idSearchViewModel.firePropertyChanged();
     }

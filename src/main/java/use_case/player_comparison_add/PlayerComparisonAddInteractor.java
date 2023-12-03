@@ -22,8 +22,13 @@ public class PlayerComparisonAddInteractor implements PlayerComparisonAddInputBo
             PlayerComparisonAddOutputData playerComparisonAddOutputData = new PlayerComparisonAddOutputData(player);
             playerComparisonAddPresenter.prepareSuccessView(playerComparisonAddOutputData);
         } else {
-            playerComparisonAddPresenter.prepareFailView(
-                    "Max amount(4) of players already added to the player comparison");
+            String error;
+            if (playerComparisonAddDataAccessInterface.getSize() >= 4){
+                error = "Max amount(4) of players already added to the player comparison";
+            }else{
+                error = "Player already added to player comparison";
+            }
+            playerComparisonAddPresenter.prepareFailView(error);
         }
 
     }

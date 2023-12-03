@@ -1,5 +1,6 @@
 package main.java.interface_adapter.PlayerDataDisplay;
 
+import main.java.entity.Player;
 import main.java.interface_adapter.player_search.PlayerSearchState;
 
 import java.util.Map;
@@ -7,6 +8,8 @@ import java.util.Map;
 public class PlayerDataDisplayViewState {
 
     private String result = "";
+
+    private Player lastSearchedPlayer;
 
     PlayerDataDisplayViewState(PlayerDataDisplayViewState copy){
         this.result = copy.result;
@@ -16,6 +19,10 @@ public class PlayerDataDisplayViewState {
     PlayerDataDisplayViewState(){}
 
     public String getResult(){return result;}
+
+    public Player getLastSearchedPlayer(){
+        return lastSearchedPlayer;
+    }
 
 
     public void setResult(Map<String, String> data) {
@@ -30,5 +37,9 @@ public class PlayerDataDisplayViewState {
         }
         value.append("</body></html>");
         result = value.toString();
+    }
+
+    public void setLastSearchedPlayer(Player player){
+        this.lastSearchedPlayer = player;
     }
 }

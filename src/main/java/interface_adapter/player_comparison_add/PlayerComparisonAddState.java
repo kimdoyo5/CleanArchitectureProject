@@ -6,23 +6,23 @@ import java.util.ArrayList;
 
 public class PlayerComparisonAddState {
 
-    private ArrayList<Player> players = new ArrayList<Player>();
+    private Player lastAddedPlayer;
 
     private String playerAddError = null;
 
     public PlayerComparisonAddState(){
     }
 
-    public void setPlayers(ArrayList<Player> players){
-        this.players = players;
+    public void setLastAddedPlayer(Player player){
+        this.lastAddedPlayer = player;
     }
 
     public void setPlayerAddError(String playerAddError){
         this.playerAddError = playerAddError;
     }
 
-    public ArrayList<Player> getPlayers(){
-        return players;
+    public Player getLastAddedPlayer(){
+        return lastAddedPlayer;
     }
 
     public String getPlayerAddError(){

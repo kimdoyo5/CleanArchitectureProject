@@ -14,7 +14,6 @@ import java.util.List;
 public class PlayerComparisonView extends JPanel {
 
     private final PlayerComparisonViewModel playerComparisonViewModel;
-    private final PlayerComparisonAddController playerComparisonAddController;
     private final PlayerComparisonRemoveController playerComparisonRemoveController;
     private final JTable comparisonTable;
     private final DefaultTableModel comparisonTableModel;
@@ -22,10 +21,8 @@ public class PlayerComparisonView extends JPanel {
     private final DefaultListModel<String> playerListModel;
 
     public PlayerComparisonView(PlayerComparisonController comparisonController,
-                                PlayerComparisonAddController addController,
                                 PlayerComparisonRemoveController removeController,
                                 PlayerComparisonViewModel comparisonViewModel) {
-        this.playerComparisonAddController = addController;
         this.playerComparisonRemoveController = removeController;
         this.playerComparisonViewModel = comparisonViewModel;
 
@@ -45,20 +42,12 @@ public class PlayerComparisonView extends JPanel {
     }
 
     private JPanel createButtonPanel() {
-        JButton addButton = new JButton("Add Player");
-        addButton.addActionListener(this::addPlayerAction);
-
         JButton removeButton = new JButton("Remove Player");
         removeButton.addActionListener(this::removePlayerAction);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
         return buttonPanel;
-    }
-
-    private void addPlayerAction(ActionEvent e) {
-        // Implement logic to add a player
     }
 
     private void removePlayerAction(ActionEvent e) {
