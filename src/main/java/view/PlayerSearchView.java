@@ -89,11 +89,7 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
                     public void keyPressed(KeyEvent e) {
                         if (e.getKeyCode() == KeyEvent.VK_ENTER){
                             PlayerSearchState currentstate = playerSearchViewModel.getSearchState();
-                            try{
-                                playerSearchController.execute(Integer.parseInt(currentstate.getSearch()));
-                            } catch (IOException ex) {
-                                JOptionPane.showMessageDialog(null, "An error occured. Please try again.");
-                            }
+                            playerSearchController.execute(Integer.parseInt(currentstate.getSearch()));
                         }
                     }
 
