@@ -11,8 +11,7 @@ public interface PlayerSearchInputDataBoundary {
     /**
      * searches for the data based on the input and runs the output boundary to display to user
      * @param playerSearchInputData the input of the user
-     * @throws IOException invaild input or error when searching or forming the data
      */
-    void execute(PlayerSearchInputData playerSearchInputData) throws IOException;
+    void execute(PlayerSearchInputData playerSearchInputData);
     void execute();
 }

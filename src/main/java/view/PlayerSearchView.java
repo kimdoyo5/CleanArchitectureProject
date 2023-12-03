@@ -52,11 +52,7 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(playerSearch)){
                             PlayerSearchState currentstate = playerSearchViewModel.getSearchState();
-                            try{
-                                playerSearchController.execute(Integer.parseInt(currentstate.getSearch()));
-                            } catch (IOException ex) {
-                                JOptionPane.showMessageDialog(null, "An error occured. Please try again.");
-                            }
+                            playerSearchController.execute(Integer.parseInt(currentstate.getSearch()));
                         }
                     }
                 }
