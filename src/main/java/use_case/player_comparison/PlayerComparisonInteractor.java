@@ -28,7 +28,7 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
 
     @Override
     public void execute() {
-        int playersAdded = playerComparisonDataAccessInterface.playersAdded();
+        int playersAdded = playerComparisonDataAccessInterface.getSize();
         List<String> playerList = playerComparisonDataAccessInterface.getAllPlayerNames();
         Map<String,String> leaders = playerComparisonDataAccessInterface.getLeaders();
 

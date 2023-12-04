@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface PlayerComparisonDataAccessInterface {
 
-    int playersAdded();
+    int getSize();
     List<String> getAllPlayerNames();
     Map<String, Double> getSimplified(String name);
     Map<String, String> getLeaders();
