@@ -23,7 +23,7 @@ public class PlayerOutputData {
         this.player = player;
         String[] simple = {"hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg"};
         String[] fullName = {"Home Runs",
-                "Totsl Bases",
+                "Total Bases",
                 "Extra Base Hits",
                 "Base on Balls",
                 "Hits",
