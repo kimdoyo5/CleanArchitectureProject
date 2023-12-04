@@ -1,14 +1,17 @@
 import main.java.app.PlayerDataDisplayViewFactory;
 import main.java.data_access.APIDataAccessObject;
 import main.java.data_access.IDFileDataAccessObject;
+import main.java.data_access.TestPlayerAddRemoveDataAccessObject;
 import main.java.entity.CommonPlayerFactory;
 import main.java.interface_adapter.PlayerDataDisplay.PlayerDataDisplayViewModel;
 import main.java.interface_adapter.ViewManagerModel;
 import main.java.interface_adapter.navigation.MainMenuViewModel;
+import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchController;
 import main.java.interface_adapter.player_search.PlayerSearchPresenter;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 import main.java.use_case.id_search.IDSearchDataAccessInterface;
+import main.java.use_case.player_comparison_add.PlayerComparisonAddDataAccessInterface;
 import main.java.use_case.player_search.PlayerSearchDataAccessInterface;
 import main.java.use_case.player_search.PlayerSearchInputData;
 import main.java.use_case.player_search.PlayerSearchInteractor;
@@ -30,11 +33,15 @@ public class PlayerSearchTest {
     IDSearchDataAccessInterface idDataAccess = new IDFileDataAccessObject("database.csv");
     ViewManagerModel viewManagerModel = new ViewManagerModel();
 
+    PlayerComparisonAddViewModel playerComparisonAddViewModel = new PlayerComparisonAddViewModel();
+
+    PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface = new TestPlayerAddRemoveDataAccessObject();
+
     PlayerSearchOutputBoundary playerSearchPresenter = new PlayerSearchPresenter(playerSearchViewModel, mainMenuViewModel, viewManagerModel, playerDataDisplayViewModel);
     PlayerSearchInteractor playerSearchInteractor = new PlayerSearchInteractor(dataAccess, playerSearchPresenter, idDataAccess);
     PlayerSearchController playerSearchController = new PlayerSearchController(playerSearchInteractor);
     JPanel playerSearchView = new PlayerSearchView(playerSearchController, playerSearchViewModel);
-    PlayerDataDisplayView playerDataDisplayView = PlayerDataDisplayViewFactory.create(playerDataDisplayViewModel,viewManagerModel,playerSearchViewModel);
+    PlayerDataDisplayView playerDataDisplayView = PlayerDataDisplayViewFactory.create(playerDataDisplayViewModel,viewManagerModel,playerSearchViewModel, playerComparisonAddViewModel, playerComparisonAddDataAccessInterface);
 
 
 

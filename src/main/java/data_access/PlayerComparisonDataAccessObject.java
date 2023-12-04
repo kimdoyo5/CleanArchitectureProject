@@ -8,6 +8,9 @@ import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAcc
 import main.java.use_case.player_comparison.PlayerComparisonDataAccessInterface;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddDataAccessInterface;
 
+/**
+ * Obtains requested data from playercomparison.csv
+ */
 public class PlayerComparisonDataAccessObject implements
         PlayerComparisonAddDataAccessInterface,
         PlayerComparisonRemoveDataAccessInterface,
@@ -26,6 +29,12 @@ public class PlayerComparisonDataAccessObject implements
         return new ArrayList<>(players.keySet());
     }
 
+    /**
+     * Constructor of the class
+     * @param csvName the file path this data access object should be connected to
+     * @param playerFactory The factory used to create player objects
+     * @throws IOException may occur if an issue reading the file occurs
+     */
     public PlayerComparisonDataAccessObject(String csvName, PlayerFactory playerFactory) throws IOException {
         this.playerFactory = playerFactory;
 
@@ -59,11 +68,9 @@ public class PlayerComparisonDataAccessObject implements
         }
     }
 
-    public void save(Player player) {
-        players.put(player.getName(), player);
-        this.save();
-    }
-
+    /**
+     * Writes the current player objects in players into the connected csv file
+     */
     private void save() {
         BufferedWriter writer;
         try {
@@ -104,14 +111,20 @@ public class PlayerComparisonDataAccessObject implements
         }
     }
 
-    public Player get(String username) {
-        return players.get(username);
+    /**
+     * Gets the first player with the same name
+     * @param name the name of the desired player to be retrieved
+     * @return player object with same name as name
+     */
+    public Player get(String name) {
+        return players.get(name);
     }
 
-    public boolean existsByName(String identifier) {                     //May not be needed
-        return players.containsKey(identifier);
-    }
-
+    /**
+     * Verifies if a player object can be added to the players map, and adds the player accordingly
+     * @param player the player object being attempted to add to the players map
+     * @return boolean based on if player has been added to players
+     */
     public boolean add(Player player) {
         int playerId = player.getID();
         boolean alreadyIn = false;
@@ -131,11 +144,11 @@ public class PlayerComparisonDataAccessObject implements
         }
     }
 
+    /**
+     * Gets the size of the players map
+     * @return an int describing the number of player maps in players
+     */
     public int getSize(){
-        return players.size();
-    }
-
-    public int playersAdded() {
         return players.size();
     }
 
@@ -206,7 +219,11 @@ public class PlayerComparisonDataAccessObject implements
         }
     }
 
-
+    /**
+     * Removes a player based on player id and returns the removed player
+     * @param playerId the id of the player which is requested to be removed
+     * @return player object with player id playerId which has been removed
+     */
     public Player remove(int playerId){
         Set<String> keys = players.keySet();
         Player player = null;
