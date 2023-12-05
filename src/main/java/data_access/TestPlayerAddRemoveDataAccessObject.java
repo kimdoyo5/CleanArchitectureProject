@@ -4,9 +4,7 @@ import main.java.entity.Player;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddDataAccessInterface;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAccessInterface;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TestPlayerAddRemoveDataAccessObject implements PlayerComparisonAddDataAccessInterface, PlayerComparisonRemoveDataAccessInterface {
 
@@ -33,16 +31,15 @@ public class TestPlayerAddRemoveDataAccessObject implements PlayerComparisonAddD
         return players.size();
     }
 
-    public Player remove(int playerId){
+    public List<String> removedPlayers(){
         Set<String> keys = players.keySet();
-        Player player = null;
+        List<String> playerNames = new ArrayList<>();
         for(String key: keys){
-            if (players.get(key).getID() == playerId){
-                player = players.get(key);
-                players.remove(key);
-            }
+            playerNames.add(key);
         }
-        return player;
+        players.clear();
+        return playerNames;
+
     }
 
 }

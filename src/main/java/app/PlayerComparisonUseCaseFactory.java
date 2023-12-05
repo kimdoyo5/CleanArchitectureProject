@@ -70,7 +70,7 @@ public class PlayerComparisonUseCaseFactory {
             PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface,
             PlayerComparisonRemoveOutputBoundary playerComparisonRemoveOutputBoundary) {
         PlayerComparisonRemoveInteractor removeInteractor = new PlayerComparisonRemoveInteractor(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
-        return new PlayerComparisonRemoveController(removeInteractor, playerComparisonRemoveOutputBoundary);
+        return new PlayerComparisonRemoveController(removeInteractor);
     }
 
 }

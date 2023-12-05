@@ -220,20 +220,17 @@ public class PlayerComparisonDataAccessObject implements
     }
 
     /**
-     * Removes a player based on player id and returns the removed player
-     * @param playerId the id of the player which is requested to be removed
-     * @return player object with player id playerId which has been removed
+     * Removes all elements from players lis
+     * @return string array of all names of the players that have been removed
      */
-    public Player remove(int playerId){
+    public List<String> removedPlayers(){
         Set<String> keys = players.keySet();
-        Player player = null;
+        List<String> playerNames = new ArrayList<>();
         for(String key: keys){
-            if (players.get(key).getID() == playerId){
-                player = players.get(key);
-                players.remove(key);
-                this.save();
-            }
+            playerNames.add(key);
         }
-        return player;
+        players.clear();
+        return playerNames;
+
     }
 }
