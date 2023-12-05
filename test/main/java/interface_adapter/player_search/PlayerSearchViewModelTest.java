@@ -9,13 +9,11 @@ import main.java.entity.Player;
 import main.java.interface_adapter.PlayerDataDisplay.PlayerDataDisplayViewModel;
 import main.java.interface_adapter.ViewManagerModel;
 import main.java.interface_adapter.navigation.MainMenuViewModel;
-import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchController;
 import main.java.interface_adapter.player_search.PlayerSearchPresenter;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 import main.java.use_case.id_search.IDSearchDataAccessInterface;
-import main.java.use_case.player_search.*;
 import main.java.view.PlayerDataDisplayView;
 import main.java.view.PlayerSearchView;
 
@@ -24,7 +22,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.Objects;
 
-public class PlayerSearchTest {
+public class PlayerSearchViewModelTest {
 
     PlayerSearchViewModel playerSearchViewModel = new PlayerSearchViewModel();
     PlayerSearchDataAccessInterface dataAccess = new APIDataAccessObject(new CommonPlayerFactory());
@@ -43,7 +41,7 @@ public class PlayerSearchTest {
     PlayerComparisonDataAccessObject playerComparisonDataAccessObject = new PlayerComparisonDataAccessObject("playercomparison.csv", new CommonPlayerFactory());
     PlayerDataDisplayView playerDataDisplayView = PlayerDataDisplayViewFactory.create(playerDataDisplayViewModel,viewManagerModel,playerSearchViewModel, playerComparisonAddViewModel, playerComparisonDataAccessObject);
 
-    public PlayerSearchTest() throws IOException {
+    public PlayerSearchViewModelTest() throws IOException {
     }
 
 
