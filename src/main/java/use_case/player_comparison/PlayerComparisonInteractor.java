@@ -5,6 +5,12 @@ import main.java.entity.PlayerFactory;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Interactor class for player comparison.
+ * This class acts as an interactor in the clean architecture, handling the business logic
+ * for comparing players. It communicates with data access interfaces and prepares
+ * data for presentation.
+ */
 public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary {
     final PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface;
     final PlayerComparisonOutputBoundary playerComparisonOutputBoundary;
@@ -12,6 +18,13 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
 
     PlayerComparisonOutputBoundary playerComparisonPresenter;
 
+    /**
+     * Constructs a PlayerComparisonInteractor with specified data access, output boundary, and player factory.
+     *
+     * @param playerComparisonDataAccessInterface Data access interface for player comparison data.
+     * @param playerComparisonOutputBoundary      Output boundary interface for sending results to the presenter.
+     * @param playerFactory                       Factory for creating player entities.
+     */
     public PlayerComparisonInteractor(PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface,
                                       PlayerComparisonOutputBoundary playerComparisonOutputBoundary,
                                       PlayerFactory playerFactory) {
@@ -20,12 +33,20 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
         this.playerDataFactory = playerFactory;
     }
 
-
+    /**
+     * Handles the request to go back from the player comparison view.
+     * This method triggers the process to return to the main menu or previous view.
+     */
     @Override
     public void back() {
         playerComparisonOutputBoundary.back();
     }
 
+    /**
+     * Executes the process of comparing players.
+     * This method contains the logic to fetch and compare player data, and prepares
+     * the output for presentation.
+     */
     @Override
     public void execute() {
         int playersAdded = playerComparisonDataAccessInterface.getSize();
@@ -43,6 +64,14 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
         playerComparisonPresenter.prepareSuccessView(playerComparisonOutputData);
     }
 
+    /**
+     * Constructs a 2D array of player statistics for comparison.
+     *
+     * @param playersAdded Number of players added for comparison.
+     * @param playerList   List of player names for comparison.
+     * @param leaders      Map of statistical leaders in different categories.
+     * @return A 2D array containing player statistics.
+     */
     private String[][] getArray(int playersAdded, List<String> playerList, Map<String,String> leaders) {
         String[] statKeys = {
                 "hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg",
@@ -72,4 +101,3 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
         return dataArray;
     }
 }
-
