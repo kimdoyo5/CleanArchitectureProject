@@ -31,8 +31,8 @@ public class PlayerComparisonRemoveTest {
         playerComparisonRemoveDataAccessInterface.add(player);
         PlayerComparisonRemoveOutputBoundary playerComparisonRemovePresenter = new PlayerComparisonRemoveOutputBoundary() {
             @Override
-            public void prepareSuccessView(PlayerComparisonRemoveOutputData players) {
-                assertEquals("Billy Bob", players.getRemovedPlayers().get(0));
+            public void prepareSuccessView(PlayerComparisonRemoveOutputData playerComparisonRemoveOutputData) {
+                assertEquals("Billy Bob", playerComparisonRemoveOutputData.getRemovedPlayers().get(0));
                 assertEquals(0, playerComparisonRemoveDataAccessInterface.getSize());
             }
 
@@ -52,7 +52,7 @@ public class PlayerComparisonRemoveTest {
         PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface = new TestPlayerAddRemoveDataAccessObject();
         PlayerComparisonRemoveOutputBoundary playerComparisonRemovePresenter = new PlayerComparisonRemoveOutputBoundary() {
             @Override
-            public void prepareSuccessView(PlayerComparisonRemoveOutputData players) {
+            public void prepareSuccessView(PlayerComparisonRemoveOutputData playerComparisonRemoveOutputData) {
                 fail("failTest failed");
 
             }

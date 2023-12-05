@@ -26,7 +26,6 @@ public class PlayerComparisonAddInteractor implements PlayerComparisonAddInputBo
     /**
      * Attempts to add the inputted player object to the player comparison
      * @param playerComparisonAddInputData the input data passed into this interactor,
-     * contains the player attempted to be added
      */
     @Override
     public void execute(PlayerComparisonAddInputData playerComparisonAddInputData) {
