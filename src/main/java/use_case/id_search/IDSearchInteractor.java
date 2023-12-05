@@ -22,12 +22,8 @@ public class IDSearchInteractor implements IDSearchInputBoundary{
             if (idSearchDataAccessInterface.isPlayer(idSearchInputData.getQuery())) {
                 try {
                     Map<String, Integer> searchResult = idSearchDataAccessInterface.getID(idSearchInputData.getQuery());
-                    if (searchResult.isEmpty()){
-                        idSearchOutputBoundary.prepareFailView("No players match this name");
-                    }
-                    else{
-                        idSearchOutputBoundary.prepareSuccessView(searchResult);
-                    }
+                    IDSearchOutputData result = new IDSearchOutputData(searchResult);
+                    idSearchOutputBoundary.prepareSuccessView(result);
                 }catch (RuntimeException e){
                     idSearchOutputBoundary.prepareFailView("Search Error");
                 }
