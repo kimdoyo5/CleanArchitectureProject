@@ -26,7 +26,7 @@ public class PlayerSearchController {
      * @param player_id The input of the user as an integer
      * @throws IOException Errors while searching or invalid input
      */
-    public void execute(int player_id) throws IOException {
+    public void execute(int player_id){
         PlayerSearchInputData data = new PlayerSearchInputData(player_id);
         playerSearchInteractor.execute(data);
     }

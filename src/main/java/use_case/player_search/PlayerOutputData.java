@@ -11,6 +11,9 @@ import java.util.Map;
  */
 public class PlayerOutputData {
     Player player;
+    Map<String, String> mainKeys = new HashMap<>();
+
+    Map<String, String> statKeys = new HashMap<>();
 
     /**
      * Initializes the class
@@ -18,6 +21,30 @@ public class PlayerOutputData {
      */
     public PlayerOutputData(Player player){
         this.player = player;
+        String[] simple = {"hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg"};
+        String[] fullName = {"Home Runs",
+                "Total Bases",
+                "Extra Base Hits",
+                "Base on Balls",
+                "Hits",
+                "Caught Stealing",
+                "Stolen Bases",
+                "At Bats",
+                "On Base Percentage",
+                "Slugging Percentage" };
+        for (int i = 0; i < simple.length; i++){
+            mainKeys.put(simple[i], fullName[i]);
+        }
+        String[] stat_key = {"HR_rate", "CS_rate", "HBB_rate", "HH_rate", "OPS", "wOPS"};
+        String[] statName = {"Home Run Rate",
+                "Caught Stealing Rate",
+                "Hits plus Base on Balls Rate",
+                "Hard Hit Rate",
+                "On Base plus Slugging Percentage",
+                "Weighted On Base plus Slugging Percentage"};
+        for (int i = 0; i < stat_key.length; i++){
+            statKeys.put(stat_key[i], statName[i]);
+        }
     }
 
     /**
@@ -60,13 +87,12 @@ public class PlayerOutputData {
         Map<String, String> data = new HashMap<>();
         data.put("Name", player.getName());
         data.put("Player Id", String.valueOf(player.getID()));
-        String[] stat_key = {"HR_rate", "CS_rate", "HBB_rate", "HH_rate", "OPS", "wOPS"};
-        for (String key: player.getStats().keySet()){
-            data.put(key, player.getStats().get(key));
+        for (String key: mainKeys.keySet()){
+            data.put(mainKeys.get(key), player.getStats().get(key));
         }
 
-        for (String key: stat_key){
-            data.put(key, player.calculateState(key));
+        for (String key: statKeys.keySet()){
+            data.put(statKeys.get(key), player.calculateState(key));
         }
         return data;
     }

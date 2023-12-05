@@ -16,7 +16,7 @@ public class PlayerSearchState {
      * Constructs a copy of the class using an existing version of the class
      * @param copy An existing version of the class
      */
-    PlayerSearchState(PlayerSearchState copy){
+    public PlayerSearchState(PlayerSearchState copy){
         this.search_error = copy.search_error;
         this.search = copy.search;
     }
@@ -24,7 +24,7 @@ public class PlayerSearchState {
     /**
      * Constructs the class
      */
-    PlayerSearchState(){}
+    public PlayerSearchState(){}
 
     /**
      * Retrieves what is in the search bar
