@@ -6,7 +6,6 @@ public class PlayerComparisonOutputData {
 
     public PlayerComparisonOutputData(String[][] dataArray) {
         this.dataArray = dataArray;
-        
     }
 
     public String[][] getDataArray() {

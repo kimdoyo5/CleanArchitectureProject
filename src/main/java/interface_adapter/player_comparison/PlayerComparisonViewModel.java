@@ -8,8 +8,7 @@ import java.beans.PropertyChangeSupport;
 public class PlayerComparisonViewModel extends ViewModel {
 
     public static final String TITLE_LABEL = "Player Comparison View";
-    public static final String ADD_BUTTON_LABEL = "Add Player";
-    public static final String COMPARISON_BUTTON_LABEL = "Compare";
+    public static final String REMOVE_BUTTON_LABEL = "Remove Player";
     public static final String BACK_BUTTON_LABEL = "Back";
     private PlayerComparisonState state = new PlayerComparisonState();
 

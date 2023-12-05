@@ -9,6 +9,7 @@ public class PlayerComparisonState {
 
     // These variables need to be declared in the class.
     private List<Player> players = new ArrayList<>();
+
     private String[][] dataArray;
 
     private String playerComparisonError = null;

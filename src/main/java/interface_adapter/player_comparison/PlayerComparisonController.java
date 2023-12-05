@@ -4,15 +4,20 @@ import main.java.use_case.player_comparison.PlayerComparisonInputBoundary;
 
 public class PlayerComparisonController {
 
-    final PlayerComparisonInputBoundary comparisonUseCaseInteractor;
+    final PlayerComparisonInputBoundary playerComparisonUseCaseInteractor;
 
     public PlayerComparisonController(PlayerComparisonInputBoundary comparisonUseCaseInteractor) {
-        this.comparisonUseCaseInteractor = comparisonUseCaseInteractor;
+        this.playerComparisonUseCaseInteractor = comparisonUseCaseInteractor;
     }
 
     public void execute() {
         // Player comparison interactor
-        comparisonUseCaseInteractor.execute();
+        playerComparisonUseCaseInteractor.execute();
+    }
+
+    public void back() {
+        // Back to main menu
+        playerComparisonUseCaseInteractor.back();
     }
 
 }

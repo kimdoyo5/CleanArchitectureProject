@@ -8,6 +8,7 @@ import main.java.interface_adapter.player_comparison.PlayerComparisonPresenter;
 import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddController;
 import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemoveController;
+import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemoveViewModel;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAccessInterface;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveInteractor;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputBoundary;
@@ -31,15 +32,14 @@ public class PlayerComparisonUseCaseFactory {
             PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface,
             PlayerComparisonRemoveOutputBoundary playerComparisonRemoveOutputBoundary,
             PlayerFactory playerFactory,
-            PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface,
             PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface,
-            PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary
+            PlayerComparisonRemoveViewModel playerComparisonRemoveViewModel
     ) {
         PlayerComparisonRemoveController playerComparisonRemoveController = createPlayerComparisonRemoveController(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
         PlayerComparisonController playerComparisonController = createPlayerComparisonController(
                 playerComparisonViewModel, navigationViewModel, viewManagerModel, playerComparisonDataAccessInterface, playerFactory);
 
-        return new PlayerComparisonView(playerComparisonController, playerComparisonRemoveController, playerComparisonViewModel);
+        return new PlayerComparisonView(playerComparisonController, playerComparisonRemoveController, playerComparisonViewModel, playerComparisonRemoveViewModel);
     }
 
     private static PlayerComparisonController createPlayerComparisonController(
@@ -58,13 +58,13 @@ public class PlayerComparisonUseCaseFactory {
         return new PlayerComparisonController(playerComparisonInputBoundary);
     }
 
-//    private static PlayerComparisonAddController createPlayerComparisonAddController(
-//            PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface,
-//            PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary
-//    ) {
-//        PlayerComparisonAddInteractor addInteractor = new PlayerComparisonAddInteractor(playerComparisonAddDataAccessInterface, playerComparisonAddOutputBoundary);
-//        return new PlayerComparisonAddController(addInteractor);
-//    }
+    private static PlayerComparisonAddController createPlayerComparisonAddController(
+            PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface,
+            PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary
+    ) {
+        PlayerComparisonAddInteractor addInteractor = new PlayerComparisonAddInteractor(playerComparisonAddDataAccessInterface, playerComparisonAddOutputBoundary);
+        return new PlayerComparisonAddController(addInteractor);
+    }
 
     private static PlayerComparisonRemoveController createPlayerComparisonRemoveController(
             PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface,
