@@ -2,16 +2,18 @@ package main.java.use_case.player_comparison_remove;
 
 import main.java.entity.Player;
 
+import java.util.List;
+
 public class PlayerComparisonRemoveOutputData {
 
-    final private Player player;
+    final private List<String> removedPlayers;
 
-    public PlayerComparisonRemoveOutputData(Player player){
-        this.player = player;
+    public PlayerComparisonRemoveOutputData(List<String> removedPlayers){
+        this.removedPlayers = removedPlayers;
     }
 
-    public Player getPlayer(){
-        return this.player;
+    public List<String> getRemovedPlayers(){
+        return this.removedPlayers;
     }
 
 }

@@ -1,3 +1,5 @@
+package main.java.use_case.player_comparison_add;
+
 import main.java.data_access.TestPlayerAddRemoveDataAccessObject;
 import main.java.entity.CommonPlayerFactory;
 import main.java.use_case.player_comparison_add.*;

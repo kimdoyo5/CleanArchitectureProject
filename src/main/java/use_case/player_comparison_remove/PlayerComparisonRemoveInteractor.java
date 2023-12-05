@@ -2,6 +2,8 @@ package main.java.use_case.player_comparison_remove;
 
 import main.java.entity.Player;
 
+import java.util.List;
+
 public class PlayerComparisonRemoveInteractor implements PlayerComparisonRemoveInputBoundary{
 
     final PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface;
@@ -14,11 +16,16 @@ public class PlayerComparisonRemoveInteractor implements PlayerComparisonRemoveI
         this.playerComparisonRemovePresenter = playerComparisonRemoveOutputBoundary;
     }
 
-    public void execute(PlayerComparisonRemoveInputData playerComparisonRemoveInputData) {
-        int playerId = playerComparisonRemoveInputData.getPlayerId();
-        Player removed = playerComparisonRemoveDataAccessInterface.remove(playerId);
-        PlayerComparisonRemoveOutputData playerComparisonRemoveOutputData
-                = new PlayerComparisonRemoveOutputData(removed);
-        playerComparisonRemovePresenter.prepareSuccessView(playerComparisonRemoveOutputData);
+    public void execute() {
+        if (playerComparisonRemoveDataAccessInterface.getSize() == 0){
+            String error = "No players in the comparison";
+            playerComparisonRemovePresenter.prepareFailView(error);
+        }else{
+            List<String> players = playerComparisonRemoveDataAccessInterface.removedPlayers();
+            PlayerComparisonRemoveOutputData playerComparisonRemoveOutputData
+                    = new PlayerComparisonRemoveOutputData(players);
+            playerComparisonRemovePresenter.prepareSuccessView(playerComparisonRemoveOutputData);
+        }
+
     }
 }
