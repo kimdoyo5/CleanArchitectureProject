@@ -1,25 +1,28 @@
 package main.java.interface_adapter.player_comparison_remove;
 
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveInputBoundary;
-import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveInputData;
-import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputBoundary;
 
+/**
+ * Controller for removing players from the comparison use case that calls the interactor to complete the removal
+ */
 public class PlayerComparisonRemoveController {
 
     final PlayerComparisonRemoveInputBoundary playerComparisonRemoveUseCaseInteractor;
-    private final PlayerComparisonRemoveOutputBoundary playerComparisonRemoveOutputBoundary;
 
+    /**
+     * Constructor for the controller
+     * @param playerComparisonRemoverUseCaseInteractor the related interactor for the player comparison remove use case
+     */
     public PlayerComparisonRemoveController(
-            PlayerComparisonRemoveInputBoundary playerComparisonRemoverUseCaseInteractor,
-            PlayerComparisonRemoveOutputBoundary playerComparisonRemoveOutputBoundary
-    ) {
+            PlayerComparisonRemoveInputBoundary playerComparisonRemoverUseCaseInteractor) {
         this.playerComparisonRemoveUseCaseInteractor = playerComparisonRemoverUseCaseInteractor;
-        this.playerComparisonRemoveOutputBoundary = playerComparisonRemoveOutputBoundary;
     }
 
-    public void execute(int playerId) {
-        PlayerComparisonRemoveInputData playerComparisonRemoveInputData = new PlayerComparisonRemoveInputData(playerId);
-        playerComparisonRemoveUseCaseInteractor.execute(playerComparisonRemoveInputData);
+    /**
+     * Calls the related interactor to remove all players from the comparison
+     */
+    public void execute() {
+        playerComparisonRemoveUseCaseInteractor.execute();
     }
 
 }
