@@ -1,3 +1,5 @@
+package main.java.use_case.player_search;
+
 import main.java.app.PlayerDataDisplayViewFactory;
 import main.java.data_access.APIDataAccessObject;
 import main.java.data_access.IDFileDataAccessObject;
@@ -51,7 +53,7 @@ public class PlayerSearchTest {
     }
 
     @org.junit.Test
-    public void searchById() throws IOException {
+    public void searchIntegrationTest() throws IOException {
         playerSearchController.execute(641541);
         assert(Objects.equals(viewManagerModel.getActiveView(), playerDataDisplayViewModel.getViewName()));
     }
@@ -108,12 +110,9 @@ public class PlayerSearchTest {
             }
 
         };
-        PlayerSearchDataAccessInterface localData = new PlayerSearchDataAccessInterface() {
-            @Override
-            public Player search(int player_id) throws IOException {
-                IOException IOException = new IOException();
-                throw IOException;
-            }
+        PlayerSearchDataAccessInterface localData = player_id -> {
+            IOException IOException = new IOException();
+            throw IOException;
         };
         PlayerSearchInteractor playerSearchInteractor1 = new PlayerSearchInteractor(localData ,present, idDataAccess);
         playerSearchInteractor1.execute(validInput);
