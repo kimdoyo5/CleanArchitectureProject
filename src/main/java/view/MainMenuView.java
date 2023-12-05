@@ -53,8 +53,9 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         this.playerComparisonViewModel = playerComparisonViewModel;
         this.idSearchViewModel = idSearchViewModel;
 
+        this.setPreferredSize(new Dimension(500, 500));
         BufferedImage picture = ImageIO.read(new File("baseball.png"));
-        JLabel pic = new JLabel(new ImageIcon(picture.getScaledInstance(100,100, Image.SCALE_SMOOTH)));
+        JLabel pic = new JLabel(new ImageIcon(picture.getScaledInstance(300,300, Image.SCALE_SMOOTH)));
         pic.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel title = new JLabel("MLB Data Program");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
