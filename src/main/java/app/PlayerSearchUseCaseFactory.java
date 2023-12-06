@@ -19,7 +19,12 @@ import main.java.view.PlayerSearchView;
 public class PlayerSearchUseCaseFactory {
     private PlayerSearchUseCaseFactory(){}
 
-    public static PlayerSearchView create (ViewManagerModel viewManagerModel, MainMenuViewModel mainMenuViewModel, PlayerSearchViewModel playerSearchViewModel, PlayerSearchDataAccessInterface playerSearchDataAccessInterface, IDSearchDataAccessInterface idSearchDataAccessInterface, PlayerDataDisplayViewModel playerDataDisplayViewModel){
+    public static PlayerSearchView create (ViewManagerModel viewManagerModel,
+                                           MainMenuViewModel mainMenuViewModel,
+                                           PlayerSearchViewModel playerSearchViewModel,
+                                           PlayerSearchDataAccessInterface playerSearchDataAccessInterface,
+                                           IDSearchDataAccessInterface idSearchDataAccessInterface,
+                                           PlayerDataDisplayViewModel playerDataDisplayViewModel){
         PlayerSearchController playerSearchController = createPlayerSearchController(viewManagerModel, mainMenuViewModel, playerSearchViewModel, playerSearchDataAccessInterface, idSearchDataAccessInterface, playerDataDisplayViewModel);
         return new PlayerSearchView(playerSearchController, playerSearchViewModel);
     }

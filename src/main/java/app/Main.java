@@ -12,8 +12,12 @@ import main.java.interface_adapter.id_search.IDSearchViewModel;
 import main.java.interface_adapter.navigation.MainMenuViewModel;
 import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddViewModel;
+import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemovePresenter;
+import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemoveViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAccessInterface;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputBoundary;
 import main.java.view.*;
 
 import javax.swing.*;
@@ -37,11 +41,13 @@ public class Main extends JFrame{
         new ViewManager(views, cardLayout, viewManagerModel);
 
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
-        PlayerComparisonViewModel compareViewModel = new PlayerComparisonViewModel();
+        PlayerComparisonViewModel playerComparisonViewModel = new PlayerComparisonViewModel();
         IDSearchViewModel IDsearchViewModel = new IDSearchViewModel();
         PlayerSearchViewModel playerSearchViewModel = new PlayerSearchViewModel();
+        PlayerComparisonRemoveViewModel playerComparisonRemoveViewModel = new PlayerComparisonRemoveViewModel();
         IDFileDataAccessObject idSearchDataAccessObject;
         PlayerComparisonDataAccessObject playerComparisonDataAccessObject;
+        PlayerComparisonRemovePresenter playerComparisonRemovePresenter = new PlayerComparisonRemovePresenter(playerComparisonRemoveViewModel);
 
         APIDataAccessObject apiDataAccessObject = new APIDataAccessObject(new CommonPlayerFactory());
 
@@ -61,21 +67,14 @@ public class Main extends JFrame{
         }
 
         MainMenuView mainMenuView = MainMenuViewFactory.create(viewManagerModel, mainMenuViewModel,
-                compareViewModel, IDsearchViewModel, playerSearchViewModel);
+                playerComparisonViewModel, IDsearchViewModel, playerSearchViewModel);
         views.add(mainMenuView, mainMenuView.viewName);
 
         IDSearchView IDsearchView = IDSearchUseCaseFactory.create(viewManagerModel, IDsearchViewModel, idSearchDataAccessObject, mainMenuViewModel);
         views.add(IDsearchView, IDsearchView.viewName);
 
-        /* to be added as UI for each use case is done
-        CompareView compareView = CompareUseCaseFactory.create(viewManagerModel, navigationViewModel, compareViewModel);
-        views.add(compareView, compareView.viewName);
-
-
-        PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, navigationViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessOject);
-        views.add(playerSearchView, playerSearchView.viewName);
-        */
-
+        PlayerComparisonView playerComparisonView = PlayerComparisonUseCaseFactory.create(playerComparisonViewModel, mainMenuViewModel, viewManagerModel, playerComparisonDataAccessObject, playerComparisonRemovePresenter, playerComparisonDataAccessObject, playerComparisonRemoveViewModel);
+        views.add(playerComparisonView, playerComparisonView.viewName);
 
         PlayerSearchView playerSearchView = PlayerSearchUseCaseFactory.create(viewManagerModel, mainMenuViewModel, playerSearchViewModel, apiDataAccessObject, idSearchDataAccessObject, playerDataDisplayViewModel);
         views.add(playerSearchView, playerSearchView.viewName);

@@ -30,7 +30,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     private final PlayerSearchViewModel playerSearchViewModel;
     private final PlayerComparisonViewModel playerComparisonViewModel;
     private final IDSearchViewModel idSearchViewModel;
-    private final JButton compare;
+    private final JButton playerComparison;
     private final JButton IDsearch;
     private final JButton playerSearch;
 
@@ -65,13 +65,13 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         buttons.add(IDsearch);
         playerSearch = new JButton(MainMenuViewModel.ID_SEARCH_BUTTON_LABEL);
         buttons.add(playerSearch);
-        compare = new JButton(MainMenuViewModel.PLAYER_COMPARISON_BUTTON_LABEL);
-        buttons.add(compare);
+        playerComparison = new JButton(MainMenuViewModel.PLAYER_COMPARISON_BUTTON_LABEL);
+        buttons.add(playerComparison);
 
-        compare.addActionListener(
+        playerComparison.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(compare)) {
+                        if (evt.getSource().equals(playerComparison)) {
                             viewManagerModel.setActiveView(playerComparisonViewModel.getViewName());
                             viewManagerModel.firePropertyChanged();
                         }

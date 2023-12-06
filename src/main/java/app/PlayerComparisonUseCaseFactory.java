@@ -27,17 +27,18 @@ public class PlayerComparisonUseCaseFactory {
 
     public static PlayerComparisonView create (
             PlayerComparisonViewModel playerComparisonViewModel,
-            MainMenuViewModel navigationViewModel,
+            MainMenuViewModel mainMenuViewModel,
             ViewManagerModel viewManagerModel,
             PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface,
             PlayerComparisonRemoveOutputBoundary playerComparisonRemoveOutputBoundary,
-            PlayerFactory playerFactory,
             PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface,
             PlayerComparisonRemoveViewModel playerComparisonRemoveViewModel
     ) {
         PlayerComparisonRemoveController playerComparisonRemoveController = PlayerComparisonRemoveUseCaseFactory.createPlayerComparisonRemoveController(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
         PlayerComparisonController playerComparisonController = createPlayerComparisonController(
-                playerComparisonViewModel, navigationViewModel, viewManagerModel, playerComparisonDataAccessInterface, playerFactory);
+                playerComparisonViewModel, mainMenuViewModel, viewManagerModel, playerComparisonDataAccessInterface);
+        PlayerComparisonRemoveController playerComparisonRemoveController = createPlayerComparisonRemoveController(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
+
 
         return new PlayerComparisonView(playerComparisonController, playerComparisonRemoveController, playerComparisonViewModel, playerComparisonRemoveViewModel);
     }
@@ -46,14 +47,13 @@ public class PlayerComparisonUseCaseFactory {
             PlayerComparisonViewModel playerComparisonViewModel,
             MainMenuViewModel navigationViewModel,
             ViewManagerModel viewManagerModel,
-            PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface,
-            PlayerFactory playerFactory
+            PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface
     ) {
         PlayerComparisonOutputBoundary playerComparisonOutputBoundary = new PlayerComparisonPresenter(
                 playerComparisonViewModel, navigationViewModel, viewManagerModel);
 
         PlayerComparisonInputBoundary playerComparisonInputBoundary = new PlayerComparisonInteractor(
-                playerComparisonDataAccessInterface, playerComparisonOutputBoundary, playerFactory);
+                playerComparisonDataAccessInterface, playerComparisonOutputBoundary);
 
         return new PlayerComparisonController(playerComparisonInputBoundary);
     }
