@@ -25,7 +25,7 @@ public class PlayerComparisonViewModel extends ViewModel {
      * Initializes the view model with the unique identifier "playerComparison".
      */
     public PlayerComparisonViewModel() {
-        super("playerComparison");
+        super("player comparison");
     }
 
     /**
