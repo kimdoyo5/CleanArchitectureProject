@@ -30,7 +30,7 @@ class IDSearchInteractorTest {
                 Object name = results.getPlayers().keySet().toArray()[0];
                 assertEquals(name, "Tom Thompson");
                 // Check that the player ID is correct
-                assertEquals(results.getPlayers().get(name), 85779);
+                assertEquals((int)results.getPlayers().get(name), 85779);
             }
 
             @Override
