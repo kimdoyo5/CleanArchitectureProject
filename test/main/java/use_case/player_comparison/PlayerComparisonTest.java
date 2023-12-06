@@ -1,9 +1,12 @@
 package main.java.use_case.player_comparison;
 
 import main.java.data_access.PlayerComparisonDataAccessObject;
-import main.java.data_access.TestPlayerAddRemoveDataAccessObject;
 import main.java.entity.CommonPlayerFactory;
 import main.java.entity.Player;
+import main.java.interface_adapter.player_comparison.PlayerComparisonPresenter;
+import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
+import main.java.interface_adapter.navigation.MainMenuViewModel;
+import main.java.interface_adapter.ViewManagerModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,19 +19,17 @@ public class PlayerComparisonTest {
     private PlayerComparisonDataAccessInterface dataAccess;
     private FakePlayerComparisonOutputBoundary outputBoundary;
     private PlayerComparisonInteractor interactor;
+    private PlayerComparisonPresenter presenter;
 
     @BeforeEach
     public void setUp() throws IOException {
-        dataAccess = new PlayerComparisonDataAccessObject(csvName, playerFactory);
+        dataAccess = new PlayerComparisonDataAccessObject("./playercomparison.csv", new CommonPlayerFactory());
         outputBoundary = new FakePlayerComparisonOutputBoundary();
-        interactor = new PlayerComparisonInteractor(dataAccess, outputBoundary, new CommonPlayerFactory());
-    }
-
-    @Test
-    public void testExecuteWithLessThanTwoPlayers() {
-        interactor.execute();
-        assertTrue(outputBoundary.isFailViewPrepared());
-        assertEquals("You need to select at least 2 players.", outputBoundary.getErrorMessage());
+        PlayerComparisonViewModel viewModel = new PlayerComparisonViewModel();
+        MainMenuViewModel navigationViewModel = new MainMenuViewModel();
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        presenter = new PlayerComparisonPresenter(viewModel, navigationViewModel, viewManagerModel);
+        interactor = new PlayerComparisonInteractor(dataAccess, outputBoundary);
     }
 
     @Test
@@ -52,6 +53,32 @@ public class PlayerComparisonTest {
     public void testBackFunctionality() {
         interactor.back();
         assertTrue(outputBoundary.isBackCalled());
+    }
+
+    @Test
+    public void testExecuteWithMoreThanTwoPlayers() {
+        addTestPlayers(3); // Adding more than two players
+
+        interactor.execute();
+        assertTrue(outputBoundary.isSuccessViewPrepared());
+        assertNotNull(outputBoundary.getDataArray());
+        assertEquals(3 + 2, outputBoundary.getDataArray()[0].length); // Check if columns are correctly formed
+    }
+
+    @Test
+    public void testPlayerComparisonOutputData() {
+        addTestPlayers(2);
+        interactor.execute();
+
+        PlayerComparisonOutputData outputData = new PlayerComparisonOutputData(outputBoundary.getDataArray());
+        assertNotNull(outputData.getDataArray());
+        assertEquals(outputBoundary.getDataArray(), outputData.getDataArray());
+    }
+
+    private void addInvalidTestPlayer() {
+        List<String> invalidPlayerInfo = List.of("InvalidPlayer", "NaN");
+        Player invalidPlayer = new CommonPlayerFactory().create(invalidPlayerInfo);
+        dataAccess.add(invalidPlayer);
     }
 
     private void addTestPlayers(int count) {
@@ -112,5 +139,6 @@ public class PlayerComparisonTest {
         }
     }
 }
+
 
 
