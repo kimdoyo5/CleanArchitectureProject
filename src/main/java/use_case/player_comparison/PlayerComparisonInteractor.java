@@ -1,63 +1,78 @@
 package main.java.use_case.player_comparison;
 
-import main.java.entity.Player;
 import main.java.entity.PlayerFactory;
-import main.java.interface_adapter.player_comparison.PlayerComparisonController;
-import main.java.interface_adapter.player_comparison.PlayerComparisonPresenter;
-import main.java.use_case.player_comparison_add.PlayerComparisonAddOutputData;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Interactor class for player comparison.
+ * This class acts as an interactor in the clean architecture, handling the business logic
+ * for comparing players. It communicates with data access interfaces and prepares
+ * data for presentation.
+ */
 public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary {
     final PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface;
-    final PlayerComparisonOutputBoundary playerComparisonPresenter;
+    final PlayerComparisonOutputBoundary playerComparisonOutputBoundary;
     final PlayerFactory playerDataFactory;
 
-    PlayerComparisonOutputBoundary comparisonPresenter;
+    PlayerComparisonOutputBoundary playerComparisonPresenter;
 
+    /**
+     * Constructs a PlayerComparisonInteractor with specified data access, output boundary, and player factory.
+     *
+     * @param playerComparisonDataAccessInterface Data access interface for player comparison data.
+     * @param playerComparisonOutputBoundary      Output boundary interface for sending results to the presenter.
+     * @param playerFactory                       Factory for creating player entities.
+     */
     public PlayerComparisonInteractor(PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface,
                                       PlayerComparisonOutputBoundary playerComparisonOutputBoundary,
                                       PlayerFactory playerFactory) {
         this.playerComparisonDataAccessInterface = playerComparisonDataAccessInterface;
-        this.playerComparisonPresenter = playerComparisonOutputBoundary;
+        this.playerComparisonOutputBoundary = playerComparisonOutputBoundary;
         this.playerDataFactory = playerFactory;
     }
 
+    /**
+     * Handles the request to go back from the player comparison view.
+     * This method triggers the process to return to the main menu or previous view.
+     */
+    @Override
+    public void back() {
+        playerComparisonOutputBoundary.back();
+    }
+
+    /**
+     * Executes the process of comparing players.
+     * This method contains the logic to fetch and compare player data, and prepares
+     * the output for presentation.
+     */
     @Override
     public void execute() {
         int playersAdded = playerComparisonDataAccessInterface.getSize();
         List<String> playerList = playerComparisonDataAccessInterface.getAllPlayerNames();
         Map<String,String> leaders = playerComparisonDataAccessInterface.getLeaders();
 
-        if (playersAdded >= 2) { // Whether there are 2+ players
-            String player1name = playerList.get(0);
-            Map<String, Double> player1 = playerComparisonDataAccessInterface.getSimplified(player1name);
-            String player2name = playerList.get(1);
-            Map<String, Double> player2 = playerComparisonDataAccessInterface.getSimplified(player2name);
-
-        } if (playersAdded >= 3) {
-            String player3name = playerList.get(2);
-            Map<String, Double> player3 = playerComparisonDataAccessInterface.getSimplified(player3name);
-
-        } if (playersAdded >= 4) {
-            String player4name = playerList.get(3);
-            Map<String, Double> player4 = playerComparisonDataAccessInterface.getSimplified(player4name);
-
-        } else {
-            comparisonPresenter.prepareFailView("You need to select at least 2 players.");
+        if (playersAdded < 2) {
+            playerComparisonPresenter.prepareFailView("You need to select at least 2 players.");
+            return;
         }
 
         String[][] dataArray = getArray(playersAdded, playerList, leaders);
 
         PlayerComparisonOutputData playerComparisonOutputData = new PlayerComparisonOutputData(dataArray);
         playerComparisonPresenter.prepareSuccessView(playerComparisonOutputData);
-
     }
 
-    private String[][] getArray(int playersAdded, List<String>playerList, Map<String,String>leaders) {
+    /**
+     * Constructs a 2D array of player statistics for comparison.
+     *
+     * @param playersAdded Number of players added for comparison.
+     * @param playerList   List of player names for comparison.
+     * @param leaders      Map of statistical leaders in different categories.
+     * @return A 2D array containing player statistics.
+     */
+    private String[][] getArray(int playersAdded, List<String> playerList, Map<String,String> leaders) {
         String[] statKeys = {
                 "hr", "tb", "xbh", "bb", "h", "cs", "sb", "ab", "obp", "slg",
                 "HR_rate", "CS_rate", "HBB_rate", "HH_rate", "OPS", "wOPS" };
@@ -68,24 +83,21 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
         // Set header row
         dataArray[0][0] = "Stat/Player";
         for (int i = 0; i < playersAdded && i < 4; i++) {
-            dataArray[0][i + 1] = playerList.get(i);
+            dataArray[0][i + 1] = "Player " + (i + 1);
         }
         dataArray[0][numColumns - 1] = "Leaders";
 
-        // Set key rows
+        // Set data rows
         for (int i = 0; i < statKeys.length; i++) {
-            dataArray[i + 1][0] = statKeys[i];
-        }
-
-        for (int i = 1; i < numRows; i++) {
-            String key = dataArray[i][0];
+            String key = statKeys[i];
+            dataArray[i + 1][0] = key;
             for (int j = 1; j <= playersAdded && j <= 4; j++) {
                 Map<String, Double> playerStats = playerComparisonDataAccessInterface.getSimplified(playerList.get(j - 1));
-                dataArray[i][j] = playerStats.containsKey(key) ? playerStats.get(key).toString() : "N/A";
+                dataArray[i + 1][j] = playerStats.containsKey(key) ? playerStats.get(key).toString() : "N/A";
             }
-            dataArray[i][numColumns - 1] = leaders.getOrDefault(key, "N/A");
+            dataArray[i + 1][numColumns - 1] = leaders.getOrDefault(key, "N/A");
         }
+
         return dataArray;
     }
 }
-
