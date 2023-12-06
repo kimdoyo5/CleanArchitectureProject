@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class PlayerComparisonView extends JPanel implements ActionListener, PropertyChangeListener {
 
+    public final String viewName = "player comparison";
     private final PlayerComparisonController playerComparisonController;
     private final PlayerComparisonViewModel playerComparisonViewModel;
     private final PlayerComparisonRemoveController playerComparisonRemoveController;

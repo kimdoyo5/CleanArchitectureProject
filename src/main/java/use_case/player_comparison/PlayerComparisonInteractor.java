@@ -14,7 +14,6 @@ import java.util.Map;
 public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary {
     final PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface;
     final PlayerComparisonOutputBoundary playerComparisonOutputBoundary;
-    final PlayerFactory playerDataFactory;
 
     PlayerComparisonOutputBoundary playerComparisonPresenter;
 
@@ -23,14 +22,11 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
      *
      * @param playerComparisonDataAccessInterface Data access interface for player comparison data.
      * @param playerComparisonOutputBoundary      Output boundary interface for sending results to the presenter.
-     * @param playerFactory                       Factory for creating player entities.
      */
     public PlayerComparisonInteractor(PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface,
-                                      PlayerComparisonOutputBoundary playerComparisonOutputBoundary,
-                                      PlayerFactory playerFactory) {
+                                      PlayerComparisonOutputBoundary playerComparisonOutputBoundary) {
         this.playerComparisonDataAccessInterface = playerComparisonDataAccessInterface;
         this.playerComparisonOutputBoundary = playerComparisonOutputBoundary;
-        this.playerDataFactory = playerFactory;
     }
 
     /**
