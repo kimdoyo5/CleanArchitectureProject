@@ -54,7 +54,7 @@ class IDFileDataAccessObjectTest {
             assertEquals(result.keySet().size(), 1);
             Map.Entry<String,Integer> entry = result.entrySet().iterator().next();
             String key = entry.getKey();
-            Integer value = entry.getValue();
+            int value = entry.getValue();
             assertTrue(key.contains("Kevin"));
             assertEquals(value, 605196);
 
@@ -73,7 +73,7 @@ class IDFileDataAccessObjectTest {
             assertEquals(result.keySet().size(), 2);
             Map.Entry<String,Integer> entry = result.entrySet().iterator().next();
             String key = entry.getKey();
-            Integer value = entry.getValue();
+            int value = entry.getValue();
             assertTrue(key.contains("Tyler"));
             assertEquals(value, 461325);
 
