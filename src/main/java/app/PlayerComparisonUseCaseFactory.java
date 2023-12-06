@@ -1,5 +1,6 @@
 package main.java.app;
 
+import main.java.data_access.PlayerComparisonDataAccessObject;
 import main.java.entity.PlayerFactory;
 import main.java.interface_adapter.ViewManagerModel;
 import main.java.interface_adapter.navigation.MainMenuViewModel;
@@ -10,6 +11,7 @@ import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddCont
 import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemoveController;
 import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemoveViewModel;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAccessInterface;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveInputBoundary;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveInteractor;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputBoundary;
 import main.java.use_case.player_comparison.PlayerComparisonDataAccessInterface;
@@ -37,7 +39,6 @@ public class PlayerComparisonUseCaseFactory {
         PlayerComparisonRemoveController playerComparisonRemoveController = PlayerComparisonRemoveUseCaseFactory.createPlayerComparisonRemoveController(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
         PlayerComparisonController playerComparisonController = createPlayerComparisonController(
                 playerComparisonViewModel, mainMenuViewModel, viewManagerModel, playerComparisonDataAccessInterface);
-        PlayerComparisonRemoveController playerComparisonRemoveController = createPlayerComparisonRemoveController(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
 
 
         return new PlayerComparisonView(playerComparisonController, playerComparisonRemoveController, playerComparisonViewModel, playerComparisonRemoveViewModel);

@@ -15,7 +15,6 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
     final PlayerComparisonDataAccessInterface playerComparisonDataAccessInterface;
     final PlayerComparisonOutputBoundary playerComparisonOutputBoundary;
 
-    PlayerComparisonOutputBoundary playerComparisonPresenter;
 
     /**
      * Constructs a PlayerComparisonInteractor with specified data access, output boundary, and player factory.
@@ -50,14 +49,13 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
         Map<String,String> leaders = playerComparisonDataAccessInterface.getLeaders();
 
         if (playersAdded < 2) {
-            playerComparisonPresenter.prepareFailView("You need to select at least 2 players.");
-            return;
+            playerComparisonOutputBoundary.prepareFailView("You need to select at least 2 players.");
         }
 
         String[][] dataArray = getArray(playersAdded, playerList, leaders);
 
         PlayerComparisonOutputData playerComparisonOutputData = new PlayerComparisonOutputData(dataArray);
-        playerComparisonPresenter.prepareSuccessView(playerComparisonOutputData);
+        playerComparisonOutputBoundary.prepareSuccessView(playerComparisonOutputData);
     }
 
     /**
