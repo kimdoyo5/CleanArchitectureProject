@@ -35,7 +35,7 @@ public class PlayerComparisonUseCaseFactory {
             PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface,
             PlayerComparisonRemoveViewModel playerComparisonRemoveViewModel
     ) {
-        PlayerComparisonRemoveController playerComparisonRemoveController = createPlayerComparisonRemoveController(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
+        PlayerComparisonRemoveController playerComparisonRemoveController = PlayerComparisonRemoveUseCaseFactory.createPlayerComparisonRemoveController(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
         PlayerComparisonController playerComparisonController = createPlayerComparisonController(
                 playerComparisonViewModel, navigationViewModel, viewManagerModel, playerComparisonDataAccessInterface, playerFactory);
 
@@ -58,20 +58,7 @@ public class PlayerComparisonUseCaseFactory {
         return new PlayerComparisonController(playerComparisonInputBoundary);
     }
 
-    private static PlayerComparisonAddController createPlayerComparisonAddController(
-            PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface,
-            PlayerComparisonAddOutputBoundary playerComparisonAddOutputBoundary
-    ) {
-        PlayerComparisonAddInteractor addInteractor = new PlayerComparisonAddInteractor(playerComparisonAddDataAccessInterface, playerComparisonAddOutputBoundary);
-        return new PlayerComparisonAddController(addInteractor);
-    }
 
-    private static PlayerComparisonRemoveController createPlayerComparisonRemoveController(
-            PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface,
-            PlayerComparisonRemoveOutputBoundary playerComparisonRemoveOutputBoundary) {
-        PlayerComparisonRemoveInteractor removeInteractor = new PlayerComparisonRemoveInteractor(playerComparisonRemoveDataAccessInterface, playerComparisonRemoveOutputBoundary);
-        return new PlayerComparisonRemoveController(removeInteractor);
-    }
 
 }
 

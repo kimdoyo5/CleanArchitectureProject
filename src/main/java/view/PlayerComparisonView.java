@@ -8,6 +8,7 @@ import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddController;
 import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddState;
 import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemoveController;
+import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemoveState;
 import main.java.interface_adapter.player_comparison_remove.PlayerComparisonRemoveViewModel;
 import main.java.interface_adapter.player_search.PlayerSearchState;
 
@@ -51,6 +52,7 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
         this.playerComparisonRemoveController = playerComparisonRemoveController;
         this.playerComparisonRemoveViewModel = playerComparisonRemoveViewModel;
         playerComparisonViewModel.addPropertyChangeListener(this);
+        playerComparisonRemoveViewModel.addPropertyChangeListener(this);
 
         // Title
         JLabel title = new JLabel(playerComparisonViewModel.TITLE_LABEL);
@@ -100,7 +102,7 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(remove)){
-                            //Implement///////////////////////////////////////////////////////////////////
+                            playerComparisonRemoveController.execute();
                         }
                     }
                 }
@@ -148,12 +150,28 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if ("propertyName".equals(evt.getPropertyName())) {
-            updateView();
-        }
-        PlayerComparisonState currentState = playerComparisonViewModel.getState();
-        if (currentState.getPlayerComparisonError() != null) {
-            JOptionPane.showMessageDialog(this, currentState.getPlayerComparisonError());
+        String name = evt.getPropertyName();
+        if(name.equals("player_comparison_remove")){
+            PlayerComparisonRemoveState state = (PlayerComparisonRemoveState) evt.getNewValue();
+            if (state.getPlayerRemoveError() != null){
+                JOptionPane.showMessageDialog(this, state.getPlayerRemoveError());
+            }else{
+                String message = "Removed players: \n";
+                for (String playerName: state.getLastRemovedPlayers()){
+                    message = message + playerName + "\n";
+                }
+                JOptionPane.showMessageDialog(this, message);
+                updateView();
+            }
+
+        }else{
+            if ("propertyName".equals(evt.getPropertyName())) {
+                updateView();
+            }
+            PlayerComparisonState currentState = playerComparisonViewModel.getState();
+            if (currentState.getPlayerComparisonError() != null) {
+                JOptionPane.showMessageDialog(this, currentState.getPlayerComparisonError());
+            }
         }
     }
 
