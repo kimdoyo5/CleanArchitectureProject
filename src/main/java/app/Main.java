@@ -91,6 +91,6 @@ public class Main extends JFrame{
         application.pack();
         application.setVisible(true);
         DatabaseCreationInterface databaseCreation = new DatabaseDataAccessObject();
-        databaseCreation.create();
+        databaseCreation.create(2010, 2023);
     }
 }

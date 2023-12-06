@@ -34,7 +34,7 @@ public class DatabaseDataAccessObject implements DatabaseCreationInterface {
         }
 
     }
-    public void create(){
+    public void create(int startYear, int endYear){
         File database = new File("database.csv");
         try {
             if (!(database.createNewFile())) {
@@ -44,7 +44,7 @@ public class DatabaseDataAccessObject implements DatabaseCreationInterface {
             throw new RuntimeException(e);
         }
         try {
-            ArrayList<Integer> teams = getTeamIDs();
+            ArrayList<Integer> teams = getTeamIDs(startYear, endYear);
             FileWriter fileWriter = new FileWriter(database);
             CSVWriter writer = new CSVWriter(fileWriter);
             String[] header = {"ID", "Name"};
@@ -67,12 +67,12 @@ public class DatabaseDataAccessObject implements DatabaseCreationInterface {
 
     }
 
-    private ArrayList<Integer> getTeamIDs(){
+    private ArrayList<Integer> getTeamIDs(int startYear, int endYear){
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         ArrayList<Request> requests = new ArrayList<>();
         ArrayList<Integer> team_ids = new ArrayList<>();
-        for (int i = 2010; i < 2023; i++) {
+        for (int i = startYear; i <= endYear; i++) {
             Request request = new Request.Builder()
                     .url(String.format("http://lookup-service-prod.mlb.com/json/named.team_all_season.bam?sport_code='mlb'&all_star_sw='N'&sort_order=name_asc&season='%s'", i))
                     .method("GET", null)
