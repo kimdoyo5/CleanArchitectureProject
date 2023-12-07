@@ -29,7 +29,7 @@ public class UseCaseFactoryTest {
     PlayerComparisonRemoveViewModel playerComparisonRemoveViewModel = new PlayerComparisonRemoveViewModel();
     IDFileDataAccessObject idSearchDataAccessObject;
     PlayerComparisonDataAccessObject playerComparisonDataAccessObject;
-    PlayerComparisonRemovePresenter playerComparisonRemovePresenter = new PlayerComparisonRemovePresenter(playerComparisonRemoveViewModel);
+    PlayerComparisonRemovePresenter playerComparisonRemovePresenter = new PlayerComparisonRemovePresenter(playerComparisonRemoveViewModel, playerComparisonViewModel);
 
     APIDataAccessObject apiDataAccessObject = new APIDataAccessObject(new CommonPlayerFactory());
 
