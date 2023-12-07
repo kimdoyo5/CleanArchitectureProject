@@ -54,7 +54,6 @@ public class PlayerComparisonPresenter implements PlayerComparisonOutputBoundary
     public void prepareFailView(String error) {
         PlayerComparisonState state = playerComparisonViewModel.getState();
         state.setPlayerComparisonError(error);
-        this.playerComparisonViewModel.setState(state);
         playerComparisonViewModel.firePropertyChanged();
     }
 

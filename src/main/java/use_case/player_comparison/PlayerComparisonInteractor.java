@@ -50,12 +50,12 @@ public class PlayerComparisonInteractor implements PlayerComparisonInputBoundary
 
         if (playersAdded < 2) {
             playerComparisonOutputBoundary.prepareFailView("You need to select at least 2 players.");
+        }else {
+            String[][] dataArray = getArray(playersAdded, playerList, leaders);
+
+            PlayerComparisonOutputData playerComparisonOutputData = new PlayerComparisonOutputData(dataArray);
+            playerComparisonOutputBoundary.prepareSuccessView(playerComparisonOutputData);
         }
-
-        String[][] dataArray = getArray(playersAdded, playerList, leaders);
-
-        PlayerComparisonOutputData playerComparisonOutputData = new PlayerComparisonOutputData(dataArray);
-        playerComparisonOutputBoundary.prepareSuccessView(playerComparisonOutputData);
     }
 
     /**

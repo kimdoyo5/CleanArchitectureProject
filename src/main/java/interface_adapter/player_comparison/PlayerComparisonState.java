@@ -16,6 +16,14 @@ public class PlayerComparisonState {
     private String[][] dataArray;
     private String playerComparisonError = null;
 
+    public PlayerComparisonState(){}
+
+    public PlayerComparisonState(PlayerComparisonState copy){
+        players = copy.getPlayers();
+        dataArray = copy.getDataArray();
+        playerComparisonError = copy.getPlayerComparisonError();
+    }
+
     /**
      * Sets the error message for player comparison.
      *
