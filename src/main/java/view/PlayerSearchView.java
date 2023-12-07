@@ -156,6 +156,7 @@ public class PlayerSearchView extends JPanel implements ActionListener, Property
         if (currentState.getSearch_error() != null) {
             JOptionPane.showMessageDialog(this, currentState.getSearch_error());
         }
+        queryInputField.setText(currentState.getSearch());
     }
 
 }
