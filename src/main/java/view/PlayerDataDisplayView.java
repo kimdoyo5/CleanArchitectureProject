@@ -7,6 +7,7 @@ import main.java.interface_adapter.ViewManagerModel;
 import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddController;
 import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddState;
 import main.java.interface_adapter.player_comparison_add.PlayerComparisonAddViewModel;
+import main.java.interface_adapter.player_search.PlayerSearchState;
 import main.java.interface_adapter.player_search.PlayerSearchViewModel;
 
 import javax.swing.*;
@@ -57,9 +58,11 @@ public class PlayerDataDisplayView extends JPanel implements ActionListener, Pro
         back = new JButton(playerDataDisplayViewModel.BACK_BUTTON_LABEL);
         back.addActionListener(
                 new ActionListener() {
+
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(back)){
+                            PlayerSearchState currentState = playerSearchViewModel.getSearchState();
                             viewManagerModel.setActiveView(playerSearchViewModel.getViewName());
                             viewManagerModel.firePropertyChanged();
                         }
