@@ -5,10 +5,19 @@ import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAcc
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveInteractor;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputBoundary;
 
+/**
+ * Factory for creating the required classes for player comparison remove
+ */
 public class PlayerComparisonRemoveUseCaseFactory {
 
     private PlayerComparisonRemoveUseCaseFactory(){}
 
+    /**
+     * Creates the controller
+     * @param playerComparisonRemoveDataAccessInterface the data access object for player remove
+     * @param playerComparisonRemoveOutputBoundary the presenter for player remove
+     * @return the controller created
+     */
     public static PlayerComparisonRemoveController createPlayerComparisonRemoveController(
             PlayerComparisonRemoveDataAccessInterface playerComparisonRemoveDataAccessInterface,
             PlayerComparisonRemoveOutputBoundary playerComparisonRemoveOutputBoundary) {

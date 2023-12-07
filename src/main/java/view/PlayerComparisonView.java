@@ -63,9 +63,6 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
 
         // Array Layout
         setLayout(new BorderLayout());
-        /*playerListModel = new DefaultListModel<>();
-        JList<String> playerListDisplay = new JList<>(playerListModel);
-        add(new JScrollPane(playerListDisplay), BorderLayout.WEST);*/
 
         comparisonTableModel = new DefaultTableModel() {
             @Override
@@ -128,14 +125,12 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
         this.setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
-        //JScrollPane pane1 = new JScrollPane(playerListDisplay);
         JScrollPane pane2 = new JScrollPane(comparisonTable);
         // Layout configuration
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(title)
                         .addGroup(layout.createSequentialGroup()
-                                //.addComponent(pane1)
                                 .addComponent(pane2)
                         )
                         .addGroup(layout.createSequentialGroup()
@@ -148,7 +143,6 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
                 layout.createSequentialGroup()
                         .addComponent(title)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                //.addComponent(pane1)
                                 .addComponent(pane2)
                         )
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -199,17 +193,6 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
     }
 
     private void updateView() {
-        // Create comparisons
-
-        /*// Update Player List
-        List<Player> players = playerComparisonViewModel.getState().getPlayers();
-        playerListModel.clear();
-        //players.forEach(player -> playerListModel.addElement(player.getName()));
-        for (Player player: players){
-            playerListModel.addElement(player.getName());
-        }*/
-
-        // Update Comparison Table
         String[][] data = playerComparisonViewModel.getState().getDataArray();
         if (data != null && data.length > 0) {
             comparisonTableModel.setDataVector(data, data[0]); // First row is column names
