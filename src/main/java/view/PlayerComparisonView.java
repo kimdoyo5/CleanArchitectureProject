@@ -183,9 +183,11 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
             }
 
         }else{
-            PlayerComparisonState currentState = playerComparisonViewModel.getState();
+            PlayerComparisonState currentState = (PlayerComparisonState) evt.getNewValue();
             if (currentState.getPlayerComparisonError() != null) {
                 JOptionPane.showMessageDialog(this, currentState.getPlayerComparisonError());
+                currentState.setPlayerComparisonError(null);
+                playerComparisonViewModel.setState(currentState);
             }else{
                 updateView();
             }
