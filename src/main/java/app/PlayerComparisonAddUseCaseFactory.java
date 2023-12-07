@@ -11,10 +11,19 @@ import main.java.use_case.player_comparison_add.PlayerComparisonAddOutputBoundar
 
 import java.io.IOException;
 
+/**
+ * Factory for creating the required classes for player comparison add
+ */
 public class PlayerComparisonAddUseCaseFactory {
 
     private PlayerComparisonAddUseCaseFactory(){}
 
+    /**
+     * Creates the controller for player comparison add
+     * @param playerComparisonAddViewModel view model for player comparison
+     * @param playerComparisonAddDataAccessInterface the data access object for player comparison
+     * @return the created controller
+     */
     public static PlayerComparisonAddController createPlayerComparisonAddController(
             PlayerComparisonAddViewModel playerComparisonAddViewModel,
             PlayerComparisonAddDataAccessInterface playerComparisonAddDataAccessInterface){

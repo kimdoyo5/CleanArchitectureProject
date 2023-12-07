@@ -16,9 +16,23 @@ import main.java.use_case.player_search.PlayerSearchInteractor;
 import main.java.use_case.player_search.PlayerSearchOutputBoundary;
 import main.java.view.PlayerSearchView;
 
+/**
+ * Factory for creating the methods needed for player search use case
+ */
 public class PlayerSearchUseCaseFactory {
     private PlayerSearchUseCaseFactory(){}
 
+
+    /**
+     * Creates the view for player search
+     * @param viewManagerModel The view manager model
+     * @param mainMenuViewModel the viewmodel for main menu
+     * @param playerSearchViewModel the view model for player search
+     * @param playerSearchDataAccessInterface the data access object for player search
+     * @param idSearchDataAccessInterface the data access object for id search
+     * @param playerDataDisplayViewModel the view model for data display
+     * @return the created view
+     */
     public static PlayerSearchView create (ViewManagerModel viewManagerModel,
                                            MainMenuViewModel mainMenuViewModel,
                                            PlayerSearchViewModel playerSearchViewModel,

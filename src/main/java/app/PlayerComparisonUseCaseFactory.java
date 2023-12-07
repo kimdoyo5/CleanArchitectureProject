@@ -23,10 +23,24 @@ import main.java.use_case.player_comparison_add.PlayerComparisonAddInteractor;
 import main.java.use_case.player_comparison_add.PlayerComparisonAddOutputBoundary;
 import main.java.view.PlayerComparisonView;
 
+/**
+ * Factory for player comparison use case
+ */
 public class PlayerComparisonUseCaseFactory {
 
     private PlayerComparisonUseCaseFactory(){}
 
+    /**
+     * Creates the view
+     * @param playerComparisonViewModel view model for player comparison
+     * @param mainMenuViewModel view model for main menu
+     * @param viewManagerModel view manager
+     * @param playerComparisonDataAccessInterface data access object for player comparison
+     * @param playerComparisonRemoveOutputBoundary presenter for player comparison
+     * @param playerComparisonRemoveDataAccessInterface data access object for player comparison
+     * @param playerComparisonRemoveViewModel view model for player remove
+     * @return The created view
+     */
     public static PlayerComparisonView create (
             PlayerComparisonViewModel playerComparisonViewModel,
             MainMenuViewModel mainMenuViewModel,
