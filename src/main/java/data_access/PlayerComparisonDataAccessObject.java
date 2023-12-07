@@ -230,7 +230,20 @@ public class PlayerComparisonDataAccessObject implements
             playerNames.add(key);
         }
         players.clear();
+        this.delete();
         return playerNames;
 
+    }
+
+    private void delete(){
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter(csvFile));
+            writer.write(String.join(",", headers.keySet()));
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
     }
 }

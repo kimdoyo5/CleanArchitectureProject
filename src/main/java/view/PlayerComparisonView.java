@@ -33,9 +33,11 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
     private final PlayerComparisonRemoveController playerComparisonRemoveController;
     private final PlayerComparisonRemoveViewModel playerComparisonRemoveViewModel;
     private final DefaultTableModel comparisonTableModel;
-    private final DefaultListModel<String> playerListModel;
+    //private final DefaultListModel<String>  playerListModel;
     private final JButton back;
     private final JButton remove;
+
+    private final JButton compare;
 
     /**
      * Initializing PlayerComparisonView
@@ -61,19 +63,20 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
 
         // Array Layout
         setLayout(new BorderLayout());
-        playerListModel = new DefaultListModel<>();
+        /*playerListModel = new DefaultListModel<>();
         JList<String> playerListDisplay = new JList<>(playerListModel);
-        add(new JScrollPane(playerListDisplay), BorderLayout.WEST);
+        add(new JScrollPane(playerListDisplay), BorderLayout.WEST);*/
 
-        comparisonTableModel = new DefaultTableModel();
+        comparisonTableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         JTable comparisonTable = new JTable(comparisonTableModel);
+
         add(new JScrollPane(comparisonTable), BorderLayout.CENTER);
 
-        // Layout management
-        GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
 
         // Back button
         back = new JButton(playerComparisonViewModel.BACK_BUTTON_LABEL);
@@ -109,29 +112,49 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
                 }
         );
 
+        compare = new JButton("Compare");
+        compare.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(compare)){
+                            playerComparisonController.execute();
+                        }
+                    }
+                }
+        );
+
+        GroupLayout layout = new GroupLayout(this);
+        this.setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        //JScrollPane pane1 = new JScrollPane(playerListDisplay);
+        JScrollPane pane2 = new JScrollPane(comparisonTable);
         // Layout configuration
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(title)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(new JScrollPane(playerListDisplay))
-                                .addComponent(new JScrollPane(comparisonTable))
+                                //.addComponent(pane1)
+                                .addComponent(pane2)
                         )
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(back)
-                                .addComponent(remove))
+                                .addComponent(remove)
+                                .addComponent(compare))
         );
 
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                         .addComponent(title)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(new JScrollPane(playerListDisplay))
-                                .addComponent(new JScrollPane(comparisonTable))
+                                //.addComponent(pane1)
+                                .addComponent(pane2)
                         )
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(back)
-                                .addComponent(remove))
+                                .addComponent(remove)
+                                .addComponent(compare))
         );
     }
 
@@ -166,24 +189,25 @@ public class PlayerComparisonView extends JPanel implements ActionListener, Prop
             }
 
         }else{
-            if ("propertyName".equals(evt.getPropertyName())) {
-                updateView();
-            }
             PlayerComparisonState currentState = playerComparisonViewModel.getState();
             if (currentState.getPlayerComparisonError() != null) {
                 JOptionPane.showMessageDialog(this, currentState.getPlayerComparisonError());
+            }else{
+                updateView();
             }
         }
     }
 
     private void updateView() {
         // Create comparisons
-        playerComparisonController.execute();
 
-        // Update Player List
+        /*// Update Player List
         List<Player> players = playerComparisonViewModel.getState().getPlayers();
         playerListModel.clear();
-        players.forEach(player -> playerListModel.addElement(player.getName()));
+        //players.forEach(player -> playerListModel.addElement(player.getName()));
+        for (Player player: players){
+            playerListModel.addElement(player.getName());
+        }*/
 
         // Update Comparison Table
         String[][] data = playerComparisonViewModel.getState().getDataArray();

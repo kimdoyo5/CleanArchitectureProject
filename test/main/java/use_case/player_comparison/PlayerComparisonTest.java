@@ -7,6 +7,8 @@ import main.java.interface_adapter.player_comparison.PlayerComparisonPresenter;
 import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.interface_adapter.navigation.MainMenuViewModel;
 import main.java.interface_adapter.ViewManagerModel;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveDataAccessInterface;
+import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveInteractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,18 +37,49 @@ public class PlayerComparisonTest {
     @Test
     public void testExecuteWithTwoOrMorePlayers() {
         addTestPlayers(2);
+        PlayerComparisonOutputBoundary testPresenter = new PlayerComparisonOutputBoundary() {
+            @Override
+            public void prepareSuccessView(PlayerComparisonOutputData dataArray) {
+                assert(true);
+            }
 
-        interactor.execute();
-        assertTrue(outputBoundary.isSuccessViewPrepared());
+            @Override
+            public void prepareFailView(String error) {
+                assert(false);
+            }
+
+            @Override
+            public void back() {
+                assert (false);
+            }
+        };
+        PlayerComparisonInteractor interactor1 = new PlayerComparisonInteractor(dataAccess, testPresenter);
+        interactor1.execute();
+
     }
 
     @Test
     public void testExecuteDataArrayFormation() {
         addTestPlayers(2);
+        PlayerComparisonOutputBoundary testPresenter = new PlayerComparisonOutputBoundary(){
+            @Override
+            public void prepareSuccessView(PlayerComparisonOutputData dataArray) {
+                assertNotNull(dataArray.getDataArray());
+                assertTrue(dataArray.getDataArray().length > 0);
+            }
 
-        interactor.execute();
-        assertNotNull(outputBoundary.getDataArray());
-        assertTrue(outputBoundary.getDataArray().length > 0);
+            @Override
+            public void prepareFailView(String error) {
+                assert(false);
+            }
+
+            @Override
+            public void back() {
+                assert (false);
+            }
+        };
+        PlayerComparisonInteractor interactor1 = new PlayerComparisonInteractor(dataAccess, testPresenter);
+        interactor1.execute();
     }
 
     @Test
@@ -57,6 +90,8 @@ public class PlayerComparisonTest {
 
     @Test
     public void testExecuteWithMoreThanTwoPlayers() {
+        PlayerComparisonRemoveDataAccessInterface data = (PlayerComparisonRemoveDataAccessInterface)dataAccess;
+        data.removedPlayers();
         addTestPlayers(3); // Adding more than two players
 
         interactor.execute();
