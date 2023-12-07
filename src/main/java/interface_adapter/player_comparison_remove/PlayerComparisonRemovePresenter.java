@@ -1,8 +1,12 @@
 package main.java.interface_adapter.player_comparison_remove;
 
+import main.java.entity.Player;
+import main.java.interface_adapter.player_comparison.PlayerComparisonState;
+import main.java.interface_adapter.player_comparison.PlayerComparisonViewModel;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputBoundary;
 import main.java.use_case.player_comparison_remove.PlayerComparisonRemoveOutputData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,12 +18,16 @@ public class PlayerComparisonRemovePresenter implements PlayerComparisonRemoveOu
 
     private final PlayerComparisonRemoveViewModel playerComparisonRemoveViewModel;
 
+    private final PlayerComparisonViewModel playerComparisonViewModel;
+
     /**
      * Constructor for the presenter
      * @param playerComparisonRemoveViewModel view model for player comparison remove use case
+     * @param playerComparisonViewModel view mode for the player comparison use case
      */
-    public PlayerComparisonRemovePresenter(PlayerComparisonRemoveViewModel playerComparisonRemoveViewModel){
+    public PlayerComparisonRemovePresenter(PlayerComparisonRemoveViewModel playerComparisonRemoveViewModel, PlayerComparisonViewModel playerComparisonViewModel){
         this.playerComparisonRemoveViewModel = playerComparisonRemoveViewModel;
+        this.playerComparisonViewModel = playerComparisonViewModel;
     }
 
     /**
@@ -31,7 +39,16 @@ public class PlayerComparisonRemovePresenter implements PlayerComparisonRemoveOu
         List<String> playerNames = response.getRemovedPlayers();
         playerComparisonRemoveState.setLastRemovedPlayer(playerNames);
         playerComparisonRemoveState.setPlayerRemoveError(null);
+
+        PlayerComparisonState playerComparisonState = playerComparisonViewModel.getState();
+
+        List<Player> empty = new ArrayList<>();
+        String[][] emptyDataArray = new String[playerComparisonState.getDataArray().length][playerComparisonState.getDataArray()[0].length];
+        playerComparisonState.setPlayers(empty);
+        playerComparisonState.setDataArray(emptyDataArray);
+
         this.playerComparisonRemoveViewModel.setState(playerComparisonRemoveState);
+        this.playerComparisonViewModel.setState(playerComparisonState);
         playerComparisonRemoveViewModel.firePropertyChanged();
     }
 
