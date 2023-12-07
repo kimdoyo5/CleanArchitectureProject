@@ -11,5 +11,7 @@ public class DatabaseDataAccessObjectTest {
         assert (database.delete());
         DatabaseDataAccessObject databaseDataAccessObject = new DatabaseDataAccessObject();
         databaseDataAccessObject.create(2023, 2023);
+        File data = new File("database.csv");
+        assert (data.length() > 0 );
     }
 }
