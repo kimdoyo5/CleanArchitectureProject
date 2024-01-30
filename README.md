@@ -1,5 +1,4 @@
-# 207-Project---Group-33
-Baseball statistics application
+# Baseball statistics application
 
 This is a simple baseball statistic application which provides tools to find data and interact with basic and advanced year-by-year player statistics. The main functions of this application are:
 1) Searching for player ID (using their name)
